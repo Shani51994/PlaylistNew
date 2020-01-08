@@ -3,6 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         xmlns:local="clr-namespace:PlayListNew.View"
         mc:Ignorable="d"
         Title="createPlaylist" Height="450" Width="800">
@@ -24,7 +27,7 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Label HorizontalAlignment="Left" Content="Let me now what playlist you want today!" FontSize="30" FontWeight="Bold" Foreground="IndianRed" Padding="10"/>
+            <Label HorizontalAlignment="Left" Content="Let me know what playlist you want today!" FontSize="30" FontWeight="Bold" Foreground="IndianRed" Padding="10"/>
 
             <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Height="50">
                 <TextBlock FontSize="15" Foreground="IndianRed" FontWeight="Bold"  VerticalAlignment="Bottom" Margin="0 0 50 0"><Run Text="Tempo"/><Run FlowDirection="RightToLeft" Text=" "/><Run Text="range: (0 to 262)"/></TextBlock>
@@ -74,15 +77,18 @@
                 <TextBox Name="ipTxt"  Margin="3" FontSize="13"  Width="60" Text="{Binding FlightServerIP, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
 
-            <WrapPanel Grid.Row="11" Grid.Column="0" HorizontalAlignment="Center" Height="80" >
-                <StackPanel>
+            <WrapPanel Grid.Row="11" Grid.Column="0" HorizontalAlignment="Center" Height="50" Width="400" >
+                <WrapPanel>
                     <TextBox x:Name="name" Text="playlist name" Width="150" Height="30" FontSize="15" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" />
                     <Button Name="okBtn" Padding="3" HorizontalAlignment="Stretch"
-                Foreground="DarkMagenta" Height="30" Width="50" Margin="10" Command="{Binding ClickCommand}">create</Button>
-                </StackPanel>
-                <Button Name="CancelNBtn" Padding="3" HorizontalAlignment="Stretch"
-                 Height="30" Width="50" Margin="10" Foreground="DarkMagenta" Command="{Binding CancelCommand}">Cancel</Button>
+                 Height="30" Width="50" Margin="10" Command="{Binding ClickCommand}">create</Button>
+                </WrapPanel>
+            <WrapPanel>
+                <Button Name="CancelNBtn" Padding="3" HorizontalAlignment="Right"
+                 Height="30" Width="50" Margin="10"  Command="{Binding CancelCommand}">Cancel</Button>
             </WrapPanel>
+
+        </WrapPanel>
 
     </Grid>
 </Window>

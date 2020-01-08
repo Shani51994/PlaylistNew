@@ -53,7 +53,7 @@ namespace PlayListNew.DB
             }
         }
 
-        // TODO - change
+        // TODO - change!!!!! -check password!!!
         public int checkIfUserExistAndPasswordRight(string email)
         {
             // String query = "SELECT EXISTS(SELECT * from playlistGame.users WHERE email= 'wwe')";

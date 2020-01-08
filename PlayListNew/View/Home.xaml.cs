@@ -1,4 +1,4 @@
-﻿using PlaylistNew.View;
+﻿using PlayListNew.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PlayListNew
+namespace PlayListNew.View
 {
     /// <summary>
     /// Interaction logic for Home.xaml

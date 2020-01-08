@@ -1,4 +1,5 @@
 ﻿using PlayListNew.DB;
+using PlayListNew.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PlayListNew.View;
 
-namespace PlaylistNew.View
+
+namespace PlayListNew.View
 {
     /// <summary>
     /// Interaction logic for login.xaml
@@ -33,18 +36,17 @@ namespace PlaylistNew.View
         {
 
             DataBaseHandler dbhandler = new DataBaseHandler("localhost", "playlistGame", "Mm1614113", "root");
-            /*
+            
             int ans = dbhandler.checkIfUserExistAndPasswordRight(emailText.Text);
+            if (ans == 1)
+            {
+                User currentUser = User.Instance;
+                currentUser.Email = emailText.Text;
 
-            if (ans == 0)
-            {
-                dbhandler.SaveUserData(emailText.Text, passwordText.Text, fullNameText.Text);
+                playlistOptions options = new playlistOptions();
+                options.Show();
             }
-            else
-            {
-                this.userExist.Visibility = Visibility.Visible;
-            }
-            */
+            
 
         }
 

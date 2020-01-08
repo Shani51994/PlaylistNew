@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PlayListNew.DB;
 
-namespace PlaylistNew.View
+namespace PlayListNew.View
 {
     /// <summary>
     /// Interaction logic for homeScreen.xaml
