@@ -53,8 +53,10 @@ namespace PlayListNew.View
         /// <summary>
         /// Handles the Click event of the Cancel button.
         /// </summary>
-        public void Cancel_Click(object sender, RoutedEventArgs e)
+        public void Clear_Click(object sender, RoutedEventArgs e)
         {
+            emailText.Text = "";
+            passwordText.Text = "";
         }
     }
     

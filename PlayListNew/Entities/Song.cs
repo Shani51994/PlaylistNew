@@ -6,23 +6,26 @@ using System.Threading.Tasks;
 
 namespace PlayListNew.Entities
 {
-    class Song
+    public class Song
     {
-        private string songName;
-        private int songId;
-
-        private Song() { }
-
         public string SongName
         {
-            get { return songName; }
-            set { songName = value; }
+            get; set;
         }
         
         public int SongId
         {
-            get { return songId; }
-            set { songId = value; }
+            get; set;
+        }
+
+        public string ArtistName
+        {
+            get; set;
+        }
+
+        public string AlbumName
+        {
+            get; set;
         }
 
 
