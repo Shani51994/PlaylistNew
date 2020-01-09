@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="showPlaylistSongs" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid  ItemsSource="{Binding songList}" x:Name="dataGrid1" AutoGenerateColumns="False" CanUserAddRows="False" Margin="31,58,56.6,0" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Song" Width="Auto" Binding="{Binding songName}" IsReadOnly="True" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Artist" Width="Auto" Binding="{Binding artistName}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Album" Width="Auto" Binding="{Binding albumName}" IsReadOnly="True"></DataGridTextColumn>
+              <!-- <DataGridTextColumn Header="Genre" Width ="Auto" IsReadOnly="True" Binding ="{Binding SongArtist.Genre}"/> -->
+              <!--  <DataGridTextColumn Header="Duration" Width="Auto" Binding="{Binding Duration}" IsReadOnly="True"></DataGridTextColumn> -->
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

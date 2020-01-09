@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PlayListNew.Entities;
+using PlayListNew.DB;
+using System.Collections.ObjectModel;
 
 namespace PlayListNew.View
 {
@@ -22,6 +25,16 @@ namespace PlayListNew.View
         public showPlaylistSongs()
         {
             InitializeComponent();
+            DataBaseHandler dbHandler = DataBaseHandler.Instance;
+
+            int playlistId = 11;
+            //List<Song> songList = DataBaseHandler.GetPlaylistSongs(playlistId);
+            ObservableCollection<Song> songList=  new ObservableCollection<Song>();
+            songList.Add(new Song() { songName = "maa", artistName = "pp", albumName = "sh" });
+            
+         //   dataGrid1.ItemsSource = songList;
+
         }
+
     }
 }
