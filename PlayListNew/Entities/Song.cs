@@ -8,23 +8,24 @@ namespace PlayListNew.Entities
 {
     public class Song
     {
-        public string songName;
-        public int songId;
-        public string artistName;
-        public string albumName;
-
-        public Song() { }
-
         public string SongName
         {
-            get { return songName; }
-            set { songName = value; }
+            get; set;
         }
         
         public int SongId
         {
-            get { return songId; }
-            set { songId = value; }
+            get; set;
+        }
+
+        public string ArtistName
+        {
+            get; set;
+        }
+
+        public string AlbumName
+        {
+            get; set;
         }
 
 

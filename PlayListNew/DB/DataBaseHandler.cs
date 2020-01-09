@@ -128,7 +128,9 @@ namespace PlayListNew.DB
 
         public void createPlaylist()
         {
-            // string connstring = string.Format(queries.creartPlaylistAllOptions, Server, DatabaseName, User, Password);
+
+            //        public void createPlaylist(string query)
+            //string connstring = string.Format(queries.creartPlaylistAllOptions, Server, DatabaseName, User, Password);
 
             string query = queries.creartPlaylistAllOptions;
             MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
@@ -137,25 +139,28 @@ namespace PlayListNew.DB
             
         }
 
-        public List<Song> GetPlaylistSongs(int playlistID)
+
+        public ObservableCollection<Song> GetPlaylistSongs(int playlistID)
         {
-            
-            List<Song> songs = new List<Song>();
+            ObservableCollection<Song> songs = new ObservableCollection<Song>();
             
             try
             {
                 if (DBConnection.IsConnect())
                 {
-                    string query = "SELECT firstname, lastname, score FROM team12.users" +
-                                    " ORDER BY users.score DESC LIMIT 10";
+                  //  string query = "SELECT songs.name FROM playlistgame.songs where id=1473;";
+                    string query = "SELECT songs.name FROM playlistgame.songs limit 35;";
+
+
+                    //string query = "SELECT playlists.playlist_name FROM playlistgame.playlists WHERE playlist_id=11;"
                     var cmd = new MySqlCommand(query, DBConnection.Connection);
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
                         string songName = reader.GetString(0);
-                        string artistName = reader.GetString(1);
-                        string albumName = reader.GetString(2);
-                        Song song = new Song() { songName = songName, artistName = artistName, albumName = albumName };
+                        //string artistName = reader.GetString(1);
+                        //string albumName = reader.GetString(2);
+                        Song song = new Song() { SongName = songName };//, ArtistName = artistName, AlbumName = albumName };
                         songs.Add(song);
                     }
                     reader.Close();

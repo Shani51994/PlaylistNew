@@ -22,19 +22,24 @@ namespace PlayListNew.View
     /// </summary>
     public partial class showPlaylistSongs : Window
     {
+      
         public showPlaylistSongs()
         {
             InitializeComponent();
             DataBaseHandler dbHandler = DataBaseHandler.Instance;
 
             int playlistId = 11;
-            //List<Song> songList = DataBaseHandler.GetPlaylistSongs(playlistId);
-            ObservableCollection<Song> songList=  new ObservableCollection<Song>();
-            songList.Add(new Song() { songName = "maa", artistName = "pp", albumName = "sh" });
+            ObservableCollection<Song> songList = dbHandler.GetPlaylistSongs(playlistId);
+
+            //ObservableCollection<Song> songList = new ObservableCollection<Song>();
+            //songList.Add(new Song() { SongName = "maa", ArtistName = "pp", AlbumName = "sh" });
             
-         //   dataGrid1.ItemsSource = songList;
+            dataGrid1.ItemsSource = songList;
 
         }
+
+
+
 
     }
 }
