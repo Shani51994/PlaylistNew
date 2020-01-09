@@ -25,7 +25,7 @@ namespace PlayListNew.View
         public playlistOptions()
         {
            InitializeComponent();
-            connectionStr.Text = User.Instance.Email;
+            connectionStr.Text = User.Instance.Email + " is connected";
         }
        
 

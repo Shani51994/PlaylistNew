@@ -38,8 +38,9 @@ namespace PlayListNew.View
 
         }
 
+        private void DataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
-
-
+        }
     }
 }

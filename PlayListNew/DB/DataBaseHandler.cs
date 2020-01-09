@@ -128,7 +128,6 @@ namespace PlayListNew.DB
 
         public void createPlaylist()
         {
-
             //        public void createPlaylist(string query)
             //string connstring = string.Format(queries.creartPlaylistAllOptions, Server, DatabaseName, User, Password);
 

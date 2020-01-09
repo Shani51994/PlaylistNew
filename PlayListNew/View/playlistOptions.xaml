@@ -4,8 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         Title="playlistOptions" Height="450" Width="800">
-    <Grid>
+    <Grid Background="Gainsboro">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -14,12 +23,12 @@
         </Grid.RowDefinitions>
 
         <TextBlock Name ="connectionStr" Grid.Row="0" HorizontalAlignment="Left" 
-                   Foreground="Firebrick" FontSize="20" FontWeight="ExtraBold" VerticalAlignment="Bottom"></TextBlock>
+                   Foreground="Teal" FontSize="14"  VerticalAlignment="Bottom"></TextBlock>
 
         <TextBlock Text="Hi, Get Your Playlist!" Grid.Row="1" HorizontalAlignment="Center" 
-                   Foreground="Firebrick" FontSize="70" FontWeight="ExtraBold" VerticalAlignment="Bottom"></TextBlock>
+                   Foreground="Teal" FontSize="70" FontWeight="ExtraBold" VerticalAlignment="Bottom"></TextBlock>
 
-        <WrapPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Margin="255,0,227.6,10" Width="311">
+        <WrapPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Margin="255,58,227.6,10" Width="311">
             <Button Height="50" Width="80" HorizontalAlignment="Center" FontWeight="Bold"  Margin="20" 
                     Click="createPlaylistWin" >
                 <TextBlock TextWrapping="Wrap">Create playlist</TextBlock>
