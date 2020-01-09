@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:PlayListNew.View"
         mc:Ignorable="d"
         Title="createPlaylist" Height="450" Width="800">
-    <Grid  Background="Khaki">
+    <Grid  Background="Gainsboro">
             <Grid.RowDefinitions>
                 
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -27,31 +27,31 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Label HorizontalAlignment="Left" Content="Let me know what playlist you want today!" FontSize="30" FontWeight="Bold" Foreground="IndianRed" Padding="10"/>
+            <Label HorizontalAlignment="Left" Content="Let me know what playlist you want today!" FontSize="30" FontWeight="Bold" Foreground="Teal" Padding="10"/>
 
             <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Height="50">
-                <TextBlock FontSize="15" Foreground="IndianRed" FontWeight="Bold"  VerticalAlignment="Bottom" Margin="0 0 50 0"><Run Text="Tempo"/><Run FlowDirection="RightToLeft" Text=" "/><Run Text="range: (0 to 262)"/></TextBlock>
+                <TextBlock FontSize="15" Foreground="Teal" FontWeight="Bold"  VerticalAlignment="Bottom" Margin="0 0 50 0"><Run Text="Tempo"/><Run FlowDirection="RightToLeft" Text=" "/><Run Text="range: (0 to 262)"/></TextBlock>
                 <TextBox x:Name="tempoMin" Text="0" Width="80" Height="30" FontSize="15" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" />
                 <TextBlock FontSize="25" VerticalAlignment="Bottom" Text="-" Margin="15 0 0 0"/>
                 <TextBox x:Name="tempoMax" Text="262" Width="80" Height="30" FontSize="15" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Height="50">
-                <TextBlock FontSize="15" Foreground="IndianRed" FontWeight="Bold"  VerticalAlignment="Bottom" Text="Loudness range: (-52 to 1)" Margin="0 0 50 0"/>
+                <TextBlock FontSize="15" Foreground="Teal" FontWeight="Bold"  VerticalAlignment="Bottom" Text="Loudness range: (-52 to 1)" Margin="0 0 50 0"/>
                 <TextBox x:Name="loudnessMin" Text="-52" Width="80" Height="30" FontSize="15" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" />
                 <TextBlock FontSize="25" VerticalAlignment="Bottom" Text="-" Margin="15 0 0 0"/>
                 <TextBox x:Name="loudnessMax" Text="1" Width="80" Height="30" FontSize="15" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="2">
-                <TextBlock Text="popularity: (0 to 1)" Padding="3" FontSize="15" Foreground="IndianRed" FontWeight="Bold" Margin="0,0,25,0"></TextBlock>
+                <TextBlock Text="popularity: (0 to 1)" Padding="3" FontSize="15" Foreground="Teal" FontWeight="Bold" Margin="0,0,25,0"></TextBlock>
                 <Slider x:Name="popularitySlider" Minimum="0" Maximum="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Height="19" Width="232"/>
                 <CheckBox x:Name="dontCarePop" Content="I don't care" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
 
         </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="7" Height="50">
-                <TextBlock FontSize="15" Foreground="IndianRed" FontWeight="Bold"  VerticalAlignment="Center" Text="Decade:" Margin="0 0 50 0"/>
+                <TextBlock FontSize="15" Foreground="Teal" FontWeight="Bold"  VerticalAlignment="Center" Text="Decade:" Margin="0 0 50 0"/>
                 <CheckBox x:Name="checkBox70" Checked="choose70" Content="70s" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
                 <CheckBox x:Name="checkBox80" Checked="choose80" Content="80s" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
                 <CheckBox x:Name="checkBox90" Checked="choose90" Content="90s" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
@@ -60,17 +60,17 @@
         </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="8" Height="50">
-                <TextBlock FontSize="15" Foreground="IndianRed" FontWeight="Bold"  VerticalAlignment="Center" Text="Song duration" Margin="0 0 50 0"/>
+                <TextBlock FontSize="15" Foreground="Teal" FontWeight="Bold"  VerticalAlignment="Center" Text="Song duration" Margin="0 0 50 0"/>
                 <Slider x:Name="durationSlider" Minimum="2" Maximum="10" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Height="19" Width="232"/>
              </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="9">
-                <TextBlock Text="num of songs you want: (max 30 songs):" Padding="3" Margin="3" Grid.Column="0" FontSize="15" Foreground="IndianRed" FontWeight="Bold"></TextBlock>
+                <TextBlock Text="num of songs you want: (max 30 songs):" Padding="3" Margin="3" Grid.Column="0" FontSize="15" Foreground="Teal" FontWeight="Bold"></TextBlock>
                 <TextBox Name="songsNum"  Margin="3" FontSize="13"  Width="60" Text="{Binding FlightServerIP, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="10">
-            <TextBlock Text="playlist name:" Padding="3" Margin="3" Grid.Column="0" FontSize="15" Foreground="IndianRed" FontWeight="Bold"></TextBlock>
+            <TextBlock Text="playlist name:" Padding="3" Margin="3" Grid.Column="0" FontSize="15" Foreground="Teal" FontWeight="Bold"></TextBlock>
             <TextBox x:Name="playListName" Width="150" Height="30" FontSize="15" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" />
         </StackPanel>
         
