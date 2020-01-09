@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace PlayListNew.Entities
 {
-    // ronnnnn
     class User
     {
         private static User instance = null;

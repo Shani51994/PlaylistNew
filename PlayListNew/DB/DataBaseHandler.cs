@@ -8,15 +8,24 @@ using System.Threading.Tasks;
 //using GuessTheSongServer.DM;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using PlayListNew.Entities;
 
 namespace PlayListNew.DB
 {
     public class DataBaseHandler
     {
         static private DBConnection DBConnection;
+        static private DataBaseHandler instance = null;
+
+
         string path = @"PlayListNewLog.txt";
 
-        public DataBaseHandler(string Server, string DatabaseName, string Password, string User)
+        private string Server = "localhost";
+        private string DatabaseName = "playlistGame";
+        private string Password = "Mm1614113";
+        private string User = "root";
+
+        public DataBaseHandler()
         {
             DBConnection = DBConnection.Instance();
             DBConnection.DatabaseName = DatabaseName;
@@ -26,6 +35,23 @@ namespace PlayListNew.DB
 
             DBConnection.Start();
         }
+
+
+        public static DataBaseHandler Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new DataBaseHandler();
+                }
+                return instance;
+            }
+
+        }
+
+        private string ConnectionString { get; set; }
+        private MySqlConnection ConnectionHandler { get; set; }
 
         public void EndDBConnection()
         {
@@ -100,8 +126,52 @@ namespace PlayListNew.DB
         }
 
 
+        public void createPlaylist()
+        {
 
-        
+            // string connstring = string.Format(queries.creartPlaylistAllOptions, Server, DatabaseName, User, Password);
+
+            string query = queries.creartPlaylistAllOptions;
+            MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
+
+            var reader = command.ExecuteReader();
+            
+
+        }
+
+
+        /*
+        public List<Song> GetSong()
+        {
+            ObservableCollection<Score> scores = new ObservableCollection<Score>();
+            try
+            {
+                if (DBConnection.IsConnect())
+                {
+                    string query = "SELECT firstname, lastname, score FROM team12.users" +
+                                    " ORDER BY users.score DESC LIMIT 10";
+                    var cmd = new MySqlCommand(query, DBConnection.Connection);
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        string firstName = reader.GetString(0);
+                        string lastName = reader.GetString(1);
+                        string userName = firstName + " " + lastName;
+                        scores.Add(new Score() { name = userName, score = Int32.Parse(reader.GetString(2)) });
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+            }
+            return scores;
+        }
+
+
+        */
+
 
         /*
         public void SaveUserScore(int score)

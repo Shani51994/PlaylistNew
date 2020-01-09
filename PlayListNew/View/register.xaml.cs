@@ -31,7 +31,8 @@ namespace PlayListNew.View
         /// </summary>
         public void registerClick(object sender, RoutedEventArgs e)
         {
-            DataBaseHandler dbhandler = new DataBaseHandler("localhost", "playlistGame", "Mm1614113", "root");
+
+            DataBaseHandler dbhandler = DataBaseHandler.Instance;
             int ans = dbhandler.checkIfUserExist(emailText.Text);
             if (ans == 0)
             {
