@@ -35,9 +35,9 @@ namespace PlayListNew.View
         public void clickSubmit(object sender, RoutedEventArgs e)
         {
 
-            DataBaseHandler dbhandler = new DataBaseHandler("localhost", "playlistGame", "Mm1614113", "root");
-            
+            DataBaseHandler dbhandler = DataBaseHandler.Instance;
             int ans = dbhandler.checkIfUserExistAndPasswordRight(emailText.Text);
+
             if (ans == 1)
             {
                 User currentUser = User.Instance;

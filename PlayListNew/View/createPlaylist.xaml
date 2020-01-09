@@ -61,33 +61,26 @@
 
         </StackPanel>
 
-
             <StackPanel Orientation="Horizontal" Grid.Row="8" Height="50">
                 <TextBlock FontSize="15" Foreground="IndianRed" FontWeight="Bold"  VerticalAlignment="Center" Text="Song duration" Margin="0 0 50 0"/>
-                <CheckBox x:Name="checkBox5" Content="1sec" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
-                <CheckBox x:Name="checkBox6" Content="2sec" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
-                <CheckBox x:Name="checkBox7" Content="3sec" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
-                <CheckBox x:Name="checkBox8" Content="4sec" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
-          
-        </StackPanel>
-
+                <Slider x:Name="slider2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Height="19" Width="232"/>
+             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="9">
                 <TextBlock Text="num of songs you want: (max 30 songs):" Padding="3" Margin="3" Grid.Column="0" FontSize="15" Foreground="IndianRed" FontWeight="Bold"></TextBlock>
                 <TextBox Name="ipTxt"  Margin="3" FontSize="13"  Width="60" Text="{Binding FlightServerIP, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
 
-            <WrapPanel Grid.Row="11" Grid.Column="0" HorizontalAlignment="Center" Height="50" Width="400" >
-                <WrapPanel>
-                    <TextBox x:Name="name" Text="playlist name" Width="150" Height="30" FontSize="15" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" />
-                    <Button Name="okBtn" Padding="3" HorizontalAlignment="Stretch"
-                 Height="30" Width="50" Margin="10" Command="{Binding ClickCommand}">create</Button>
-                </WrapPanel>
-            <WrapPanel>
-                <Button Name="CancelNBtn" Padding="3" HorizontalAlignment="Right"
-                 Height="30" Width="50" Margin="10"  Command="{Binding CancelCommand}">Cancel</Button>
-            </WrapPanel>
-
+        <StackPanel Orientation="Horizontal" Grid.Row="10">
+            <TextBlock Text="playlist name:" Padding="3" Margin="3" Grid.Column="0" FontSize="15" Foreground="IndianRed" FontWeight="Bold"></TextBlock>
+            <TextBox x:Name="playListName" Width="150" Height="30" FontSize="15" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" />
+        </StackPanel>
+        
+        <WrapPanel Grid.Row="11" Grid.Column="0" HorizontalAlignment="Center" Height="50" Width="200" >
+                   <Button Name="okBtn" Padding="3" HorizontalAlignment="Stretch"
+                 Height="30" Width="50" Margin="10" Click="pressCreate">create</Button>
+            <Button Name="CancelNBtn" Padding="3" HorizontalAlignment="Right"
+                 Height="30" Width="50" Margin="10">Cancel</Button>
         </WrapPanel>
 
     </Grid>

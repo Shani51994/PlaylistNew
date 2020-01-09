@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using PlayListNew.DB;
+
 namespace PlayListNew.View
 {
     /// <summary>
@@ -23,5 +25,13 @@ namespace PlayListNew.View
         {
             InitializeComponent();
         }
+
+        public void pressCreate(object sender, RoutedEventArgs e)
+        {
+
+            DataBaseHandler dbhandler = DataBaseHandler.Instance;
+            dbhandler.createPlaylist();
+        }
+
     }
 }

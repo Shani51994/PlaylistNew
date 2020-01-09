@@ -67,6 +67,8 @@
     <Compile Include="DB\DataBaseHandler.cs" />
     <Compile Include="DB\DBConnection.cs" />
     <Compile Include="DB\queries.cs" />
+    <Compile Include="Entities\Playlist.cs" />
+    <Compile Include="Entities\Song.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
