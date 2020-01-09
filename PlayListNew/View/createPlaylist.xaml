@@ -44,31 +44,29 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="2">
-                <TextBlock Text="popularity:" Padding="3" FontSize="15" Foreground="IndianRed" FontWeight="Bold" Margin="0,0,25,0"></TextBlock>
-                <Slider x:Name="slider1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Height="19" Width="232"/>
+                <TextBlock Text="popularity: (0 to 1)" Padding="3" FontSize="15" Foreground="IndianRed" FontWeight="Bold" Margin="0,0,25,0"></TextBlock>
+                <Slider x:Name="popularitySlider" Minimum="0" Maximum="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Height="19" Width="232"/>
                 <CheckBox x:Name="dontCarePop" Content="I don't care" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
 
         </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="7" Height="50">
                 <TextBlock FontSize="15" Foreground="IndianRed" FontWeight="Bold"  VerticalAlignment="Center" Text="Decade:" Margin="0 0 50 0"/>
-                <CheckBox x:Name="checkBox1" Content="70s" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
-                <CheckBox x:Name="checkBox2" Content="80s" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
-                <CheckBox x:Name="checkBox3" Content="90s" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
-                <CheckBox x:Name="checkBox4" Content="00s" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
-                <CheckBox x:Name="dontCareDec" Content="I don't care" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
-
-
+                <CheckBox x:Name="checkBox70" Checked="choose70" Content="70s" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
+                <CheckBox x:Name="checkBox80" Checked="choose80" Content="80s" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
+                <CheckBox x:Name="checkBox90" Checked="choose90" Content="90s" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
+                <CheckBox x:Name="checkBox00" Checked="choose00" Content="00s" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
+            <CheckBox x:Name="dontCareDec" Checked="chooseAllDec" Content="I don't care" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
         </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="8" Height="50">
                 <TextBlock FontSize="15" Foreground="IndianRed" FontWeight="Bold"  VerticalAlignment="Center" Text="Song duration" Margin="0 0 50 0"/>
-                <Slider x:Name="slider2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Height="19" Width="232"/>
+                <Slider x:Name="durationSlider" Minimum="2" Maximum="10" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Height="19" Width="232"/>
              </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="9">
                 <TextBlock Text="num of songs you want: (max 30 songs):" Padding="3" Margin="3" Grid.Column="0" FontSize="15" Foreground="IndianRed" FontWeight="Bold"></TextBlock>
-                <TextBox Name="ipTxt"  Margin="3" FontSize="13"  Width="60" Text="{Binding FlightServerIP, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Name="songsNum"  Margin="3" FontSize="13"  Width="60" Text="{Binding FlightServerIP, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="10">
