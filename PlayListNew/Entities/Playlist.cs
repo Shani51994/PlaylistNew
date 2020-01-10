@@ -19,14 +19,12 @@ namespace PlayListNew.Entities
             set; get;
         }
 
-        /*
-
-        /*
+        
         public int PlaylistId
         {
             get; set;
         }
-        */
+       
 
     }
 }

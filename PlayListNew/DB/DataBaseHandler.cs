@@ -191,7 +191,8 @@ namespace PlayListNew.DB
                     while (reader.Read())
                     {
                         string playlistName = reader.GetString(0);
-                        Playlist plist = new Playlist() { PlaylistName = playlistName};
+                        int playlistId = reader.GetInt32(1);
+                        Playlist plist = new Playlist() { PlaylistName = playlistName, PlaylistId = playlistId };
                         playlists.Add(plist);
                     }
                     reader.Close();

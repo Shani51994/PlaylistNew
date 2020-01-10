@@ -33,7 +33,19 @@ namespace PlayListNew.View
             //songList.Add(new Song() { SongName = "maa", ArtistName = "pp", AlbumName = "sh" });
 
             dataGrid1.ItemsSource = playlistList;
+        }
 
+        /// <summary>
+        /// Handles the Click event of the Show songs button.
+        /// </summary>
+        private void OpenPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+           
+            Button button = (Button)sender;
+            int playlistId = (int)button.CommandParameter;
+            showPlaylistSongs playlistSongs = new showPlaylistSongs(playlistId);
+            playlistSongs.Show();
+           
         }
     }
 }

@@ -120,7 +120,7 @@ namespace PlayListNew.DB
         //******************* show playlist section**************************************************************************************
 
         // show all playlists of a specific user on the screen - sort it by date!
-        public static string getAllUserPlaylists = @"SELECT playlists.playlist_name
+        public static string getAllUserPlaylists = @"SELECT playlists.playlist_name, playlists.playlist_id
                     FROM playlistgame.playlists, playlistgame.user_to_playlists
                     WHERE user_id='{0}' AND playlists.playlist_id=user_to_playlists.playlist_id;";
                    
