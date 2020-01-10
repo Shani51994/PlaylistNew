@@ -22,25 +22,34 @@ namespace PlayListNew.View
     {
         public register()
         {
-           InitializeComponent();
+            InitializeComponent();
         }
-        
+
 
         /// <summary>
         /// Handles the Click event of the Submit button.
         /// </summary>
         public void registerClick(object sender, RoutedEventArgs e)
         {
+            if (emailText.Text == "" || passwordText.Text=="" || fullNameText.Text == "")
+            {
+                this.message.Text = "fill all fileds please";
+                return;
+            }
 
             DataBaseHandler dbhandler = DataBaseHandler.Instance;
             int ans = dbhandler.checkIfUserExist(emailText.Text);
             if (ans == 0)
             {
                 dbhandler.SaveUserData(emailText.Text, passwordText.Text, fullNameText.Text);
+                this.message.Text = "successfully register";
             }
             else
             {
-                this.userExist.Visibility = Visibility.Visible;
+                emailText.Text = "";
+                passwordText.Text = "";
+                fullNameText.Text = "";
+                this.message.Text = "there is a user with this email already";
             }
         }
 

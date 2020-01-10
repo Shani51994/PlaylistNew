@@ -14,7 +14,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
        
-        Title="login" Height="270" Width="400">
+        Title="login" Height="280" Width="400">
     <Grid Background="Gainsboro">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -38,10 +38,12 @@
             <TextBox x:Name="passwordText" FontSize="18"  Width="219" Text="{Binding FlightServerIP, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,-0.2"/>
         </StackPanel>
 
+        <TextBlock Name="wrongDetails" Visibility="Hidden" Grid.Row="3" FontSize="18" >wrong email or password</TextBlock>
+
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15">
-            <Button Name="okBtn" Padding="3" HorizontalAlignment="Stretch" Grid.Row="4" 
+            <Button Name="okBtn" Padding="3" HorizontalAlignment="Stretch" 
                   FontSize="18" Height="40" Width="70" Margin="8"  Click="clickSubmit">Login</Button>
-            <Button Name="clearBtn" Padding="3" HorizontalAlignment="Stretch" Grid.Row="4" 
+            <Button Name="clearBtn" Padding="3" HorizontalAlignment="Stretch"
                   FontSize="18" Height="40" Width="70"  Click="Clear_Click">clear</Button>
         </StackPanel>
         

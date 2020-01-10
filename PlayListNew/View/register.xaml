@@ -43,8 +43,7 @@
         </StackPanel>
 
 
-        <TextBlock Name="missingDetails" Visibility="Hidden" Grid.Row="5" FontSize="18" > fill all fileds please</TextBlock>
-        <TextBlock Name="userExist" Visibility="Hidden" Grid.Row="5" FontSize="18" >there is a user with this email already</TextBlock>
+        <TextBlock Name="message" Grid.Row="5" FontSize="18" ></TextBlock>
 
 
 
