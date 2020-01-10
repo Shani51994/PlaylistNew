@@ -147,19 +147,16 @@ namespace PlayListNew.DB
             {
                 if (DBConnection.IsConnect())
                 {
-                  //  string query = "SELECT songs.name FROM playlistgame.songs where id=1473;";
-                    string query = "SELECT songs.name FROM playlistgame.songs limit 35;";
+                    string query = string.Format(queries.getAllplaylistSongs, playlistID);
 
-
-                    //string query = "SELECT playlists.playlist_name FROM playlistgame.playlists WHERE playlist_id=11;"
                     var cmd = new MySqlCommand(query, DBConnection.Connection);
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
                         string songName = reader.GetString(0);
-                        //string artistName = reader.GetString(1);
-                        //string albumName = reader.GetString(2);
-                        Song song = new Song() { SongName = songName };//, ArtistName = artistName, AlbumName = albumName };
+                        string artistName = reader.GetString(1);
+                        string albumName = reader.GetString(2);
+                        Song song = new Song() { SongName = songName, ArtistName = artistName, AlbumName = albumName };
                         songs.Add(song);
                     }
                     reader.Close();
@@ -173,6 +170,42 @@ namespace PlayListNew.DB
             return songs;
 
         }
+
+
+        public ObservableCollection<Playlist> GetAllUserPlaylist()
+        {
+            ObservableCollection<Playlist> playlists = new ObservableCollection<Playlist>();
+
+            try
+            {
+                if (DBConnection.IsConnect())
+                {
+                    //string query = string.Format(queries.getAllUserPlaylists, Entities.User.Instance.Email);
+
+                    //only for checks:
+                    string query = string.Format(queries.getAllUserPlaylists, 1);
+
+                    var cmd = new MySqlCommand(query, DBConnection.Connection);
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        string playlistName = reader.GetString(0);
+                        Playlist plist = new Playlist() { PlaylistName = playlistName};
+                        playlists.Add(plist);
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+            }
+
+            return playlists;
+
+        }
+
 
 
     }

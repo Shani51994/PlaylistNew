@@ -31,9 +31,6 @@ namespace PlayListNew.View
             int playlistId = 11;
             ObservableCollection<Song> songList = dbHandler.GetPlaylistSongs(playlistId);
 
-            //ObservableCollection<Song> songList = new ObservableCollection<Song>();
-            //songList.Add(new Song() { SongName = "maa", ArtistName = "pp", AlbumName = "sh" });
-            
             dataGrid1.ItemsSource = songList;
 
         }

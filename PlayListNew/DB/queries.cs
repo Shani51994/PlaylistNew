@@ -8,6 +8,8 @@ namespace PlayListNew.DB
 {
     class queries
     {
+        //******************* creat playlist section*******************************************************************************
+        
         public static string creartPlaylistAllOptionsTest = @" SELECT songs.id FROM playlistgame.songs
                                         WHERE songs.tempo >= 0 AND songs.tempo <= 200
                                         AND songs.loudness >= -52 AND songs.loudness <= 1
@@ -16,8 +18,7 @@ namespace PlayListNew.DB
                                         AND (songs.duration >= 0 AND songs.duration < 300)
                                         LIMIT 200;";
 
-
-
+       
         public static string creartPlaylistAllOptionsSmall = @" SELECT songs.id FROM playlistgame.songs
                             WHERE songs.tempo >= '{0} AND songs.tempo <= '{1}'
                             AND songs.loudness >= '{2}' AND songs.loudness <= '{3}'
@@ -51,8 +52,7 @@ namespace PlayListNew.DB
                     (SELECT playlists.playlist_id FROM playlistgame.playlists
                     WHERE playlists.playlist_name = '{0}'),
                     (SELECT * FROM playlistgame.songs
-                    WHERE songs.tempo >= '{1} AND songs.tempo <= '{2}'
-                    AND songs.loudness >= '{3}' AND songs.loudness <= '{4}'
+                    WHERE songs.tempo >= '{1} AND songs.tempo <= '{2}'to                    AND songs.loudness >= '{3}' AND songs.loudness <= '{4}'
                     AND (songs.duration >= 0 AND songs.duration < '{5} + 60')
                     LIMIT '{6}')";
 
@@ -80,27 +80,66 @@ namespace PlayListNew.DB
                     AND (songs.duration >= 0 AND songs.duration < '{7} + 60')
                     LIMIT '{8}'))";
 
-        // show playlist songs - need to fix
-        public static string getPlaylistDetails = @"SELECT playlists.playlist_name, albums.album_name
-                    FROM songs
-                    INNER JOIN playlists ON playlists.song_id = songs.song_id
-                    INNER JOIN albums ON albums.album_id = songs.album_id";
+        //******************* END of creat playlist section*******************************************************************************
 
-        // show all playlists of a specific user on the screen - sort it by date!
-        public static string getAllUserPlaylists = @"SELECT playlists.playlist_name
-                    FROM playlistgame.playlists, playlistgame.user_to_playlists
-                    WHERE user_id='{0}' AND playlists.playlist_id=user_to_playlists.playlist_id
-                    ORDER BY playlists.creation_date DESC";
 
-        // get user id when user logged in
+
+
+        //******************* Users section**************************************************************************************
+       
+            // get user id when user logged in
         public static string getUserIdAndName = @"SELECT users.user_id, users.full_name
                     FROM playlistgame.users
                     WHERE name = '{0}'";
 
+        //******************* END of Users section**************************************************************************************
+
+
+
+
+
+        //******************* show song section**************************************************************************************
+
+        // show playlist songs
+        public static string getAllplaylistSongs = @"SELECT songs.name, artists.name, albums.name
+                                                    FROM playlistgame.songs
+                                                    INNER JOIN playlistgame.albums ON albums.id = songs.albumId
+                                                    INNER JOIN playlistgame.artists ON artists.id = songs.artistId
+                                                    Where songs.id IN (SELECT song_to_playlist.song_id
+                                                                     From playlistgame.song_to_playlist
+                                                                     WHERE song_to_playlist.playlist_id= '{0}');";
+
+        //******************* show song section**************************************************************************************
+
+
+
+
+
+
+
+        //******************* show playlist section**************************************************************************************
+
+        // show all playlists of a specific user on the screen - sort it by date!
+        public static string getAllUserPlaylists = @"SELECT playlists.playlist_name
+                    FROM playlistgame.playlists, playlistgame.user_to_playlists
+                    WHERE user_id='{0}' AND playlists.playlist_id=user_to_playlists.playlist_id;";
+                   
+
+// ORDER BY playlists.creation_time DESC"
+
+        //******************* show playlist section**************************************************************************************
+
+
+
+
+        //******************* DB conection section**************************************************************************************
+
+
+        //******************* END of DB conection section**************************************************************************************
+
+
+
+
     }
-
-
-
-
 
 }

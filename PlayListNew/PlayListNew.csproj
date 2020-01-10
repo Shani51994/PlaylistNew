@@ -88,6 +88,9 @@
     <Compile Include="View\showAllUserPlaylist.xaml.cs">
       <DependentUpon>showAllUserPlaylist.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ShowPlaylists.xaml.cs">
+      <DependentUpon>ShowPlaylists.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\showPlaylistSongs.xaml.cs">
       <DependentUpon>showPlaylistSongs.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\showAllUserPlaylist.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShowPlaylists.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

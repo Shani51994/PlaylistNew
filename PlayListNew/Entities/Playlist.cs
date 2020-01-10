@@ -6,35 +6,27 @@ using System.Threading.Tasks;
 
 namespace PlayListNew.Entities
 {
-    class Playlist
+    public class Playlist
     {
-        private string playlistName;
-        private int playlistId;
-        public List<Song> playlistSongs = new List<Song>();
-
-        private Playlist() { }
        
         public string PlaylistName
         {
-            get { return playlistName; }
-            set { playlistName = value; }
+            get; set;
         }
 
-        public int PlaylistId
+        public int PlaylistNumOfSongs
         {
-            get { return playlistId; }
-            set { playlistId = value; }
+            set; get;
         }
-
-        
-        public List<Song> PlaylistSongs {
-            set; get; }
 
         /*
-        public string TotalDuration
+
+        /*
+        public int PlaylistId
         {
             get; set;
-        }*/
+        }
+        */
 
     }
 }
