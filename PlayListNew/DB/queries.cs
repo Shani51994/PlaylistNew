@@ -93,6 +93,16 @@ namespace PlayListNew.DB
                     FROM playlistgame.users
                     WHERE name = '{0}';";
 
+        // insert new user
+        public static string insertNewUser = @"INSERT INTO playlistGame.users (Email, Password, Full_name)
+                                              Values('{0}','{1}', '{2}');";
+
+        // to check if email exsits
+        public static string queryToCheckIfUserExist = @"SELECT * from playlistGame.users WHERE email= '{0}';";
+
+        // to check if password entered is correct
+        public static string toCheckPassword = "SELECT users.password from playlistGame.users WHERE email='{0}';";
+
         //******************* END of Users section**************************************************************************************
 
 
@@ -130,17 +140,7 @@ namespace PlayListNew.DB
 
         //******************* show playlist section**************************************************************************************
 
-
-
-
-        //******************* DB conection section**************************************************************************************
-
-
-        //******************* END of DB conection section**************************************************************************************
-
-
-
-
+         
     }
 
 }

@@ -34,9 +34,8 @@ namespace PlayListNew.View
         /// </summary>
         public void clickSubmit(object sender, RoutedEventArgs e)
         {
-
             DataBaseHandler dbhandler = DataBaseHandler.Instance;
-            int ans = dbhandler.checkIfUserExistAndPasswordRight(emailText.Text);
+            int ans = dbhandler.checkIfUserExistAndPasswordRight(emailText.Text, passwordText.Text);
 
             if (ans == 1)
             {
@@ -51,9 +50,14 @@ namespace PlayListNew.View
                 this.Close();
                 options.Show();
             }
-            
-
+            else
+            {
+                emailText.Text = "";
+                passwordText.Text = "";
+                this.wrongDetails.Visibility = Visibility.Visible;
+            }
         }
+
 
         /// <summary>
         /// Handles the Click event of the Cancel button.
