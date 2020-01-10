@@ -11,7 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using MySql.Data.MySqlClient;
+using PlayListNew.Entities;
 using PlayListNew.DB;
 
 namespace PlayListNew.View
@@ -23,6 +24,7 @@ namespace PlayListNew.View
     /// </summary>
     public partial class createPlaylist : Window
     {
+        // variables for all user's selections
         private double popularity;
         private double minTempoRange;
         private double maxTempoRange;
@@ -34,19 +36,27 @@ namespace PlayListNew.View
         private int numOfSongs;
         private string playlistName;
         private bool isDontCareDecChoosed;
+        private bool isDontCarePopChoosed;
         private int numOfDecChoosed = 0;
         private List<int> decadesRanges = new List<int>();
+        private string query;
 
         public createPlaylist()
         {
             InitializeComponent();
         }
 
+        // function for create a playlist according to the user's requests
         public void pressCreate(object sender, RoutedEventArgs e)
         {
 
+            // if user choosed zero songs in playlist
+            if (this.numOfSongs == 0)
+            {
+                return;
+            }
+
             // get all values inserted by the user
-            this.popularity = (double)popularitySlider.Value;
             this.minTempoRange = double.Parse(tempoMin.Text);
             this.maxTempoRange = double.Parse(tempoMax.Text);
             this.minLoudnessRange = double.Parse(loudnessMin.Text);
@@ -56,17 +66,83 @@ namespace PlayListNew.View
             this.playlistName = playListName.Text;
 
 
-            // checks hoe many checkboxes of decades user choosed
+            // if user insert invalis values (out of the valid range), fix it
+            // to be the minimum or maximum range
+            if (this.minTempoRange < 0)
+            {
+                this.minTempoRange = 0;
+            }
+
+            if (this.maxTempoRange > 262)
+            {
+                this.maxTempoRange = 262;
+            }
+
+            if (this.minLoudnessRange < -52)
+            {
+                this.minLoudnessRange = -52;
+            }
+
+            if (this.maxLoudnessRange > 1)
+            {
+                this.maxLoudnessRange = 1;
+            }
+
+            if (this.numOfSongs < 0)
+            {
+                this.numOfSongs = 30;
+            }
+
+            if (this.numOfSongs > 30)
+            {
+                this.numOfSongs = 30;
+            }
+
+
+            // insert the playlist name into the playlists table
+
+            // get the id of the new playlist
+
+
+            // checks how many and which checkboxes of decades user choosed
             if (this.isDontCareDecChoosed)
             {
-
+                this.maxDecadeRange = 1970;
+                this.maxDecadeRange = 2009;
+            } else
+            {
+                // send what in the list
             }
+
+            // checks if user wants popularity
+            if (this.isDontCareDecChoosed)
+            {
+                this.popularity = 1.0;
+            }
+            else
+            {
+                this.popularity = (double)popularitySlider.Value;
+            }
+
+
+            /*        //        public void createPlaylist(string query)
+        //string connstring = string.Format(queries.creartPlaylistAllOptions, Server, DatabaseName, User, Password);
+
+        string query = queries.creartPlaylistAllOptions;
+        MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
+
+        var reader = command.ExecuteReader();
+        */
+
+            query = string.Format(queries.creartPlaylistAllOptionsSmall, this.minTempoRange, this.maxTempoRange,
+                this.minLoudnessRange, this.maxLoudnessRange, this.popularity, this.minDecadeRange,
+                this.maxDecadeRange, this.duration);
 
             DataBaseHandler dbhandler = DataBaseHandler.Instance;
             dbhandler.createPlaylist();
         }
 
-
+        // function for check if user choosed songs from '70 decade
         private void choose70(object sender, RoutedEventArgs e)
         {
             this.decadesRanges.Add(1970);
@@ -75,6 +151,7 @@ namespace PlayListNew.View
 
         }
 
+        // function for check if user choosed songs from '80 decade
         private void choose80(object sender, RoutedEventArgs e)
         {
             this.decadesRanges.Add(1980);
@@ -83,6 +160,7 @@ namespace PlayListNew.View
             
         }
 
+        // function for check if user choosed songs from '90 decade
         private void choose90(object sender, RoutedEventArgs e)
         {
             this.decadesRanges.Add(1990);
@@ -90,6 +168,7 @@ namespace PlayListNew.View
             this.numOfDecChoosed++;
         }
 
+        // function for check if user choosed songs from '00 decade
         private void choose00(object sender, RoutedEventArgs e)
         {
             this.decadesRanges.Add(2000);
@@ -97,10 +176,17 @@ namespace PlayListNew.View
             this.numOfDecChoosed++;
         }
 
+        // function for check if user choosed songs from all decades
         private void chooseAllDec(object sender, RoutedEventArgs e)
         {
             this.isDontCareDecChoosed = true;
             numOfDecChoosed = 0;
+        }
+
+        // function for check if user choosed songs without popularity priority
+        private void chooseAllPop(object sender, RoutedEventArgs e)
+        {
+            this.isDontCarePopChoosed = true;
         }
 
     }
