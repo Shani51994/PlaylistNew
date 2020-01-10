@@ -42,8 +42,13 @@ namespace PlayListNew.View
             {
                 User currentUser = User.Instance;
                 currentUser.Email = emailText.Text;
+                
+                foreach (Window window in Application.Current.Windows.OfType<Home>())
+                    ((Home)window).Close();
 
                 playlistOptions options = new playlistOptions();
+
+                this.Close();
                 options.Show();
             }
             

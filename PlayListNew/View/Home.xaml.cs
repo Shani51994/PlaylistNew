@@ -20,6 +20,7 @@ namespace PlayListNew.View
     /// </summary>
     public partial class Home : Window
     {
+        login loginS;
         public Home()
         {
             InitializeComponent();
@@ -27,7 +28,9 @@ namespace PlayListNew.View
 
         private void loginClicked(object sender, RoutedEventArgs e)
         {
-            login loginS = new login();
+            //login loginS = new login();
+            loginS = new login();
+
             loginS.Show();
         }
 

@@ -32,13 +32,15 @@ namespace PlayListNew.View
         private void createPlaylistWin(object sender, RoutedEventArgs e)
         {
             createPlaylist createPl = new createPlaylist();
+            this.Close();
             createPl.Show();
-          //  this.Close();
+           
         }
 
         private void ShowAllPlaylistWin(object sender, RoutedEventArgs e)
         {
             showAllUserPlaylist showAllPls = new showAllUserPlaylist();
+            this.Close();
             showAllPls.Show();
         }
 

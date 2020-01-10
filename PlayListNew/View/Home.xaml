@@ -8,14 +8,10 @@
         Title="Home" Height="450" Width="800"
         Background="black">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="259*"/>
-            <ColumnDefinition Width="32*"/>
-            <ColumnDefinition Width="106*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Background="Gainsboro">
+        <StackPanel>
 
-        <Image Margin="22,51,125.752,0" Height="177" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+        <Image Margin="54,10,86.6,0" Height="254" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -25,17 +21,17 @@
                 </TransformGroup>
             </Image.RenderTransform>
             <Image.Source>
-                <BitmapImage DecodePixelWidth="300" UriSource="/playListBingo.png"/>
+                <BitmapImage DecodePixelWidth="300" UriSource="/Playlist-Bingo-Logo_web-No-Background.png"/>
             </Image.Source>
         </Image>
 
-        <StackPanel Grid.ColumnSpan="3" Margin="0,0,-0.4,0">
+        <StackPanel Orientation="Horizontal" Width="250" Margin="0,40">
             <Button Name="loginBtn" Padding="3" HorizontalAlignment="Stretch"
-              FontSize="18"  Height="40" Width="80" Margin="8,20" Click="loginClicked" >Login</Button>
+              FontSize="18"  Height="40" Width="80" Margin="30"  Click="loginClicked" >Login</Button>
             <Button x:Name="registerBtn" Padding="3" HorizontalAlignment="Stretch"
-              FontSize="18" Height="40" Width="80" Margin="357,20,356.6,20" Click="registerClicked" Content="Register"/>
+              FontSize="18" Height="40" Width="80" Click="registerClicked" Content="Register"/>
 
         </StackPanel>
-
+        </StackPanel>
     </Grid>
 </Window>
