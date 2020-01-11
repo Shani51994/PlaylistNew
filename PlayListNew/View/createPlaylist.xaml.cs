@@ -50,21 +50,20 @@ namespace PlayListNew.View
         public void pressCreate(object sender, RoutedEventArgs e)
         {
 
-            // if user choosed zero songs in playlist
-            if (this.numOfSongs == 0)
-            {
-                return;
-            }
-
             // get all values inserted by the user
             this.minTempoRange = double.Parse(tempoMin.Text);
             this.maxTempoRange = double.Parse(tempoMax.Text);
             this.minLoudnessRange = double.Parse(loudnessMin.Text);
             this.maxLoudnessRange = double.Parse(loudnessMax.Text);
-            this.duration = (int)durationSlider.Value;
+            this.duration = (int)durationSlider.Value * 60;
             this.numOfSongs = int.Parse(songsNum.Text);
             this.playlistName = playListName.Text;
 
+            // if user choosed zero songs in playlist
+            if (this.numOfSongs == 0)
+            {
+                return;
+            }
 
             // if user insert invalis values (out of the valid range), fix it
             // to be the minimum or maximum range
@@ -107,7 +106,7 @@ namespace PlayListNew.View
             // checks how many and which checkboxes of decades user choosed
             if (this.isDontCareDecChoosed)
             {
-                this.maxDecadeRange = 1970;
+                this.minDecadeRange = 1970;
                 this.maxDecadeRange = 2009;
             } else
             {
@@ -115,7 +114,7 @@ namespace PlayListNew.View
             }
 
             // checks if user wants popularity
-            if (this.isDontCareDecChoosed)
+            if (this.isDontCarePopChoosed)
             {
                 this.popularity = 1.0;
             }
@@ -125,21 +124,28 @@ namespace PlayListNew.View
             }
 
 
-            /*        //        public void createPlaylist(string query)
-        //string connstring = string.Format(queries.creartPlaylistAllOptions, Server, DatabaseName, User, Password);
+            DataBaseHandler dbhandler = DataBaseHandler.Instance;
 
-        string query = queries.creartPlaylistAllOptions;
-        MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
+            query = string.Format(queries.insertNewPlaylist, this.playlistName);
 
-        var reader = command.ExecuteReader();
-        */
+            dbhandler.saveNewPlaylistName(query);
 
-            query = string.Format(queries.creartPlaylistAllOptionsSmall, this.minTempoRange, this.maxTempoRange,
+            query = string.Format(queries.getPlaylistIdByName, this.playlistName);
+
+            string playlistId = dbhandler.getPlaylistId(query);
+
+            query = string.Format(queries.getSongsIds, this.minTempoRange, this.maxTempoRange,
                 this.minLoudnessRange, this.maxLoudnessRange, this.popularity, this.minDecadeRange,
                 this.maxDecadeRange, this.duration);
 
-            DataBaseHandler dbhandler = DataBaseHandler.Instance;
-            dbhandler.createPlaylist();
+            List<string> songsIds = dbhandler.getSongsIds(query);
+
+            for (int i = 0; i < songsIds.Count; i++)
+            {
+                query = string.Format(queries.creartPlaylist, playlistId, songsIds[i]);
+                dbhandler.createPlaylist(query);
+            }
+
         }
 
         // function for check if user choosed songs from '70 decade
