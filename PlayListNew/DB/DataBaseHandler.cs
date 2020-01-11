@@ -113,21 +113,16 @@ namespace PlayListNew.DB
         }
 
 
-        public void saveNewPlaylistName(string query)
+        public void saveNewPlaylistName(string playlistName)
         {
+            string query = string.Format(queries.insertNewPlaylist, playlistName);
+
             try
             {
                 if (DBConnection.IsConnect())
                 {
                     var command = new MySqlCommand(query, DBConnection.Connection);
-                    var reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        Console.WriteLine(reader.GetString(0));
-                    }
-
-                    reader.Close();
+                    command.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
@@ -137,10 +132,10 @@ namespace PlayListNew.DB
         }
 
 
-        public string getPlaylistId(string query)
+        public string getPlaylistId(string playlistName)
         {
             string playlistId = "";
-
+            string query = string.Format(queries.getPlaylistIdByName, playlistName);
             try
             {
                 if (DBConnection.IsConnect())

@@ -30,8 +30,6 @@ namespace PlayListNew.View
         private double maxTempoRange;
         private double minLoudnessRange;
         private double maxLoudnessRange;
-        private int minDecadeRange;
-        private int maxDecadeRange;
         private int duration;
         private int numOfSongs;
         private string playlistName;
@@ -40,6 +38,7 @@ namespace PlayListNew.View
         private int numOfDecChoosed = 0;
         private List<int> decadesRanges = new List<int>();
         private string query;
+        private string appropriateQuery;
 
         public createPlaylist()
         {
@@ -98,47 +97,121 @@ namespace PlayListNew.View
             }
 
 
-            // insert the playlist name into the playlists table
-
-            // get the id of the new playlist
-
-
-            // checks how many and which checkboxes of decades user choosed
+            // checks if user wants specific decades
             if (this.isDontCareDecChoosed)
             {
-                this.minDecadeRange = 1970;
-                this.maxDecadeRange = 2009;
-            } else
-            {
-                // send what in the list
+                this.isDontCareDecChoosed = true;
             }
 
             // checks if user wants popularity
             if (this.isDontCarePopChoosed)
             {
-                this.popularity = 1.0;
+                this.isDontCarePopChoosed = true;
             }
             else
             {
                 this.popularity = (double)popularitySlider.Value;
             }
 
+            // deals with all variations of options in order to know which query to run
+            if (this.isDontCarePopChoosed && this.isDontCarePopChoosed)
+            {
+                this.appropriateQuery = queries.getSongsIdsWithoutPopAndDec;
+                query = string.Format(queries.getSongsIdsWithoutPopAndDec, this.minTempoRange, this.maxTempoRange,
+                        this.minLoudnessRange, this.maxLoudnessRange, this.duration, this.numOfSongs);
+            } else if (this.isDontCarePopChoosed && !this.isDontCareDecChoosed)
+            {
+                if (this.numOfDecChoosed == 1)
+                {
+                    this.appropriateQuery = queries.getSongsIdsWithoutPopOneDec;
+                    query = string.Format(queries.getSongsIdsWithoutPopOneDec, this.minTempoRange, this.maxTempoRange,
+                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
+                            this.decadesRanges[1], this.duration, this.numOfSongs);
+                } else if (this.numOfDecChoosed == 2)
+                {
+                    this.appropriateQuery = queries.getSongsIdsWithoutPopTwoDec;
+                    query = string.Format(queries.getSongsIdsWithoutPopTwoDec, this.minTempoRange, this.maxTempoRange,
+                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
+                            this.decadesRanges[1], this.decadesRanges[2],
+                            this.decadesRanges[3], this.duration, this.numOfSongs);
+                }
+                else if (this.numOfDecChoosed == 3)
+                {
+                    this.appropriateQuery = queries.getSongsIdsWithoutPopThreeDec;
+                    query = string.Format(queries.getSongsIdsWithoutPopThreeDec, this.minTempoRange, this.maxTempoRange,
+                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
+                            this.decadesRanges[1], this.decadesRanges[2], this.decadesRanges[3],
+                            this.decadesRanges[4], this.decadesRanges[5], this.duration, this.numOfSongs);
+                }
+                else
+                {
+                    this.appropriateQuery = queries.getSongsIdsWithoutPopFourDec;
+                    query = string.Format(queries.getSongsIdsWithoutPopFourDec, this.minTempoRange, this.maxTempoRange,
+                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
+                            this.decadesRanges[1], this.decadesRanges[2], this.decadesRanges[3],
+                            this.decadesRanges[4], this.decadesRanges[5], this.decadesRanges[6],
+                            this.decadesRanges[7], this.duration, this.numOfSongs);
+                }
+            } else if (!this.isDontCarePopChoosed && this.isDontCareDecChoosed)
+            {
+                this.appropriateQuery = queries.getSongsIdsWithoutDec;
+                query = string.Format(queries.getSongsIdsWithoutDec, this.minTempoRange, this.maxTempoRange,
+                        this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
+                        this.duration, this.numOfSongs);
+            }
+            else
+            {
+                if (this.numOfDecChoosed == 1)
+                {
+                    this.appropriateQuery = queries.getSongsIdsAllOptionsOneDec;
+                    query = string.Format(queries.getSongsIdsAllOptionsOneDec, this.minTempoRange, this.maxTempoRange,
+                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
+                            this.decadesRanges[1], this.popularity, this.duration, this.numOfSongs);
+                }
+                else if (this.numOfDecChoosed == 2)
+                {
+                    this.appropriateQuery = queries.getSongsIdsAllOptionsTwoDec;
+                    query = string.Format(queries.getSongsIdsAllOptionsTwoDec, this.minTempoRange, this.maxTempoRange,
+                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
+                            this.decadesRanges[1], this.decadesRanges[2], this.decadesRanges[3],
+                            this.popularity, this.duration, this.numOfSongs);
+                }
+                else if (this.numOfDecChoosed == 3)
+                {
+                    this.appropriateQuery = queries.getSongsIdsAllOptionsThreeDec;
+                    query = string.Format(queries.getSongsIdsAllOptionsThreeDec, this.minTempoRange, this.maxTempoRange,
+                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
+                            this.decadesRanges[1], this.decadesRanges[2], this.decadesRanges[3],
+                            this.decadesRanges[4], this.decadesRanges[5], this.popularity,
+                            this.duration, this.numOfSongs);
+                }
+                else
+                {
+                    this.appropriateQuery = queries.getSongsIdsAllOptionsFourDec;
+                    query = string.Format(queries.getSongsIdsAllOptionsFourDec, this.minTempoRange, this.maxTempoRange,
+                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
+                            this.decadesRanges[1], this.decadesRanges[2], this.decadesRanges[3],
+                            this.decadesRanges[4], this.decadesRanges[5], this.decadesRanges[6],
+                            this.decadesRanges[7], this.popularity, this.duration, this.numOfSongs);
+                }
+            }
+
+            // move all to DataBaseHandler.cs
 
             DataBaseHandler dbhandler = DataBaseHandler.Instance;
+            
+            // insert the playlist name into the playlists table
+            dbhandler.saveNewPlaylistName(this.playlistName);
 
-            query = string.Format(queries.insertNewPlaylist, this.playlistName);
+            // get the id of the new playlist
+            string playlistId = dbhandler.getPlaylistId(this.playlistName);
 
-            dbhandler.saveNewPlaylistName(query);
-
-            query = string.Format(queries.getPlaylistIdByName, this.playlistName);
-
-            string playlistId = dbhandler.getPlaylistId(query);
-
-            query = string.Format(queries.getSongsIds, this.minTempoRange, this.maxTempoRange,
+            // get all songs ids according to the user's request
+            List<string> songsIds = dbhandler.getSongsIds(query);
+            /*query = string.Format(queries.getSongsIdsAllOptionsOneDec, this.minTempoRange, this.maxTempoRange,
                 this.minLoudnessRange, this.maxLoudnessRange, this.popularity, this.minDecadeRange,
                 this.maxDecadeRange, this.duration);
-
-            List<string> songsIds = dbhandler.getSongsIds(query);
+                */
 
             for (int i = 0; i < songsIds.Count; i++)
             {
