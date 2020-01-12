@@ -165,34 +165,34 @@ namespace PlayListNew.View
                 {
                     this.appropriateQuery = queries.getSongsIdsAllOptionsOneDec;
                     query = string.Format(queries.getSongsIdsAllOptionsOneDec, this.minTempoRange, this.maxTempoRange,
-                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
-                            this.decadesRanges[1], this.popularity, this.duration, this.numOfSongs);
+                            this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
+                            this.decadesRanges[0], this.decadesRanges[1], this.duration, this.numOfSongs);
                 }
                 else if (this.numOfDecChoosed == 2)
                 {
                     this.appropriateQuery = queries.getSongsIdsAllOptionsTwoDec;
                     query = string.Format(queries.getSongsIdsAllOptionsTwoDec, this.minTempoRange, this.maxTempoRange,
-                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
-                            this.decadesRanges[1], this.decadesRanges[2], this.decadesRanges[3],
-                            this.popularity, this.duration, this.numOfSongs);
+                            this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
+                            this.decadesRanges[0], this.decadesRanges[1], this.decadesRanges[2],
+                            this.decadesRanges[3], this.popularity, this.duration, this.numOfSongs);
                 }
                 else if (this.numOfDecChoosed == 3)
                 {
                     this.appropriateQuery = queries.getSongsIdsAllOptionsThreeDec;
                     query = string.Format(queries.getSongsIdsAllOptionsThreeDec, this.minTempoRange, this.maxTempoRange,
-                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
-                            this.decadesRanges[1], this.decadesRanges[2], this.decadesRanges[3],
-                            this.decadesRanges[4], this.decadesRanges[5], this.popularity,
+                            this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
+                            this.decadesRanges[0], this.decadesRanges[1], this.decadesRanges[2],
+                            this.decadesRanges[3], this.decadesRanges[4], this.decadesRanges[5],
                             this.duration, this.numOfSongs);
                 }
                 else
                 {
                     this.appropriateQuery = queries.getSongsIdsAllOptionsFourDec;
                     query = string.Format(queries.getSongsIdsAllOptionsFourDec, this.minTempoRange, this.maxTempoRange,
-                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
-                            this.decadesRanges[1], this.decadesRanges[2], this.decadesRanges[3],
-                            this.decadesRanges[4], this.decadesRanges[5], this.decadesRanges[6],
-                            this.decadesRanges[7], this.popularity, this.duration, this.numOfSongs);
+                            this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
+                            this.decadesRanges[0], this.decadesRanges[1], this.decadesRanges[2],
+                            this.decadesRanges[3], this.decadesRanges[4], this.decadesRanges[5], this.decadesRanges[6],
+                            this.decadesRanges[7], this.duration, this.numOfSongs);
                 }
             }
 

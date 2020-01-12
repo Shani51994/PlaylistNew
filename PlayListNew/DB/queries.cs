@@ -44,7 +44,7 @@ namespace PlayListNew.DB
                     AND songs.hotness >= 0 AND songs.hotness <= '{4}'
                     AND (songs.year >= '{5}' AND songs.year< '{6}')
                     AND(songs.duration >= 0 AND songs.duration< '{7}')
-                    LIMIT '{8}'";
+                    LIMIT {8}";
 
         // get songs ids according to the user requests, when user choosed all options
         public static string getSongsIdsAllOptionsTwoDec = @"SELECT songs.id FROM playlistgame.songs
