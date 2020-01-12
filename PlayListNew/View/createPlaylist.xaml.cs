@@ -199,12 +199,6 @@ namespace PlayListNew.View
             // get the id of the new playlist
             string playlistId = dbhandler.getPlaylistId(this.playlistName);
 
-            // get the current user id
-            string userId = User.Instance.Id.ToString();
-
-            // insert the playlist id and the current user id into the user_to_playlists table
-            dbhandler.saveNewPlaylisUser(playlistId, userId);
-
             // get all songs ids according to the user's request
             List<string> songsIds = dbhandler.getSongsIds(query);
             /*query = string.Format(queries.getSongsIdsAllOptionsOneDec, this.minTempoRange, this.maxTempoRange,
@@ -218,6 +212,19 @@ namespace PlayListNew.View
                 query = string.Format(queries.creartPlaylist, playlistId, songsIds[i]);
                 dbhandler.createPlaylist(query);
             }
+
+            // if no songs found
+            if (songsIds.Count == 0)
+            {
+                dbhandler.deletePlaylist(int.Parse(playlistId));
+                return;
+            }
+
+            // get the current user id
+            string userId = User.Instance.Id.ToString();
+
+            // insert the playlist id and the current user id into the user_to_playlists table
+            dbhandler.saveNewPlaylisUser(playlistId, userId);
 
         }
 
