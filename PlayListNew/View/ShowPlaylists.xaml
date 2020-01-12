@@ -23,27 +23,18 @@
                 <DataGrid ItemsSource="{Binding playlistList}" x:Name="dataGrid1" Background="OldLace" AutoGenerateColumns="False" CanUserAddRows="False" Margin="31,58,56.6,0" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Playlist Name" Width="Auto" Binding="{Binding PlaylistName}" IsReadOnly="True"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Num of song" Width="Auto" Binding="{Binding PlaylistNumOfSongs}" IsReadOnly="True"></DataGridTextColumn>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button CommandParameter="{Binding Path=PlaylistId}"  Margin="150 0 0 0" Click="OpenPlaylist_Click">show songs</Button>
-                                    <!-- ToolTip="Display Playlist" Content="{Binding Path=Value.PlaylistName}"  Click="OpenPlaylist_Click" -->
-
+                                    <Button CommandParameter="{Binding Path=PlaylistId}"  Margin="100 0 0 0" Click="OpenPlaylist_Click" >show songs</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
-                        <!--  <DataGridTextColumn Header="Playlist Length" Width="Auto" Binding="{Binding Path=Value.Songs.Count}" IsReadOnly="True"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Duration" Width="Auto" Binding="{Binding Path=Value.TotalDuration}" IsReadOnly="True"></DataGridTextColumn>-->
-                    </DataGrid.Columns>
 
-                    <!-- <DataGridTextColumn Header="Song" Width="Auto" Binding="{Binding SongName}" IsReadOnly="True" />
-                       
-                         <DataGridTextColumn Header="Artist" Width="Auto" Binding="{Binding Path=ArtistName}" IsReadOnly="True"></DataGridTextColumn>
-                <DataGridTextColumn Header="Album" Width="Auto" Binding="{Binding  Path=AlbumName}" IsReadOnly="True"></DataGridTextColumn> -->
-                    <!-- <DataGridTextColumn Header="Genre" Width ="Auto" IsReadOnly="True" Binding ="{Binding SongArtist.Genre}"/> -->
-                    <!--  <DataGridTextColumn Header="Duration" Width="Auto" Binding="{Binding Duration}" IsReadOnly="True"></DataGridTextColumn> -->
-                </DataGrid>
+                        <!--<DataGridTextColumn Header="Duration" Width="Auto" Binding="{Binding Path=Value.TotalDuration}" IsReadOnly="True"></DataGridTextColumn>-->
+                    </DataGrid.Columns>
+               </DataGrid>
             </StackPanel>
         </ScrollViewer>
     </Grid>
