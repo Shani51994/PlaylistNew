@@ -39,7 +39,7 @@ namespace PlayListNew.View
 
         private void ShowAllPlaylistWin(object sender, RoutedEventArgs e)
         {
-            showAllUserPlaylist showAllPls = new showAllUserPlaylist();
+            ShowPlaylists showAllPls = new ShowPlaylists();
             this.Close();
             showAllPls.Show();
         }
