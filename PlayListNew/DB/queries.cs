@@ -189,9 +189,17 @@ namespace PlayListNew.DB
         //******************* show playlist section**************************************************************************************
 
         // show all playlists of a specific user on the screen - sort it by date!
-        public static string getAllUserPlaylists = @"SELECT playlists.playlist_name, playlists.playlist_id
-                    FROM playlistgame.playlists, playlistgame.user_to_playlists
-                    WHERE user_id='{0}' AND playlists.playlist_id=user_to_playlists.playlist_id;";
+        /* public static string getAllUserPlaylists = @"SELECT playlists.playlist_name, playlists.playlist_id
+                     FROM playlistgame.playlists, playlistgame.user_to_playlists
+                     WHERE user_id='{0}' AND playlists.playlist_id=user_to_playlists.playlist_id;";
+                     */
+
+        public static string getAllUserPlaylists = @"SELECT playlists.playlist_name, playlists.playlist_id, COUNT(*) as Num
+                FROM playlistgame.playlists
+                INNER JOIN playlistgame.user_to_playlists ON playlists.playlist_id = user_to_playlists.playlist_id
+                INNER JOIN playlistgame.song_to_playlist ON playlists.playlist_id = song_to_playlist.playlist_id
+                WHERE user_id='{0}'
+                group by playlist_id;";
                    
                      // maybe add:
                     // ORDER BY playlists.creation_time DESC"
