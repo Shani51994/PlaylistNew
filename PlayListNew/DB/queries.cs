@@ -174,9 +174,9 @@ namespace PlayListNew.DB
                                                     FROM playlistgame.songs
                                                     INNER JOIN playlistgame.albums ON albums.id = songs.albumId
                                                     INNER JOIN playlistgame.artists ON artists.id = songs.artistId
-                                                    Where songs.id IN (SELECT song_to_playlist.song_id
-                                                                     From playlistgame.song_to_playlist
-                                                                     WHERE song_to_playlist.playlist_id= '{0}');";
+                                                    Where songs.id IN (SELECT songs_to_playlist.song_id
+                                                                     From playlistgame.songs_to_playlist
+                                                                     WHERE songs_to_playlist.playlist_id= '{0}');";
 
         //******************* show song section**************************************************************************************
 
@@ -197,7 +197,7 @@ namespace PlayListNew.DB
         public static string getAllUserPlaylists = @"SELECT playlists.playlist_name, playlists.playlist_id, COUNT(*) as Num
                 FROM playlistgame.playlists
                 INNER JOIN playlistgame.user_to_playlists ON playlists.playlist_id = user_to_playlists.playlist_id
-                INNER JOIN playlistgame.song_to_playlist ON playlists.playlist_id = song_to_playlist.playlist_id
+                INNER JOIN playlistgame.songs_to_playlist ON playlists.playlist_id = songs_to_playlist.playlist_id
                 WHERE user_id='{0}'
                 group by playlist_id;";
                    
