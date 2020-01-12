@@ -20,8 +20,10 @@ namespace PlayListNew.DB
         string path = @"PlayListNewLog.txt";
 
         private string Server = "localhost";
-        private string DatabaseName = "playlistGame";
-        private string Password = "Mm1614113";
+        //private string DatabaseName = "playlistGame";
+        //private string Password = "Mm1614113";
+        private string DatabaseName = "playlistgame";
+        private string Password = "Sql1234pass1234Sql";
         private string User = "root";
 
         public DataBaseHandler()
@@ -63,6 +65,7 @@ namespace PlayListNew.DB
             string query = string.Format(queries.queryToCheckIfUserExist, email);
             MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
         
+            //*******************
             var reader = command.ExecuteReader();
             if (reader.HasRows){
                 reader.Close();
@@ -110,16 +113,107 @@ namespace PlayListNew.DB
         }
 
 
-        public void createPlaylist()
+        public void saveNewPlaylistName(string playlistName)
         {
-            //        public void createPlaylist(string query)
-            //string connstring = string.Format(queries.creartPlaylistAllOptions, Server, DatabaseName, User, Password);
+            string query = string.Format(queries.insertNewPlaylist, playlistName);
 
-            string query = queries.creartPlaylistAllOptions;
-            MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
+            try
+            {
+                if (DBConnection.IsConnect())
+                {
+                    var command = new MySqlCommand(query, DBConnection.Connection);
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+            }
+        }
 
-            var reader = command.ExecuteReader();
-            
+
+        public string getPlaylistId(string playlistName)
+        {
+            string playlistId = "";
+            string query = string.Format(queries.getPlaylistIdByName, playlistName);
+            try
+            {
+                if (DBConnection.IsConnect())
+                {
+
+                    var command = new MySqlCommand(query, DBConnection.Connection);
+
+                    var reader = command.ExecuteReader();
+
+
+                    while (reader.Read())
+                    {
+                        playlistId = reader.GetString(0);
+                    }
+
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+            }
+            return playlistId;
+
+        }
+
+
+        public List<string> getSongsIds(string query)
+        {
+            List<string> songsIds = new List<string>();
+
+            try
+            {
+                if (DBConnection.IsConnect())
+                {
+
+                    var command = new MySqlCommand(query, DBConnection.Connection);
+
+                    var reader = command.ExecuteReader();
+
+
+                    while (reader.Read())
+                    {
+                        songsIds.Add(reader.GetString(0));
+                    }
+
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+            }
+            return songsIds;
+
+        }
+
+
+        public void createPlaylist(string query)
+        {
+            try
+            {
+                if (DBConnection.IsConnect())
+                {
+                    //        public void createPlaylist(string query)
+                    //string connstring = string.Format(queries.creartPlaylistAllOptions, Server, DatabaseName, User, Password);
+
+                    //string query = queries.creartPlaylistAllOptions;
+                    var command = new MySqlCommand(query, DBConnection.Connection);
+
+
+                    command.ExecuteNonQuery();
+
+                }
+            } catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+            }
         }
 
 
