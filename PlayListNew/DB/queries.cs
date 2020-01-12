@@ -43,7 +43,7 @@ namespace PlayListNew.DB
                     AND songs.loudness >= '{2}' AND songs.loudness <= '{3}'
                     AND songs.hotness >= 0 AND songs.hotness <= '{4}'
                     AND (songs.year >= '{5}' AND songs.year< '{6}')
-                    AND(songs.duration >= 0 AND songs.duration< '{7}')
+                    AND (songs.duration >= 0 AND songs.duration< '{7}')
                     LIMIT {8}";
 
         // get songs ids according to the user requests, when user choosed all options
@@ -51,88 +51,88 @@ namespace PlayListNew.DB
                     WHERE songs.tempo >= '{0}' AND songs.tempo <= '{1}'
                     AND songs.loudness >= '{2}' AND songs.loudness <= '{3}'
                     AND songs.hotness >= 0 AND songs.hotness <= '{4}'
-                    AND (songs.year >= '{5}' AND songs.year< '{6}')
-                    AND (songs.year >= '{7}' AND songs.year < '{8}')
+                    AND ((songs.year >= '{5}' AND songs.year< '{6}')
+                    OR (songs.year >= '{7}' AND songs.year < '{8}'))
                     AND (songs.duration >= 0 AND songs.duration < '{9}')
-                    LIMIT '{10}'";
+                    LIMIT {10}";
 
         // get songs ids according to the user requests, when user choosed all options
         public static string getSongsIdsAllOptionsThreeDec = @"SELECT songs.id FROM playlistgame.songs
                     WHERE songs.tempo >= '{0}' AND songs.tempo <= '{1}'
                     AND songs.loudness >= '{2}' AND songs.loudness <= '{3}'
                     AND songs.hotness >= 0 AND songs.hotness <= '{4}'
-                    AND (songs.year >= '{5}' AND songs.year< '{6}')
-                    AND (songs.year >= '{7}' AND songs.year < '{8}')
-                    AND (songs.year >= '{9}' AND songs.year < '{10}')
+                    AND ((songs.year >= '{5}' AND songs.year< '{6}')
+                    OR (songs.year >= '{7}' AND songs.year < '{8}')
+                    OR (songs.year >= '{9}' AND songs.year < '{10}'))
                     AND (songs.duration >= 0 AND songs.duration < '{11}')
-                    LIMIT '{12}'";
+                    LIMIT {12}";
 
         // get songs ids according to the user requests, when user choosed all options
         public static string getSongsIdsAllOptionsFourDec = @"SELECT songs.id FROM playlistgame.songs
                     WHERE songs.tempo >= '{0}' AND songs.tempo <= '{1}'
                     AND songs.loudness >= '{2}' AND songs.loudness <= '{3}'
                     AND songs.hotness >= 0 AND songs.hotness <= '{4}'
-                    AND (songs.year >= '{5}' AND songs.year< '{6}')
-                    AND (songs.year >= '{7}' AND songs.year < '{8}')
-                    AND (songs.year >= '{9}' AND songs.year < '{10}')
-                    AND (songs.year >= '{11}' AND songs.year < '{12}')
+                    AND ((songs.year >= '{5}' AND songs.year< '{6}')
+                    OR (songs.year >= '{7}' AND songs.year < '{8}')
+                    OR (songs.year >= '{9}' AND songs.year < '{10}')
+                    OR (songs.year >= '{11}' AND songs.year < '{12}'))
                     AND (songs.duration >= 0 AND songs.duration < '{13}')
-                    LIMIT '{14}'";
+                    LIMIT {14}";
 
 
         // get songs ids according to the user requests, when user didnt choose specific popularity
         // and specific decade
-        public static string getSongsIdsWithoutPopAndDec = @"SELECT * FROM playlistgame.songs
-                    WHERE songs.tempo >= '{0} AND songs.tempo <= '{1}'                    
+        public static string getSongsIdsWithoutPopAndDec = @"SELECT songs.id FROM playlistgame.songs
+                    WHERE songs.tempo >= '{0}' AND songs.tempo <= '{1}'                    
                     AND songs.loudness >= '{2}' AND songs.loudness <= '{3}'
                     AND (songs.duration >= 0 AND songs.duration < '{4}')
-                    LIMIT '{5}'";
+                    LIMIT {5}";
 
         // get songs ids according to the user requests, when user didnt choose specific decade
-        public static string getSongsIdsWithoutDec = @"SELECT * FROM playlistgame.songs
-                    WHERE songs.tempo >= '{0} AND songs.tempo <= '{1}'
+        public static string getSongsIdsWithoutDec = @"SELECT songs.id FROM playlistgame.songs
+                    WHERE songs.tempo >= '{0}' AND songs.tempo <= '{1}'
                     AND songs.loudness >= '{2}' AND songs.loudness <= '{3}'
                     AND songs.hotness >= 0 AND songs.hotness <= '{4}'
                     AND (songs.duration >= 0 AND songs.duration < '{5}')
-                    LIMIT '{6}'";
+                    LIMIT {6}";
 
         // get songs ids according to the user requests, when user didnt choose all specific popularity
-        public static string getSongsIdsWithoutPopOneDec = @"SELECT * FROM playlistgame.songs
-                    WHERE songs.tempo >= '{0} AND songs.tempo <= '{1}'
+        public static string getSongsIdsWithoutPopOneDec = @"SELECT songs.id FROM playlistgame.songs
+                    WHERE songs.tempo >= '{0}' AND songs.tempo <= '{1}'
                     AND songs.loudness >= '{2}' AND songs.loudness <= '{3}'
                     AND (songs.year >= '{4}' AND songs.year < '{5}')
                     AND (songs.duration >= 0 AND songs.duration < '{6}')
-                    LIMIT '{7}'";
+                    LIMIT {7}";
 
         // get songs ids according to the user requests, when user didnt choose all specific popularity
-        public static string getSongsIdsWithoutPopTwoDec = @"SELECT * FROM playlistgame.songs
-                    WHERE songs.tempo >= '{0} AND songs.tempo <= '{1}'
+        public static string getSongsIdsWithoutPopTwoDec = @"SELECT songs.id FROM playlistgame.songs
+                    WHERE songs.tempo >= '{0}' AND songs.tempo <= '{1}'
                     AND songs.loudness >= '{2}' AND songs.loudness <= '{3}'
-                    AND (songs.year >= '{4}' AND songs.year < '{5}')
-                    AND (songs.year >= '{6}' AND songs.year < '{7}')
+                    AND ((songs.year >= '{4}' AND songs.year < '{5}')
+                    OR (songs.year >= '{6}' AND songs.year < '{7}'))
                     AND (songs.duration >= 0 AND songs.duration < '{8}')
-                    LIMIT '{9}'";
+                    LIMIT {9}";
 
         // get songs ids according to the user requests, when user didnt choose all specific popularity
-        public static string getSongsIdsWithoutPopThreeDec = @"SELECT * FROM playlistgame.songs
-                    WHERE songs.tempo >= '{0} AND songs.tempo <= '{1}'
+        public static string getSongsIdsWithoutPopThreeDec = @"SELECT songs.id FROM playlistgame.songs
+                    WHERE songs.tempo >= '{0}' AND songs.tempo <= '{1}'
                     AND songs.loudness >= '{2}' AND songs.loudness <= '{3}'
-                    AND (songs.year >= '{4}' AND songs.year < '{5}')
-                    AND (songs.year >= '{6}' AND songs.year < '{7}')
-                    AND (songs.year >= '{8}' AND songs.year < '{9}')
+                    AND ((songs.year >= '{4}' AND songs.year < '{5}')
+                    OR (songs.year >= '{6}' AND songs.year < '{7}')
+                    OR (songs.year >= '{8}' AND songs.year < '{9}'))
                     AND (songs.duration >= 0 AND songs.duration < '{10}')
-                    LIMIT '{11}'";
+                    LIMIT {11}";
 
         // get songs ids according to the user requests, when user didnt choose all specific popularity
-        public static string getSongsIdsWithoutPopFourDec = @"SELECT * FROM playlistgame.songs
-                    WHERE songs.tempo >= '{0} AND songs.tempo <= '{1}'
+        public static string getSongsIdsWithoutPopFourDec = @"SELECT songs.id FROM playlistgame.songs
+                    WHERE songs.tempo >= '{0}' AND songs.tempo <= '{1}'
                     AND songs.loudness >= '{2}' AND songs.loudness <= '{3}'
-                    AND (songs.year >= '{4}' AND songs.year < '{5}')
-                    AND (songs.year >= '{6}' AND songs.year < '{7}')
-                    AND (songs.year >= '{8}' AND songs.year < '{9}')
-                    AND (songs.year >= '{10}' AND songs.year < '{11}')
+                    AND ((songs.year >= '{4}' AND songs.year < '{5}')
+                    OR (songs.year >= '{6}' AND songs.year < '{7}')
+                    OR (songs.year >= '{8}' AND songs.year < '{9}')
+                    OR (songs.year >= '{10}' AND songs.year < '{11}'))
                     AND (songs.duration >= 0 AND songs.duration < '{12}')
-                    LIMIT '{13}'";
+                    LIMIT {13}";
 
         // create playlist and insert all songs choosed
         public static string creartPlaylist = @"INSERT INTO playlistgame.songs_to_playlist(songs_to_playlist.playlist_id, songs_to_playlist.song_id)

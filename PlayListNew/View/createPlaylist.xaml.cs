@@ -38,7 +38,6 @@ namespace PlayListNew.View
         private int numOfDecChoosed = 0;
         private List<int> decadesRanges = new List<int>();
         private string query;
-        private string appropriateQuery;
 
         public createPlaylist()
         {
@@ -114,22 +113,19 @@ namespace PlayListNew.View
             }
 
             // deals with all variations of options in order to know which query to run
-            if (this.isDontCarePopChoosed && this.isDontCarePopChoosed)
+            if (this.isDontCarePopChoosed && this.isDontCareDecChoosed)
             {
-                this.appropriateQuery = queries.getSongsIdsWithoutPopAndDec;
                 query = string.Format(queries.getSongsIdsWithoutPopAndDec, this.minTempoRange, this.maxTempoRange,
                         this.minLoudnessRange, this.maxLoudnessRange, this.duration, this.numOfSongs);
             } else if (this.isDontCarePopChoosed && !this.isDontCareDecChoosed)
             {
                 if (this.numOfDecChoosed == 1)
                 {
-                    this.appropriateQuery = queries.getSongsIdsWithoutPopOneDec;
                     query = string.Format(queries.getSongsIdsWithoutPopOneDec, this.minTempoRange, this.maxTempoRange,
                             this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
                             this.decadesRanges[1], this.duration, this.numOfSongs);
                 } else if (this.numOfDecChoosed == 2)
                 {
-                    this.appropriateQuery = queries.getSongsIdsWithoutPopTwoDec;
                     query = string.Format(queries.getSongsIdsWithoutPopTwoDec, this.minTempoRange, this.maxTempoRange,
                             this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
                             this.decadesRanges[1], this.decadesRanges[2],
@@ -137,7 +133,6 @@ namespace PlayListNew.View
                 }
                 else if (this.numOfDecChoosed == 3)
                 {
-                    this.appropriateQuery = queries.getSongsIdsWithoutPopThreeDec;
                     query = string.Format(queries.getSongsIdsWithoutPopThreeDec, this.minTempoRange, this.maxTempoRange,
                             this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
                             this.decadesRanges[1], this.decadesRanges[2], this.decadesRanges[3],
@@ -145,7 +140,6 @@ namespace PlayListNew.View
                 }
                 else
                 {
-                    this.appropriateQuery = queries.getSongsIdsWithoutPopFourDec;
                     query = string.Format(queries.getSongsIdsWithoutPopFourDec, this.minTempoRange, this.maxTempoRange,
                             this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
                             this.decadesRanges[1], this.decadesRanges[2], this.decadesRanges[3],
@@ -154,7 +148,6 @@ namespace PlayListNew.View
                 }
             } else if (!this.isDontCarePopChoosed && this.isDontCareDecChoosed)
             {
-                this.appropriateQuery = queries.getSongsIdsWithoutDec;
                 query = string.Format(queries.getSongsIdsWithoutDec, this.minTempoRange, this.maxTempoRange,
                         this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
                         this.duration, this.numOfSongs);
@@ -163,22 +156,19 @@ namespace PlayListNew.View
             {
                 if (this.numOfDecChoosed == 1)
                 {
-                    this.appropriateQuery = queries.getSongsIdsAllOptionsOneDec;
                     query = string.Format(queries.getSongsIdsAllOptionsOneDec, this.minTempoRange, this.maxTempoRange,
                             this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
                             this.decadesRanges[0], this.decadesRanges[1], this.duration, this.numOfSongs);
                 }
                 else if (this.numOfDecChoosed == 2)
                 {
-                    this.appropriateQuery = queries.getSongsIdsAllOptionsTwoDec;
                     query = string.Format(queries.getSongsIdsAllOptionsTwoDec, this.minTempoRange, this.maxTempoRange,
                             this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
                             this.decadesRanges[0], this.decadesRanges[1], this.decadesRanges[2],
-                            this.decadesRanges[3], this.popularity, this.duration, this.numOfSongs);
+                            this.decadesRanges[3], this.duration, this.numOfSongs);
                 }
                 else if (this.numOfDecChoosed == 3)
                 {
-                    this.appropriateQuery = queries.getSongsIdsAllOptionsThreeDec;
                     query = string.Format(queries.getSongsIdsAllOptionsThreeDec, this.minTempoRange, this.maxTempoRange,
                             this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
                             this.decadesRanges[0], this.decadesRanges[1], this.decadesRanges[2],
@@ -187,7 +177,6 @@ namespace PlayListNew.View
                 }
                 else
                 {
-                    this.appropriateQuery = queries.getSongsIdsAllOptionsFourDec;
                     query = string.Format(queries.getSongsIdsAllOptionsFourDec, this.minTempoRange, this.maxTempoRange,
                             this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
                             this.decadesRanges[0], this.decadesRanges[1], this.decadesRanges[2],
@@ -213,6 +202,7 @@ namespace PlayListNew.View
                 this.maxDecadeRange, this.duration);
                 */
 
+            // move it to DataBaseHandler*************
             for (int i = 0; i < songsIds.Count; i++)
             {
                 query = string.Format(queries.creartPlaylist, playlistId, songsIds[i]);

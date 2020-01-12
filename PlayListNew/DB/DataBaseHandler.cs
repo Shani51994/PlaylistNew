@@ -148,7 +148,6 @@ namespace PlayListNew.DB
 
                     while (reader.Read())
                     {
-                        Console.WriteLine(reader.GetString(0));
                         playlistId = reader.GetString(0);
                     }
 
@@ -180,7 +179,6 @@ namespace PlayListNew.DB
 
                     while (reader.Read())
                     {
-                        Console.WriteLine(reader.GetString(0));
                         songsIds.Add(reader.GetString(0));
                     }
 
