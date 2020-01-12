@@ -131,6 +131,24 @@ namespace PlayListNew.DB
             }
         }
 
+        public void saveNewPlaylisUser(string playlistId, string userId)
+        {
+            string query = string.Format(queries.crearteUserAndPlaylist, playlistId, userId);
+
+            try
+            {
+                if (DBConnection.IsConnect())
+                {
+                    var command = new MySqlCommand(query, DBConnection.Connection);
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+            }
+        }
+
 
         public string getPlaylistId(string playlistName)
         {

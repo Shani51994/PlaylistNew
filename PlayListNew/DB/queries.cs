@@ -138,6 +138,10 @@ namespace PlayListNew.DB
         public static string creartPlaylist = @"INSERT INTO playlistgame.songs_to_playlist(songs_to_playlist.playlist_id, songs_to_playlist.song_id)
                     VALUES ('{0}', '{1}')";
 
+        // create row for user id and playlist id and insert to user_tp_playlists table
+        public static string crearteUserAndPlaylist = @"INSERT INTO playlistgame.user_to_playlists(user_to_playlists.playlist_id, user_to_playlists.user_id)
+                    VALUES ('{0}', '{1}')";
+
 
         //******************* END of creat playlist section*******************************************************************************
 
@@ -145,8 +149,8 @@ namespace PlayListNew.DB
 
 
         //******************* Users section**************************************************************************************
-       
-            // get user id when user logged in
+
+        // get user id when user logged in
         public static string getUserIdAndName = @"SELECT users.user_id, users.full_name
                     FROM playlistgame.users
                     WHERE name = '{0}';";

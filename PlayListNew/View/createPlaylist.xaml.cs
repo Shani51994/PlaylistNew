@@ -195,6 +195,12 @@ namespace PlayListNew.View
             // get the id of the new playlist
             string playlistId = dbhandler.getPlaylistId(this.playlistName);
 
+            // get the current user id
+            string userId = 15.ToString();
+
+            // insert the playlist id and the current user id into the user_to_playlists table
+            dbhandler.saveNewPlaylisUser(playlistId, userId);
+
             // get all songs ids according to the user's request
             List<string> songsIds = dbhandler.getSongsIds(query);
             /*query = string.Format(queries.getSongsIdsAllOptionsOneDec, this.minTempoRange, this.maxTempoRange,
