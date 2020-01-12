@@ -17,8 +17,8 @@ using PlayListNew.DB;
 
 namespace PlayListNew.View
 {
-    
-    
+
+
     /// <summary>
     /// Interaction logic for createPlaylist.xaml
     /// </summary>
@@ -188,7 +188,7 @@ namespace PlayListNew.View
             // move all to DataBaseHandler.cs
 
             DataBaseHandler dbhandler = DataBaseHandler.Instance;
-            
+
             // insert the playlist name into the playlists table
             dbhandler.saveNewPlaylistName(this.playlistName);
 
@@ -232,7 +232,7 @@ namespace PlayListNew.View
             this.decadesRanges.Add(1980);
             this.decadesRanges.Add(1989);
             this.numOfDecChoosed++;
-            
+
         }
 
         // function for check if user choosed songs from '90 decade
@@ -264,5 +264,18 @@ namespace PlayListNew.View
             this.isDontCarePopChoosed = true;
         }
 
+        public void pressGoBack(object sender, RoutedEventArgs e)
+        {
+            playlistOptions options = new playlistOptions();
+            this.Close();
+            options.Show();
+        }
+
+        public void pressClear(object sender, RoutedEventArgs e)
+        {
+          
+        }
+
     }
+
 }

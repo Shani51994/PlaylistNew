@@ -204,13 +204,24 @@ namespace PlayListNew.DB
                 INNER JOIN playlistgame.songs_to_playlist ON playlists.playlist_id = songs_to_playlist.playlist_id
                 WHERE user_id='{0}'
                 group by playlist_id;";
-                   
-                     // maybe add:
-                    // ORDER BY playlists.creation_time DESC"
+
+        // maybe add:
+        // ORDER BY playlists.creation_time DESC"
 
         //******************* show playlist section**************************************************************************************
 
-         
+
+        //******************* delete section**************************************************************************************
+
+        public static string deletePlaylist = @"DELETE FROM playlists WHERE playlist_id='{0}';";
+
+        public static string deleteSongsByPlaylist = @"DELETE FROM songs_to_playlist WHERE playlist_id='{0}';";
+
+        public static string deletePlaylistToUse = @"DELETE FROM user_to_playlists WHERE playlist_id='{0}';";
+
+
+
+        //******************* end of delete section**************************************************************************************
     }
 
 }

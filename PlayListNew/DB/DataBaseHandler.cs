@@ -329,5 +329,50 @@ namespace PlayListNew.DB
             return id;
         }
 
+        
+
+        public void deletePlaylist(int playlistId)
+        {
+
+            string query = string.Format(queries.deletePlaylist, playlistId);
+            MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at RunQuery function" + ex.Message + Environment.NewLine);
+            }
+
+
+            string query2 = string.Format(queries.deleteSongsByPlaylist, playlistId);
+            MySqlCommand command2 = new MySqlCommand(query2, DBConnection.Connection);
+
+            try
+            {
+                command2.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at RunQuery function" + ex.Message + Environment.NewLine);
+            }
+
+
+
+            string query3 = string.Format(queries.deletePlaylistToUse, playlistId);
+            MySqlCommand command3 = new MySqlCommand(query3, DBConnection.Connection);
+
+            try
+            {
+                command3.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at RunQuery function" + ex.Message + Environment.NewLine);
+            }
+        }
+
     }
 }

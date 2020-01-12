@@ -38,7 +38,7 @@ namespace PlayListNew.View
         /// <summary>
         /// Handles the Click event of the Show songs button.
         /// </summary>
-        private void OpenPlaylist_Click(object sender, RoutedEventArgs e)
+        private void pressOpenPlaylist(object sender, RoutedEventArgs e)
         {
            
             Button button = (Button)sender;
@@ -47,5 +47,27 @@ namespace PlayListNew.View
             playlistSongs.Show();
            
         }
+
+        public void pressGoBack(object sender, RoutedEventArgs e)
+        {
+            playlistOptions options = new playlistOptions();
+            this.Close();
+            options.Show();
+        }
+
+
+        private void pressDeletePlaylist(object sender, RoutedEventArgs e)
+        {
+
+            Button button = (Button)sender;
+            int playlistId = (int)button.CommandParameter;
+
+            DataBaseHandler.Instance.deletePlaylist(playlistId);
+            
+            //this.Close;
+
+
+        }
+
     }
 }

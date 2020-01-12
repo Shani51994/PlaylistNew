@@ -45,8 +45,6 @@
 
         <TextBlock Name="message" Grid.Row="5" FontSize="18" ></TextBlock>
 
-
-
         <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15">
             <Button Name="okBtn" Padding="3" HorizontalAlignment="Stretch" Grid.Row="4" 
                   FontSize="18" Height="40" Width="80" Margin="8"  Click="registerClick">Register</Button>
