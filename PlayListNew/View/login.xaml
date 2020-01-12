@@ -38,7 +38,7 @@
             <TextBox x:Name="passwordText" FontSize="18"  Width="219" Text="{Binding FlightServerIP, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,-0.2"/>
         </StackPanel>
 
-        <TextBlock Name="wrongDetails" Visibility="Hidden" Grid.Row="3" FontSize="18" >wrong email or password</TextBlock>
+        <TextBlock Name="message" Grid.Row="3" FontSize="18" ></TextBlock>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15">
             <Button Name="okBtn" Padding="3" HorizontalAlignment="Stretch" 

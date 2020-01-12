@@ -82,6 +82,7 @@ namespace PlayListNew.DB
 
         public int checkIfUserExistAndPasswordRight(string email, string password)
         {
+           
             string query = string.Format(queries.toCheckPassword, email);
             MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
 
@@ -359,9 +360,8 @@ namespace PlayListNew.DB
                 File.AppendAllText(path, "Server DB Error at RunQuery function" + ex.Message + Environment.NewLine);
             }
 
-
-
-            string query3 = string.Format(queries.deletePlaylistToUse, playlistId);
+            
+            string query3 = string.Format(queries.deletePlaylistToUser, playlistId);
             MySqlCommand command3 = new MySqlCommand(query3, DBConnection.Connection);
 
             try

@@ -20,19 +20,15 @@ namespace PlayListNew.View
     /// <summary>
     /// Interaction logic for ShowPlaylists.xaml
     /// </summary>
+    /// 
+
+        
     public partial class ShowPlaylists : Window
     {
         public ShowPlaylists()
         {
             InitializeComponent();
-            DataBaseHandler dbHandler = DataBaseHandler.Instance;
-            
-            ObservableCollection<Playlist> playlistList = dbHandler.GetAllUserPlaylist();
-
-            //ObservableCollection<Song> songList = new ObservableCollection<Song>();
-            //songList.Add(new Song() { SongName = "maa", ArtistName = "pp", AlbumName = "sh" });
-
-            dataGrid1.ItemsSource = playlistList;
+            showCurrentPlaylist();
         }
 
         /// <summary>
@@ -56,6 +52,14 @@ namespace PlayListNew.View
         }
 
 
+        public void showCurrentPlaylist()
+        {
+           
+            DataBaseHandler dbHandler = DataBaseHandler.Instance;
+            ObservableCollection<Playlist> playlistList = dbHandler.GetAllUserPlaylist();
+            dataGrid1.ItemsSource = playlistList;
+        }
+
         private void pressDeletePlaylist(object sender, RoutedEventArgs e)
         {
 
@@ -63,9 +67,8 @@ namespace PlayListNew.View
             int playlistId = (int)button.CommandParameter;
 
             DataBaseHandler.Instance.deletePlaylist(playlistId);
-            
-            //this.Close;
 
+            showCurrentPlaylist();
 
         }
 

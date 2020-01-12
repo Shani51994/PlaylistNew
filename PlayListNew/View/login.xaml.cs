@@ -34,6 +34,12 @@ namespace PlayListNew.View
         /// </summary>
         public void clickSubmit(object sender, RoutedEventArgs e)
         {
+            if (emailText.Text == "" || passwordText.Text == "" )
+            {
+                this.message.Text = "fill all fileds please";
+                return;
+            }
+
             DataBaseHandler dbhandler = DataBaseHandler.Instance;
             int ans = dbhandler.checkIfUserExistAndPasswordRight(emailText.Text, passwordText.Text);
 
@@ -55,7 +61,7 @@ namespace PlayListNew.View
             {
                 emailText.Text = "";
                 passwordText.Text = "";
-                this.wrongDetails.Visibility = Visibility.Visible;
+                this.message.Text= "wrong email or password";
             }
         }
 

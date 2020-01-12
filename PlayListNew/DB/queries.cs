@@ -199,25 +199,22 @@ namespace PlayListNew.DB
                      */
 
         public static string getAllUserPlaylists = @"SELECT playlists.playlist_name, playlists.playlist_id, COUNT(*) as Num
-                FROM playlistgame.playlists
-                INNER JOIN playlistgame.user_to_playlists ON playlists.playlist_id = user_to_playlists.playlist_id
-                INNER JOIN playlistgame.songs_to_playlist ON playlists.playlist_id = songs_to_playlist.playlist_id
-                WHERE user_id='{0}'
-                group by playlist_id;";
-
-        // maybe add:
-        // ORDER BY playlists.creation_time DESC"
+                                                    FROM playlistgame.playlists
+                                                    INNER JOIN playlistgame.user_to_playlists ON playlists.playlist_id = user_to_playlists.playlist_id
+                                                    INNER JOIN playlistgame.songs_to_playlist ON playlists.playlist_id = songs_to_playlist.playlist_id
+                                                    WHERE user_id='{0}'
+                                                    group by playlist_id
+				                                    ORDER BY creation_date DESC;";
 
         //******************* show playlist section**************************************************************************************
 
 
         //******************* delete section**************************************************************************************
 
+        // when delete playlist - delete the playlist from tables: playlists, songs_to_playlist, user_to_playlists
         public static string deletePlaylist = @"DELETE FROM playlists WHERE playlist_id='{0}';";
-
         public static string deleteSongsByPlaylist = @"DELETE FROM songs_to_playlist WHERE playlist_id='{0}';";
-
-        public static string deletePlaylistToUse = @"DELETE FROM user_to_playlists WHERE playlist_id='{0}';";
+        public static string deletePlaylistToUser = @"DELETE FROM user_to_playlists WHERE playlist_id='{0}';";
 
 
 
