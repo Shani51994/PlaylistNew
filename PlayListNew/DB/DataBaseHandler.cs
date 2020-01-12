@@ -247,7 +247,6 @@ namespace PlayListNew.DB
         public ObservableCollection<Song> GetPlaylistSongs(int playlistID)
         {
             ObservableCollection<Song> songs = new ObservableCollection<Song>();
-
             try
             {
                 if (DBConnection.IsConnect())
@@ -261,7 +260,10 @@ namespace PlayListNew.DB
                         string songName = reader.GetString(0);
                         string artistName = reader.GetString(1);
                         string albumName = reader.GetString(2);
-                        Song song = new Song() { SongName = songName, ArtistName = artistName, AlbumName = albumName };
+                        int id = reader.GetInt32(3);
+                        double duration = reader.GetDouble(4);
+
+                        Song song = new Song() { SongName = songName, ArtistName = artistName, AlbumName = albumName, SongId=id, Duration=duration};
                         songs.Add(song);
                     }
                     reader.Close();
@@ -372,6 +374,27 @@ namespace PlayListNew.DB
             {
                 File.AppendAllText(path, "Server DB Error at RunQuery function" + ex.Message + Environment.NewLine);
             }
+        }
+
+
+
+
+
+        public void deleteSong(int songId)
+        {
+
+            string query = string.Format(queries.deleteSongFromPlaylist, songId);
+            MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at RunQuery function" + ex.Message + Environment.NewLine);
+            }
+            
         }
 
     }

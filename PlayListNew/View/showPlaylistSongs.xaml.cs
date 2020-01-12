@@ -22,17 +22,35 @@ namespace PlayListNew.View
     /// </summary>
     public partial class showPlaylistSongs : Window
     {
-      
+        public int playlistIdG;
+
+        public void showCurrentSongs()
+        {
+            DataBaseHandler dbHandler = DataBaseHandler.Instance;
+            ObservableCollection<Song> songList = dbHandler.GetPlaylistSongs(playlistIdG);
+            dataGrid1.ItemsSource = songList;
+        }
+
+
         public showPlaylistSongs(int playlistId)
         {
             InitializeComponent();
-            DataBaseHandler dbHandler = DataBaseHandler.Instance;
-            
-            ObservableCollection<Song> songList = dbHandler.GetPlaylistSongs(playlistId);
-
-            dataGrid1.ItemsSource = songList;
-
+            playlistIdG = playlistId;
+            showCurrentSongs();
         }
+
+
+        private void pressDeletePlaylist(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            int songId = (int)button.CommandParameter;
+
+            DataBaseHandler.Instance.deleteSong(songId);
+
+            showCurrentSongs();
+        }
+
+
 
         private void DataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -174,7 +174,7 @@ namespace PlayListNew.DB
         //******************* show song section**************************************************************************************
 
         // show playlist songs
-        public static string getAllplaylistSongs = @"SELECT songs.name, artists.name, albums.name
+        public static string getAllplaylistSongs = @"SELECT songs.name, artists.name, albums.name, songs.id, songs.duration
                                                     FROM playlistgame.songs
                                                     INNER JOIN playlistgame.albums ON albums.id = songs.albumId
                                                     INNER JOIN playlistgame.artists ON artists.id = songs.artistId
@@ -187,16 +187,7 @@ namespace PlayListNew.DB
 
 
 
-
-
-
         //******************* show playlist section**************************************************************************************
-
-        // show all playlists of a specific user on the screen - sort it by date!
-        /* public static string getAllUserPlaylists = @"SELECT playlists.playlist_name, playlists.playlist_id
-                     FROM playlistgame.playlists, playlistgame.user_to_playlists
-                     WHERE user_id='{0}' AND playlists.playlist_id=user_to_playlists.playlist_id;";
-                     */
 
         public static string getAllUserPlaylists = @"SELECT playlists.playlist_name, playlists.playlist_id, COUNT(*) as Num
                                                     FROM playlistgame.playlists
@@ -209,6 +200,8 @@ namespace PlayListNew.DB
         //******************* show playlist section**************************************************************************************
 
 
+
+
         //******************* delete section**************************************************************************************
 
         // when delete playlist - delete the playlist from tables: playlists, songs_to_playlist, user_to_playlists
@@ -217,6 +210,7 @@ namespace PlayListNew.DB
         public static string deletePlaylistToUser = @"DELETE FROM user_to_playlists WHERE playlist_id='{0}';";
 
 
+        public static string deleteSongFromPlaylist = @"DELETE FROM songs_to_playlist WHERE song_id='{0}';";
 
         //******************* end of delete section**************************************************************************************
     }

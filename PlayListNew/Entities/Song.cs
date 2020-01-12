@@ -29,6 +29,12 @@ namespace PlayListNew.Entities
         }
 
 
+        public double Duration
+        {
+            get; set;
+        }
+
+
 
         /*
           private float duration;
