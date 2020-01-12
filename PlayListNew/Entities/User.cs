@@ -12,8 +12,6 @@ namespace PlayListNew.Entities
 
         private int id;
         private string email;
-        private string password;
-        private string fullName;
        
         private User()
         { }
@@ -29,12 +27,7 @@ namespace PlayListNew.Entities
                 return instance;
             }
         }
-
-        public string FullName
-        {
-            get { return fullName; }
-            set { fullName = value; }
-        }
+        
 
         public string Email
         {

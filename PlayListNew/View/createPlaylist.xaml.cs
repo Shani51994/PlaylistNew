@@ -196,7 +196,7 @@ namespace PlayListNew.View
             string playlistId = dbhandler.getPlaylistId(this.playlistName);
 
             // get the current user id
-            string userId = 15.ToString();
+            string userId = User.Instance.Id.ToString();
 
             // insert the playlist id and the current user id into the user_to_playlists table
             dbhandler.saveNewPlaylisUser(playlistId, userId);

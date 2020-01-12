@@ -16,7 +16,7 @@ namespace PlayListNew.DB
     {
         static private DBConnection DBConnection;
         static private DataBaseHandler instance = null;
-        
+
         string path = @"PlayListNewLog.txt";
 
         private string Server = "localhost";
@@ -64,13 +64,16 @@ namespace PlayListNew.DB
         {
             string query = string.Format(queries.queryToCheckIfUserExist, email);
             MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
-        
+
             //*******************
             var reader = command.ExecuteReader();
-            if (reader.HasRows){
+            if (reader.HasRows)
+            {
                 reader.Close();
                 return 1;
-            } else {
+            }
+            else
+            {
                 reader.Close();
                 return 0;
             }
@@ -81,17 +84,21 @@ namespace PlayListNew.DB
         {
             string query = string.Format(queries.toCheckPassword, email);
             MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
-       
+
             string DBpassword = "";
             var reader = command.ExecuteReader();
-            while (reader.Read()) {
+            while (reader.Read())
+            {
                 DBpassword = reader.GetString(0);
             }
-            
-            if (DBpassword == password){
+
+            if (DBpassword == password)
+            {
                 reader.Close();
                 return 1;
-            }else{
+            }
+            else
+            {
                 reader.Close();
                 return 0;
             }
@@ -101,7 +108,7 @@ namespace PlayListNew.DB
         {
             string query = string.Format(queries.insertNewUser, email, password, fullName);
             MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
-            
+
             try
             {
                 command.ExecuteNonQuery();
@@ -228,7 +235,8 @@ namespace PlayListNew.DB
                     command.ExecuteNonQuery();
 
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
             }
@@ -238,7 +246,7 @@ namespace PlayListNew.DB
         public ObservableCollection<Song> GetPlaylistSongs(int playlistID)
         {
             ObservableCollection<Song> songs = new ObservableCollection<Song>();
-            
+
             try
             {
                 if (DBConnection.IsConnect())
@@ -262,7 +270,7 @@ namespace PlayListNew.DB
             {
                 File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
             }
-            
+
             return songs;
 
         }
@@ -276,12 +284,7 @@ namespace PlayListNew.DB
             {
                 if (DBConnection.IsConnect())
                 {
-                    //DOTO !!!!!!!!!!!!!!!!!!!!
-                    // change when program ready
-                    //string query = string.Format(queries.getAllUserPlaylists, Entities.User.Instance.Email);
-
-                    //only for checks:
-                    string query = string.Format(queries.getAllUserPlaylists, 1);
+                    string query = string.Format(queries.getAllUserPlaylists, Entities.User.Instance.Id);
 
                     var cmd = new MySqlCommand(query, DBConnection.Connection);
                     var reader = cmd.ExecuteReader();
@@ -291,7 +294,7 @@ namespace PlayListNew.DB
                         string playlistName = reader.GetString(0);
                         int playlistId = reader.GetInt32(1);
                         int playlistNumOfSongs = reader.GetInt32(2);
-                        Playlist plist = new Playlist() { PlaylistName = playlistName, PlaylistId = playlistId, PlaylistNumOfSongs= playlistNumOfSongs };
+                        Playlist plist = new Playlist() { PlaylistName = playlistName, PlaylistId = playlistId, PlaylistNumOfSongs = playlistNumOfSongs };
                         playlists.Add(plist);
                     }
                     reader.Close();
@@ -307,6 +310,24 @@ namespace PlayListNew.DB
         }
 
 
+
+        public int getUserIdByEmail(string email)
+        {
+
+            string query = string.Format(queries.getUserId, email);
+            MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
+
+            int id=0;
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                id = reader.GetInt32(0);
+            }
+            reader.Close();
+
+            return id;
+        }
 
     }
 }

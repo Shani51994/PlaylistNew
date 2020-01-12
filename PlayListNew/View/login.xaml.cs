@@ -41,7 +41,8 @@ namespace PlayListNew.View
             {
                 User currentUser = User.Instance;
                 currentUser.Email = emailText.Text;
-                
+                currentUser.Id = dbhandler.getUserIdByEmail(emailText.Text);
+
                 foreach (Window window in Application.Current.Windows.OfType<Home>())
                     ((Home)window).Close();
 

@@ -151,9 +151,9 @@ namespace PlayListNew.DB
         //******************* Users section**************************************************************************************
 
         // get user id when user logged in
-        public static string getUserIdAndName = @"SELECT users.user_id, users.full_name
-                    FROM playlistgame.users
-                    WHERE name = '{0}';";
+        public static string getUserId = @"SELECT users.user_id
+                                            FROM playlistgame.users
+                                            WHERE email = '{0}';";
 
         // insert new user
         public static string insertNewUser = @"INSERT INTO playlistGame.users (Email, Password, Full_name)
