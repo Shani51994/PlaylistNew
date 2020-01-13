@@ -46,7 +46,7 @@
 
             <StackPanel Orientation="Horizontal" Grid.Row="2">
                 <TextBlock Text="popularity: (0 to 1)" Padding="3" FontSize="15" Foreground="Teal" FontWeight="Bold" Margin="0,0,25,0"></TextBlock>
-                <Slider x:Name="popularitySlider" Minimum="0" Maximum="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Height="19" Width="232"/>
+                <Slider x:Name="popularitySlider" Minimum="0" Maximum="1" TickPlacement="TopLeft" TickFrequency="0.1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Height="19" Width="232"/>
                 <CheckBox x:Name="dontCarePop" Checked="chooseAllPop" Content="I don't care" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
 
         </StackPanel>
@@ -62,7 +62,7 @@
 
             <StackPanel Orientation="Horizontal" Grid.Row="8" Height="50">
                 <TextBlock FontSize="15" Foreground="Teal" FontWeight="Bold"  VerticalAlignment="Center" Text="Song duration" Margin="0 0 50 0"/>
-                <Slider x:Name="durationSlider" Minimum="2" Maximum="10" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Height="19" Width="232"/>
+                <Slider x:Name="durationSlider" Minimum="2" Maximum="10" TickPlacement="TopLeft" TickFrequency="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Height="19" Width="232"/>
              </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="9">

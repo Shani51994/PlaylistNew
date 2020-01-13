@@ -33,11 +33,15 @@ namespace PlayListNew.View
         private int duration;
         private int numOfSongs;
         private string playlistName;
-        private bool isDontCareDecChoosed;
-        private bool isDontCarePopChoosed;
+        private bool isDontCareDecChoosed = false;
+        private bool isDontCarePopChoosed = false;
         private int numOfDecChoosed = 0;
         private List<int> decadesRanges = new List<int>();
         private string query;
+        private bool isChoosed70 = false;
+        private bool isChoosed80 = false;
+        private bool isChoosed90 = false;
+        private bool isChoosed00 = false;
 
         public createPlaylist()
         {
@@ -195,12 +199,6 @@ namespace PlayListNew.View
             // get the id of the new playlist
             string playlistId = dbhandler.getPlaylistId(this.playlistName);
 
-            // get the current user id
-            string userId = User.Instance.Id.ToString();
-
-            // insert the playlist id and the current user id into the user_to_playlists table
-            dbhandler.saveNewPlaylisUser(playlistId, userId);
-
             // get all songs ids according to the user's request
             List<string> songsIds = dbhandler.getSongsIds(query);
             /*query = string.Format(queries.getSongsIdsAllOptionsOneDec, this.minTempoRange, this.maxTempoRange,
@@ -215,6 +213,19 @@ namespace PlayListNew.View
                 dbhandler.createPlaylist(query);
             }
 
+            // if no songs found
+            if (songsIds.Count == 0)
+            {
+                dbhandler.deletePlaylist(int.Parse(playlistId));
+                return;
+            }
+
+            // get the current user id
+            string userId = User.Instance.Id.ToString();
+
+            // insert the playlist id and the current user id into the user_to_playlists table
+            dbhandler.saveNewPlaylisUser(playlistId, userId);
+
         }
 
         // function for check if user choosed songs from '70 decade
@@ -223,6 +234,7 @@ namespace PlayListNew.View
             this.decadesRanges.Add(1970);
             this.decadesRanges.Add(1979);
             this.numOfDecChoosed++;
+            this.isChoosed70 = true;
 
         }
 
@@ -232,6 +244,7 @@ namespace PlayListNew.View
             this.decadesRanges.Add(1980);
             this.decadesRanges.Add(1989);
             this.numOfDecChoosed++;
+            this.isChoosed80 = true;
 
         }
 
@@ -241,6 +254,7 @@ namespace PlayListNew.View
             this.decadesRanges.Add(1990);
             this.decadesRanges.Add(1999);
             this.numOfDecChoosed++;
+            this.isChoosed90 = true;
         }
 
         // function for check if user choosed songs from '00 decade
@@ -249,6 +263,7 @@ namespace PlayListNew.View
             this.decadesRanges.Add(2000);
             this.decadesRanges.Add(2009);
             this.numOfDecChoosed++;
+            this.isChoosed00 = true;
         }
 
         // function for check if user choosed songs from all decades
@@ -273,7 +288,46 @@ namespace PlayListNew.View
 
         public void pressClear(object sender, RoutedEventArgs e)
         {
-          
+            // initial all values inserted by the user
+            tempoMin.Text = "0";
+            tempoMax.Text = "262";
+            loudnessMin.Text = "-52";
+            loudnessMax.Text = "1";
+            this.duration = (int)durationSlider.Value * 60;
+            songsNum.Clear();
+            playListName.Clear();
+            durationSlider.Value = 2;
+            popularitySlider.Value = 0;
+
+            if (this.isChoosed70)
+            {
+                checkBox70.IsChecked = false;
+            }
+
+            if (this.isChoosed80)
+            {
+                checkBox80.IsChecked = false;
+            }
+
+            if (this.isChoosed90)
+            {
+                checkBox90.IsChecked = false;
+            }
+
+            if (this.isChoosed00)
+            {
+                checkBox00.IsChecked = false;
+            }
+
+            if (this.isDontCareDecChoosed)
+            {
+                dontCareDec.IsChecked = false;
+            }
+
+            if (this.isDontCarePopChoosed)
+            {
+                dontCarePop.IsChecked = false;
+            }
         }
 
     }
