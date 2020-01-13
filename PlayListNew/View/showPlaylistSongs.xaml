@@ -26,9 +26,9 @@
                 <DataGrid ItemsSource="{Binding songList}" x:Name="dataGrid1" Background="OldLace" AutoGenerateColumns="False" CanUserAddRows="False" Margin="31,58,56.6,0" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Song" Width="Auto" Binding="{Binding SongName}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Duration" Width="Auto" Binding="{Binding Duration}" IsReadOnly="True"></DataGridTextColumn>
                         <DataGridTextColumn Header="Artist" Width="Auto" Binding="{Binding ArtistName}" IsReadOnly="True"></DataGridTextColumn>
                         <DataGridTextColumn Header="Album" Width="Auto" Binding="{Binding AlbumName}" IsReadOnly="True"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Duration" Width="Auto" Binding="{Binding Duration}" IsReadOnly="True"></DataGridTextColumn>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

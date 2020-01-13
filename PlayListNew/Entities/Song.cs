@@ -29,7 +29,7 @@ namespace PlayListNew.Entities
         }
 
 
-        public double Duration
+        public string Duration
         {
             get; set;
         }

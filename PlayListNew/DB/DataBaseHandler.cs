@@ -261,9 +261,10 @@ namespace PlayListNew.DB
                         string artistName = reader.GetString(1);
                         string albumName = reader.GetString(2);
                         int id = reader.GetInt32(3);
-                        double duration = reader.GetDouble(4);
+                        int duration = reader.GetInt32(4);
+                        string durationS = TimeSpan.FromSeconds(Convert.ToInt32(duration)).ToString(@"mm\:ss"); ;
 
-                        Song song = new Song() { SongName = songName, ArtistName = artistName, AlbumName = albumName, SongId=id, Duration=duration};
+                        Song song = new Song() { SongName = songName, ArtistName = artistName, AlbumName = albumName, SongId=id, Duration=durationS};
                         songs.Add(song);
                     }
                     reader.Close();
