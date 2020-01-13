@@ -20,10 +20,10 @@ namespace PlayListNew.DB
         string path = @"PlayListNewLog.txt";
 
         private string Server = "localhost";
-        private string DatabaseName = "playlistGame";
-        private string Password = "Mm1614113";
-        //private string DatabaseName = "playlistgame";
-        //private string Password = "Sql1234pass1234Sql";
+        //private string DatabaseName = "playlistGame";
+        //private string Password = "Mm1614113";
+        private string DatabaseName = "playlistgame";
+        private string Password = "Sql1234pass1234Sql";
         private string User = "root";
 
         public DataBaseHandler()
