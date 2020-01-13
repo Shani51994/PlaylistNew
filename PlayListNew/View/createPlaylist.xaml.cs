@@ -48,6 +48,61 @@ namespace PlayListNew.View
             InitializeComponent();
         }
 
+        // function for clear screen from user's reqauests
+        public void clearScreen()
+        {
+            // initial all values inserted by the user
+            tempoMin.Text = "0";
+            tempoMax.Text = "262";
+            loudnessMin.Text = "-52";
+            loudnessMax.Text = "1";
+            this.duration = (int)durationSlider.Value * 60;
+            songsNum.Clear();
+            playListName.Clear();
+            durationSlider.Value = 2;
+            popularitySlider.Value = 0;
+
+            if (this.isChoosed70)
+            {
+                checkBox70.IsChecked = false;
+            }
+
+            if (this.isChoosed80)
+            {
+                checkBox80.IsChecked = false;
+            }
+
+            if (this.isChoosed90)
+            {
+                checkBox90.IsChecked = false;
+            }
+
+            if (this.isChoosed00)
+            {
+                checkBox00.IsChecked = false;
+            }
+
+            if (this.isDontCareDecChoosed)
+            {
+                dontCareDec.IsChecked = false;
+            }
+
+            if (this.isDontCarePopChoosed)
+            {
+                dontCarePop.IsChecked = false;
+            }
+
+            // initial all variables
+            this.isChoosed70 = false;
+            this.isChoosed80 = false;
+            this.isChoosed90 = false;
+            this.isChoosed00 = false;
+            this.isDontCareDecChoosed = false;
+            this.isDontCarePopChoosed = false;
+            this.decadesRanges.Clear();
+            this.numOfDecChoosed = 0;
+        }
+
         // function for create a playlist according to the user's requests
         public void pressCreate(object sender, RoutedEventArgs e)
         {
@@ -201,10 +256,6 @@ namespace PlayListNew.View
 
             // get all songs ids according to the user's request
             List<string> songsIds = dbhandler.getSongsIds(query);
-            /*query = string.Format(queries.getSongsIdsAllOptionsOneDec, this.minTempoRange, this.maxTempoRange,
-                this.minLoudnessRange, this.maxLoudnessRange, this.popularity, this.minDecadeRange,
-                this.maxDecadeRange, this.duration);
-                */
 
             // move it to DataBaseHandler*************
             for (int i = 0; i < songsIds.Count; i++)
@@ -226,6 +277,11 @@ namespace PlayListNew.View
             // insert the playlist id and the current user id into the user_to_playlists table
             dbhandler.saveNewPlaylisUser(playlistId, userId);
 
+            this.clearScreen();
+
+            message.Text = "Your playlist succesfully created!";
+            System.Threading.Thread.Sleep(5000);
+            message.Text = "";
         }
 
         // function for check if user choosed songs from '70 decade
@@ -288,46 +344,7 @@ namespace PlayListNew.View
 
         public void pressClear(object sender, RoutedEventArgs e)
         {
-            // initial all values inserted by the user
-            tempoMin.Text = "0";
-            tempoMax.Text = "262";
-            loudnessMin.Text = "-52";
-            loudnessMax.Text = "1";
-            this.duration = (int)durationSlider.Value * 60;
-            songsNum.Clear();
-            playListName.Clear();
-            durationSlider.Value = 2;
-            popularitySlider.Value = 0;
-
-            if (this.isChoosed70)
-            {
-                checkBox70.IsChecked = false;
-            }
-
-            if (this.isChoosed80)
-            {
-                checkBox80.IsChecked = false;
-            }
-
-            if (this.isChoosed90)
-            {
-                checkBox90.IsChecked = false;
-            }
-
-            if (this.isChoosed00)
-            {
-                checkBox00.IsChecked = false;
-            }
-
-            if (this.isDontCareDecChoosed)
-            {
-                dontCareDec.IsChecked = false;
-            }
-
-            if (this.isDontCarePopChoosed)
-            {
-                dontCarePop.IsChecked = false;
-            }
+            this.clearScreen();
         }
 
     }
