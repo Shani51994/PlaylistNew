@@ -76,7 +76,7 @@
         </StackPanel>
 
 
-        <TextBlock Name="message" Text="" Grid.Row="11" FontSize="18" ></TextBlock>
+        <TextBlock Name="message" Text="" Foreground="Teal" Grid.Row="11" FontSize="18" ></TextBlock>
 
 
 
