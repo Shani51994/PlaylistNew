@@ -37,6 +37,13 @@ namespace PlayListNew.DB
         public static string getPlaylistIdByName = @"SELECT playlists.playlist_id FROM playlistgame.playlists
                     WHERE playlists.playlist_name = '{0}'";
 
+
+        // important!!
+        // the query for get all songs ids according to the user,
+        // is generate dynamiclly in the file: createPlaylist.cs
+
+
+    /*
         // get songs ids according to the user requests, when user choosed all options
         public  static string getSongsIdsAllOptionsOneDec = @"SELECT songs.id FROM playlistgame.songs
                     WHERE songs.tempo >= '{0}' AND songs.tempo <= '{1}'
@@ -142,7 +149,7 @@ namespace PlayListNew.DB
         public static string crearteUserAndPlaylist = @"INSERT INTO playlistgame.user_to_playlists(user_to_playlists.playlist_id, user_to_playlists.user_id)
                     VALUES ('{0}', '{1}')";
 
-
+    */
         //******************* END of creat playlist section*******************************************************************************
 
 
