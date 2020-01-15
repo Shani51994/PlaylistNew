@@ -65,6 +65,7 @@ namespace PlayListNew.DB
             string query = string.Format(queries.queryToCheckIfUserExist, email);
             MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
 
+
             //*******************
             var reader = command.ExecuteReader();
             if (reader.HasRows)

@@ -106,7 +106,6 @@ namespace PlayListNew.View
         // function for create a playlist according to the user's requests
         public void pressCreate(object sender, RoutedEventArgs e)
         {
-
             // get all values inserted by the user
             this.minTempoRange = double.Parse(tempoMin.Text);
             this.maxTempoRange = double.Parse(tempoMax.Text);
@@ -154,6 +153,11 @@ namespace PlayListNew.View
                 this.numOfSongs = 30;
             }
 
+            query = "SELECT songs.id FROM playlistgame.songs " +
+                    "WHERE songs.tempo >= " + this.minTempoRange.ToString() +
+                    " AND songs.tempo <= " + this.maxTempoRange.ToString() +
+                    " AND songs.loudness >= " + this.minLoudnessRange.ToString() +
+                    " AND songs.loudness <= " + this.maxLoudnessRange.ToString();
 
             // checks if user wants specific decades
             if (this.isDontCareDecChoosed)
@@ -169,82 +173,49 @@ namespace PlayListNew.View
             else
             {
                 this.popularity = (double)popularitySlider.Value;
+                query += " AND songs.hotness >= 0 AND songs.hotness <= " + this.popularity.ToString();
             }
 
             // deals with all variations of options in order to know which query to run
-            if (this.isDontCarePopChoosed && this.isDontCareDecChoosed)
-            {
-                query = string.Format(queries.getSongsIdsWithoutPopAndDec, this.minTempoRange, this.maxTempoRange,
-                        this.minLoudnessRange, this.maxLoudnessRange, this.duration, this.numOfSongs);
-            } else if (this.isDontCarePopChoosed && !this.isDontCareDecChoosed)
+            if (this.isDontCareDecChoosed)
             {
                 if (this.numOfDecChoosed == 1)
                 {
-                    query = string.Format(queries.getSongsIdsWithoutPopOneDec, this.minTempoRange, this.maxTempoRange,
-                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
-                            this.decadesRanges[1], this.duration, this.numOfSongs);
-                } else if (this.numOfDecChoosed == 2)
-                {
-                    query = string.Format(queries.getSongsIdsWithoutPopTwoDec, this.minTempoRange, this.maxTempoRange,
-                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
-                            this.decadesRanges[1], this.decadesRanges[2],
-                            this.decadesRanges[3], this.duration, this.numOfSongs);
-                }
-                else if (this.numOfDecChoosed == 3)
-                {
-                    query = string.Format(queries.getSongsIdsWithoutPopThreeDec, this.minTempoRange, this.maxTempoRange,
-                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
-                            this.decadesRanges[1], this.decadesRanges[2], this.decadesRanges[3],
-                            this.decadesRanges[4], this.decadesRanges[5], this.duration, this.numOfSongs);
-                }
-                else
-                {
-                    query = string.Format(queries.getSongsIdsWithoutPopFourDec, this.minTempoRange, this.maxTempoRange,
-                            this.minLoudnessRange, this.maxLoudnessRange, this.decadesRanges[0],
-                            this.decadesRanges[1], this.decadesRanges[2], this.decadesRanges[3],
-                            this.decadesRanges[4], this.decadesRanges[5], this.decadesRanges[6],
-                            this.decadesRanges[7], this.duration, this.numOfSongs);
-                }
-            } else if (!this.isDontCarePopChoosed && this.isDontCareDecChoosed)
-            {
-                query = string.Format(queries.getSongsIdsWithoutDec, this.minTempoRange, this.maxTempoRange,
-                        this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
-                        this.duration, this.numOfSongs);
-            }
-            else
-            {
-                if (this.numOfDecChoosed == 1)
-                {
-                    query = string.Format(queries.getSongsIdsAllOptionsOneDec, this.minTempoRange, this.maxTempoRange,
-                            this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
-                            this.decadesRanges[0], this.decadesRanges[1], this.duration, this.numOfSongs);
+                    query += " AND(songs.year >= " + this.decadesRanges[0].ToString() +
+                             " AND songs.year < " + this.decadesRanges[1].ToString() + ")";
+
                 }
                 else if (this.numOfDecChoosed == 2)
                 {
-                    query = string.Format(queries.getSongsIdsAllOptionsTwoDec, this.minTempoRange, this.maxTempoRange,
-                            this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
-                            this.decadesRanges[0], this.decadesRanges[1], this.decadesRanges[2],
-                            this.decadesRanges[3], this.duration, this.numOfSongs);
+                    query += " AND((songs.year >= " + this.decadesRanges[0].ToString() +
+                             " AND songs.year < " + this.decadesRanges[1].ToString() + ")" +
+                             " OR(songs.year >= " + this.decadesRanges[2].ToString() +
+                             " AND songs.year < " + this.decadesRanges[3].ToString() + "))";
                 }
                 else if (this.numOfDecChoosed == 3)
                 {
-                    query = string.Format(queries.getSongsIdsAllOptionsThreeDec, this.minTempoRange, this.maxTempoRange,
-                            this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
-                            this.decadesRanges[0], this.decadesRanges[1], this.decadesRanges[2],
-                            this.decadesRanges[3], this.decadesRanges[4], this.decadesRanges[5],
-                            this.duration, this.numOfSongs);
+                    query += " AND((songs.year >= " + this.decadesRanges[0].ToString() +
+                             " AND songs.year < " + this.decadesRanges[1].ToString() + ")" +
+                             " OR(songs.year >= " + this.decadesRanges[2].ToString() +
+                             " AND songs.year < " + this.decadesRanges[3].ToString() + ")" +
+                             " OR(songs.year >= " + this.decadesRanges[4].ToString() +
+                             " AND songs.year < " + this.decadesRanges[5].ToString() + "))";
                 }
-                else
+                else if (this.numOfDecChoosed == 4)
                 {
-                    query = string.Format(queries.getSongsIdsAllOptionsFourDec, this.minTempoRange, this.maxTempoRange,
-                            this.minLoudnessRange, this.maxLoudnessRange, this.popularity,
-                            this.decadesRanges[0], this.decadesRanges[1], this.decadesRanges[2],
-                            this.decadesRanges[3], this.decadesRanges[4], this.decadesRanges[5], this.decadesRanges[6],
-                            this.decadesRanges[7], this.duration, this.numOfSongs);
+                    query += " AND((songs.year >= " + this.decadesRanges[0].ToString() +
+                             " AND songs.year < " + this.decadesRanges[1].ToString() + ")" +
+                             " OR(songs.year >= " + this.decadesRanges[2].ToString() +
+                             " AND songs.year < " + this.decadesRanges[3].ToString() + ")" +
+                             " OR(songs.year >= " + this.decadesRanges[4].ToString() +
+                             " AND songs.year < " + this.decadesRanges[5].ToString() + ")" +
+                             " OR(songs.year >= " + this.decadesRanges[6].ToString() +
+                             " AND songs.year < " + this.decadesRanges[7].ToString() + "))";
                 }
             }
 
-            // move all to DataBaseHandler.cs
+            query += " AND(songs.duration >= 0 AND songs.duration < " + this.duration.ToString() + ")" +
+                     " LIMIT " + this.numOfSongs.ToString();
 
             DataBaseHandler dbhandler = DataBaseHandler.Instance;
 
@@ -257,7 +228,7 @@ namespace PlayListNew.View
             // get all songs ids according to the user's request
             List<string> songsIds = dbhandler.getSongsIds(query);
 
-            // move it to DataBaseHandler*************
+            // insert every song to the platlists table
             for (int i = 0; i < songsIds.Count; i++)
             {
                 query = string.Format(queries.creartPlaylist, playlistId, songsIds[i]);
@@ -280,8 +251,9 @@ namespace PlayListNew.View
             this.clearScreen();
 
             message.Text = "Your playlist succesfully created!";
-            System.Threading.Thread.Sleep(5000);
-            message.Text = "";
+
+            //System.Threading.Thread.Sleep(5000);
+
         }
 
         // function for check if user choosed songs from '70 decade
@@ -291,7 +263,6 @@ namespace PlayListNew.View
             this.decadesRanges.Add(1979);
             this.numOfDecChoosed++;
             this.isChoosed70 = true;
-
         }
 
         // function for check if user choosed songs from '80 decade
@@ -301,7 +272,6 @@ namespace PlayListNew.View
             this.decadesRanges.Add(1989);
             this.numOfDecChoosed++;
             this.isChoosed80 = true;
-
         }
 
         // function for check if user choosed songs from '90 decade
@@ -348,5 +318,4 @@ namespace PlayListNew.View
         }
 
     }
-
 }
