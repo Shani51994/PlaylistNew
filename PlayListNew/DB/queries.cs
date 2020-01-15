@@ -141,7 +141,9 @@ namespace PlayListNew.DB
                     AND (songs.duration >= 0 AND songs.duration < '{12}')
                     LIMIT {13}";
 
-        // create playlist and insert all songs choosed
+    */
+    
+    // create playlist and insert all songs choosed
         public static string creartPlaylist = @"INSERT INTO playlistgame.songs_to_playlist(songs_to_playlist.playlist_id, songs_to_playlist.song_id)
                     VALUES ('{0}', '{1}')";
 
@@ -149,7 +151,7 @@ namespace PlayListNew.DB
         public static string crearteUserAndPlaylist = @"INSERT INTO playlistgame.user_to_playlists(user_to_playlists.playlist_id, user_to_playlists.user_id)
                     VALUES ('{0}', '{1}')";
 
-    */
+    
         //******************* END of creat playlist section*******************************************************************************
 
 
