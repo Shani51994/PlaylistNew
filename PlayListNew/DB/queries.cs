@@ -40,7 +40,7 @@ namespace PlayListNew.DB
 
         // important!!
         // the query for get all songs ids according to the user,
-        // is generate dynamiclly in the file: createPlaylist.cs
+        // is generate dynamiclly in the file: createPlaylist.xaml.cs
 
 
     /*

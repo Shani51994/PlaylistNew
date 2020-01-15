@@ -106,7 +106,6 @@ namespace PlayListNew.View
         // function for create a playlist according to the user's requests
         public void pressCreate(object sender, RoutedEventArgs e)
         {
-
             // get all values inserted by the user
             this.minTempoRange = double.Parse(tempoMin.Text);
             this.maxTempoRange = double.Parse(tempoMax.Text);
@@ -154,7 +153,6 @@ namespace PlayListNew.View
                 this.numOfSongs = 30;
             }
 
-
             query = "SELECT songs.id FROM playlistgame.songs " +
                     "WHERE songs.tempo >= " + this.minTempoRange.ToString() +
                     " AND songs.tempo <= " + this.maxTempoRange.ToString() +
@@ -177,9 +175,6 @@ namespace PlayListNew.View
                 this.popularity = (double)popularitySlider.Value;
                 query += " AND songs.hotness >= 0 AND songs.hotness <= " + this.popularity.ToString();
             }
-
-
-
 
             // deals with all variations of options in order to know which query to run
             if (this.isDontCareDecChoosed)
@@ -222,9 +217,6 @@ namespace PlayListNew.View
             query += " AND(songs.duration >= 0 AND songs.duration < " + this.duration.ToString() + ")" +
                      " LIMIT " + this.numOfSongs.ToString();
 
-
-            // move all to DataBaseHandler.cs
-
             DataBaseHandler dbhandler = DataBaseHandler.Instance;
 
             // insert the playlist name into the playlists table
@@ -259,8 +251,9 @@ namespace PlayListNew.View
             this.clearScreen();
 
             message.Text = "Your playlist succesfully created!";
-            System.Threading.Thread.Sleep(5000);
-            message.Text = "";
+
+            //System.Threading.Thread.Sleep(5000);
+
         }
 
         // function for check if user choosed songs from '70 decade
@@ -270,7 +263,6 @@ namespace PlayListNew.View
             this.decadesRanges.Add(1979);
             this.numOfDecChoosed++;
             this.isChoosed70 = true;
-
         }
 
         // function for check if user choosed songs from '80 decade
@@ -280,7 +272,6 @@ namespace PlayListNew.View
             this.decadesRanges.Add(1989);
             this.numOfDecChoosed++;
             this.isChoosed80 = true;
-
         }
 
         // function for check if user choosed songs from '90 decade
@@ -327,5 +318,4 @@ namespace PlayListNew.View
         }
 
     }
-
 }
