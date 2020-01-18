@@ -45,6 +45,12 @@ namespace PlayListNew.View
         }
 
 
+        private void backToHomePage(object sender, RoutedEventArgs e)
+        {
+            Home homePage = new Home();
+            this.Close();
+            homePage.Show();
+        }
 
     }
 }

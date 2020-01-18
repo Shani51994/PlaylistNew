@@ -19,21 +19,18 @@
         <ScrollViewer Background="Transparent" ScrollViewer.CanContentScroll="False"  ScrollViewer.HorizontalScrollBarVisibility="Auto">
             <StackPanel Background="Gainsboro" ScrollViewer.CanContentScroll="False">
                 <StackPanel>
-
                     <Button Name="returnBtn" Padding="3" Margin="10,10,40,20" HorizontalAlignment="Left" Height="30" Width="70" Click="pressGoBack">Go back</Button>
-
                     <TextBlock HorizontalAlignment="Left" Text="Playlists list:"  FontSize="40" FontWeight="Bold" Foreground="Teal" Padding="10"/>
 
                 </StackPanel>
-
-                <DataGrid ItemsSource="{Binding playlistList}" x:Name="dataGrid1" Background="OldLace" AutoGenerateColumns="False" CanUserAddRows="False" Margin="30,0,30,0" >
+                <DataGrid Width="Auto" ItemsSource="{Binding playlistList}" x:Name="dataGrid1" Background="OldLace" AutoGenerateColumns="False" CanUserAddRows="False" Margin="30,0,30,0" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Playlist Name" Width="Auto" Binding="{Binding PlaylistName}" IsReadOnly="True"></DataGridTextColumn>
                         <DataGridTextColumn Header="Num of songs" Width="Auto" Binding="{Binding PlaylistNumOfSongs}" IsReadOnly="True"></DataGridTextColumn>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button CommandParameter="{Binding Path=PlaylistId}"  Margin="100 0 0 0" Click="pressOpenPlaylist" >show songs</Button>
+                                    <Button CommandParameter="{Binding Path=PlaylistId}"  Click="pressOpenPlaylist" >show songs</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -41,7 +38,7 @@
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button CommandParameter="{Binding Path=PlaylistId}"  Margin="100 0 0 0" Click="pressDeletePlaylist">delete playlist</Button>
+                                    <Button CommandParameter="{Binding Path=PlaylistId}" Click="pressDeletePlaylist">delete playlist</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

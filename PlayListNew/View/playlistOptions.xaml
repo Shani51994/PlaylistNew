@@ -14,6 +14,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="playlistOptions" Height="450" Width="800">
+    
     <Grid Background="Gainsboro">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
@@ -22,8 +23,11 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Name ="connectionStr" Grid.Row="0" HorizontalAlignment="Left" 
-                   Foreground="Teal" FontSize="14"  VerticalAlignment="Bottom"></TextBlock>
+        <TextBlock Name ="connectionStr"  Grid.Row="0" HorizontalAlignment="Left"
+                Foreground="Teal" FontSize="14"  VerticalAlignment="Center"></TextBlock>
+        <Button Height="40" Width="80" Grid.Row="0" FontWeight="Bold" Margin="0,0,10,0" HorizontalAlignment="Right" Background="LightSeaGreen" Click="backToHomePage" >
+            <TextBlock TextWrapping="Wrap" >Logout</TextBlock>
+        </Button>
 
         <TextBlock Text="Hi, Get Your Playlist!" Grid.Row="1" HorizontalAlignment="Center" 
                    Foreground="Teal" FontSize="70" FontWeight="ExtraBold" VerticalAlignment="Bottom"></TextBlock>

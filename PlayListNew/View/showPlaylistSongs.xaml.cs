@@ -40,7 +40,7 @@ namespace PlayListNew.View
         }
 
 
-        private void pressDeletePlaylist(object sender, RoutedEventArgs e)
+        private void pressDeleteSong(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
             int songId = (int)button.CommandParameter;

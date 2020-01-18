@@ -45,8 +45,6 @@ namespace PlayListNew.DB
             {
                 if (String.IsNullOrEmpty(databaseName))
                     return false;
-                //string ConnectionString = "SERVER = localhost; DATABASE = playlistGame; UID = root; PASSWORD = Mm1614113";
-
                 string connstring = string.Format("Server={0}; database={1}; UID={2}; password={3}",Server, DatabaseName, User, Password);
                 connection = new MySqlConnection(connstring);
                 connection.Open();
