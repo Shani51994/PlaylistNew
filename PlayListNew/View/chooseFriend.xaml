@@ -1,0 +1,49 @@
+﻿<Window x:Class="PlayListNew.View.chooseFriend"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlayListNew.View"
+        mc:Ignorable="d"
+        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="chooseFriend" Height="430" Width="650">
+    <Grid  Background="Gainsboro">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="240"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label HorizontalAlignment="Center" Grid.Row="0" Content="Write your friend emails to get their playlist:" FontSize="25" FontWeight="Bold"
+               Foreground="CadetBlue"  Padding="10" Margin="50,0,50.2,0.4"/>
+
+        <Label HorizontalAlignment="Left" Content="you most choose at list one friend (up to five)" FontSize="15" FontWeight="Bold"
+               Foreground="Black"  Grid.Row="1"/>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Grid.Row="2" Margin="0,10,0,0" >
+            <TextBlock Text="friends emails:" Padding="3" VerticalAlignment="Top" FontSize="20" Foreground="Teal" FontWeight="Bold"></TextBlock>
+            <StackPanel>
+                <TextBox x:Name="firstEmail" Width="230" Height="30" FontSize="18" VerticalAlignment="Center" MaxLength="25"/>
+                <TextBox x:Name="secEmail" Width="230" Height="30" Margin="10" FontSize="18" VerticalAlignment="Center" MaxLength="25"/>
+                <TextBox x:Name="thirdEmail" Width="230" Height="30" Margin="10" FontSize="18" VerticalAlignment="Center" MaxLength="25"/>
+                <TextBox x:Name="fourEmail" Width="230" Height="30" Margin="10" FontSize="18" VerticalAlignment="Center" MaxLength="25"/>
+                <TextBox x:Name="fifthEmail" Width="230" Height="30" Margin="10" FontSize="18" VerticalAlignment="Center" MaxLength="25"/>
+
+            </StackPanel>
+        </StackPanel>
+        
+        <TextBlock Name="message" Text="" VerticalAlignment="Center" Foreground="Red" Grid.Row="3" FontSize="18"/>
+
+        <WrapPanel Grid.Row="4" HorizontalAlignment="Center" Height="50" Width="600"   >
+            <Button Name="returnBtn" Padding="3" HorizontalAlignment="Stretch"
+                 Height="30" Width="70" Margin="10,0,300,0" Click="pressGoBack">Go back</Button>
+            <Button Name="okBtn" Padding="3" HorizontalAlignment="Stretch"
+                 Height="30" Width="120" Margin="10" Click="pressCreate">Show playlists</Button>
+        </WrapPanel>
+
+    </Grid>
+</Window>

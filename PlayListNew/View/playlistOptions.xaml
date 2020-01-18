@@ -32,7 +32,7 @@
         <TextBlock Text="Hi, Get Your Playlist!" Grid.Row="1" HorizontalAlignment="Center" 
                    Foreground="Teal" FontSize="70" FontWeight="ExtraBold" VerticalAlignment="Bottom"></TextBlock>
 
-        <WrapPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Margin="255,58,227.6,10" Width="311">
+        <WrapPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Margin="0,50,0,0" Width="460">
             <Button Height="50" Width="80" HorizontalAlignment="Center" FontWeight="Bold"  Margin="20" 
                     Click="createPlaylistWin" >
                 <TextBlock TextWrapping="Wrap">Create playlist</TextBlock>
@@ -40,6 +40,10 @@
             <Button Height="55" Width="129" HorizontalAlignment="Center" FontWeight="Bold" Margin="20" 
                     Click="ShowAllPlaylistWin">
                 <TextBlock TextWrapping="Wrap">Show all my playlist</TextBlock>
+            </Button>
+            <Button Height="55" Width="129" HorizontalAlignment="Center" FontWeight="Bold" Margin="20" 
+                    Click="ShowChooseFriends">
+                <TextBlock TextWrapping="Wrap">get friends playlist</TextBlock>
             </Button>
         </WrapPanel>
     </Grid>

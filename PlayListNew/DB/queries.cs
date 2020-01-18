@@ -206,6 +206,18 @@ namespace PlayListNew.DB
                                                     group by playlist_id
 				                                    ORDER BY creation_date DESC;";
 
+
+        public static string getAllFriendsPlaylists = @"SELECT playlists.playlist_name, playlists.playlist_id, COUNT(*) as Num
+                                                    FROM playlistgame.playlists
+                                                    INNER JOIN playlistgame.user_to_playlists ON playlists.playlist_id = user_to_playlists.playlist_id
+                                                    INNER JOIN playlistgame.songs_to_playlist ON playlists.playlist_id = songs_to_playlist.playlist_id
+                                                    WHERE user_id IN ('{0}')
+                                                    group by playlist_id
+                                                    ORDER BY creation_date DESC;";
+
+
+        public static string countFriendPlaylistNum = @"";
+
         //******************* show playlist section**************************************************************************************
 
 

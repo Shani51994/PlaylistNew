@@ -18,21 +18,14 @@ namespace PlayListNew.DB
         static private DataBaseHandler instance = null;
 
         string path = @"PlayListNewLog.txt";
-
-        private string Server = "localhost";
-        private string DatabaseName = "playlistGame";
-        private string Password = "Mm1614113";
-        //private string DatabaseName = "playlistgame";
-        //private string Password = "Sql1234pass1234Sql";
-        private string User = "root";
-
+        
         public DataBaseHandler()
         {
             DBConnection = DBConnection.Instance();
-            DBConnection.DatabaseName = DatabaseName;
-            DBConnection.Password = Password;
-            DBConnection.Server = Server;
-            DBConnection.User = User;
+            DBConnection.DatabaseName = connectionInfo.DatabaseName;
+            DBConnection.Password = connectionInfo.Password;
+            DBConnection.Server = connectionInfo.Server;
+            DBConnection.User = connectionInfo.User;
 
             DBConnection.Start();
         }
@@ -398,6 +391,70 @@ namespace PlayListNew.DB
             }
             
         }
+
+
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! need to change!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        public int countFriendPlaylist(List<string> emails)
+        {
+            return 1; 
+        }
+
+
+
+        public ObservableCollection<Playlist> GetFriendsPlaylist(List<string> emails)
+        {
+            /*
+            string strEmails = "";
+            int firststr = 1;
+            foreach (string email in emails)
+            {
+                if (firststr == 1)
+                {
+                    strEmails += email;
+                    firststr = 0;
+                }
+                else
+                {
+                    strEmails += "," + email;
+                }
+            }
+            */
+           
+
+            ObservableCollection<Playlist> playlists = new ObservableCollection<Playlist>();
+
+            try
+            {
+                if (DBConnection.IsConnect())
+                {
+                    string query = string.Format(queries.getAllFriendsPlaylists, 1);
+
+                    var cmd = new MySqlCommand(query, DBConnection.Connection);
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        string playlistName = reader.GetString(0);
+                        int playlistId = reader.GetInt32(1);
+                        int playlistNumOfSongs = reader.GetInt32(2);
+                        // string userName = reader.GetString(3);
+                        string userName = "ss";
+                        Playlist plist = new Playlist() { PlaylistName = playlistName, PlaylistId = playlistId,
+                            PlaylistNumOfSongs = playlistNumOfSongs, UserName=userName};
+                        playlists.Add(plist);
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+            }
+
+            return playlists;
+
+        }
+
 
     }
 }
