@@ -92,7 +92,7 @@
         </StackPanel>
 
 
-        <TextBlock Name="message" Text="" Foreground="Teal" Grid.Row="9" FontSize="18" ></TextBlock>
+        <TextBlock Name="message" Text="" VerticalAlignment="Center" Foreground="Teal" Grid.Row="9" FontSize="18" ></TextBlock>
 
         <WrapPanel Grid.Row="10" Grid.Column="0" HorizontalAlignment="Center" Height="50" Width="700" >
             <Button Name="returnBtn" Padding="3" HorizontalAlignment="Stretch"

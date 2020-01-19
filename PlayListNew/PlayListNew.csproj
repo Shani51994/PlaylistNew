@@ -64,12 +64,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB\connectionInfo.cs" />
     <Compile Include="DB\DataBaseHandler.cs" />
     <Compile Include="DB\DBConnection.cs" />
     <Compile Include="DB\queries.cs" />
     <Compile Include="Entities\Playlist.cs" />
     <Compile Include="Entities\Song.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="View\chooseFriend.xaml.cs">
+      <DependentUpon>chooseFriend.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -85,12 +89,19 @@
     <Compile Include="View\register.xaml.cs">
       <DependentUpon>register.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ShowFriendsPlaylists.xaml.cs">
+      <DependentUpon>ShowFriendsPlaylists.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ShowPlaylists.xaml.cs">
       <DependentUpon>ShowPlaylists.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\showPlaylistSongs.xaml.cs">
       <DependentUpon>showPlaylistSongs.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\chooseFriend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,6 +123,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\register.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ShowFriendsPlaylists.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

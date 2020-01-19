@@ -52,5 +52,15 @@ namespace PlayListNew.View
             homePage.Show();
         }
 
+
+       
+        private void ShowChooseFriends(object sender, RoutedEventArgs e)
+        {
+            chooseFriend friends = new chooseFriend();
+            this.Close();
+            friends.Show();
+        }
+
+
     }
 }
