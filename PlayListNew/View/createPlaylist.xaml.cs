@@ -66,11 +66,13 @@ namespace PlayListNew.View
             this.isDontCarePopChoosed = false;
             this.decadesRanges.Clear();
             this.numOfDecChoosed = 0;
+
+            this.message.Text = "";
         }
 
-        // function for create a playlist according to the user's requests
-        public void pressCreate(object sender, RoutedEventArgs e)
+        public string createQuery(DataBaseHandler dbhandler)
         {
+            
             // get all values inserted by the user
             this.duration = (int)durationSlider.Value * 60;
             this.playlistName = playListName.Text;
@@ -80,7 +82,7 @@ namespace PlayListNew.View
             {
                 this.clearScreen();
                 message.Text = "One or more fields are incorrect. Please try again.";
-                return;
+                return "0";
             }
             else
             {
@@ -90,23 +92,32 @@ namespace PlayListNew.View
                 this.maxLoudnessRange = double.Parse(loudnessMax.Text);
                 this.numOfSongs = int.Parse(songsNum.Text);
             }
+            
 
-            // prints appropriate message if user didnt choose all fields
-            // or choosed wrong values (out of range)
+            // if user choosed zero songs in playlist
+            if (this.numOfSongs == 0)
+            {
+                message.Text = "choose one or more songs in Song num field";
+                return "0";
+            }
+
+            if (dbhandler.checkIfPlNameExsistToUser(playlistName) == 1)
+            {
+                this.clearScreen();
+                message.Text = "you have playlist with the same name already";
+                return "0";
+            }
+
+            // prints appropriate message if user didnt choose all fields or choosed wrong values (out of range)
             if (this.minLoudnessRange < -52 || this.maxLoudnessRange > 1 || this.minTempoRange < 0 ||
                 this.maxTempoRange > 262 || this.numOfSongs < 0 || this.numOfSongs > 30 ||
                 this.playlistName == "" || (this.numOfDecChoosed == 0 && !this.isDontCareDecChoosed))
             {
                 this.clearScreen();
                 message.Text = "One or more fields are incorrect. Please try again.";
-                return;
+                return "0";
             }
 
-            // if user choosed zero songs in playlist
-            if (this.numOfSongs == 0)
-            {
-                return;
-            }
 
             query = "SELECT songs.id FROM playlistgame.songs " +
                     "WHERE songs.tempo >= " + this.minTempoRange.ToString() +
@@ -150,9 +161,22 @@ namespace PlayListNew.View
                      " ORDER BY RAND()" +
                      " LIMIT " + this.numOfSongs.ToString();
 
+            return query;
 
+        }
+
+        // function for create a playlist according to the user's requests
+        public void pressCreate(object sender, RoutedEventArgs e)
+        {
             DataBaseHandler dbhandler = DataBaseHandler.Instance;
+            string query = createQuery(dbhandler); 
+            // if query equals "0" then user filter wasnt good 
+            if (query == "0")
+            {
+                return;
+            }
             
+
             // get all songs ids according to the user's request
             List<string> songsIds = dbhandler.getSongsIds(query);
 
@@ -163,8 +187,6 @@ namespace PlayListNew.View
                 return;
             }
             
-
-
             // insert the playlist name into the playlists table
             dbhandler.saveNewPlaylistName(this.playlistName);
 
@@ -185,10 +207,9 @@ namespace PlayListNew.View
             dbhandler.saveNewPlaylisUser(playlistId, userId);
 
             this.clearScreen();
-
-            message.Text = "Your playlist succesfully created!";
-
-            //System.Threading.Thread.Sleep(5000);
+            
+            // move to pop window!
+           /// message.Text = "Your playlist succesfully created!";
         }
 
         // function for check if user choosed songs from '70 decade

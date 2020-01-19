@@ -51,6 +51,7 @@ namespace PlayListNew.DB
         }
 
 
+
         public int checkIfUserExist(string email)
         {
             string query = string.Format(queries.queryToCheckIfUserExist, email);
@@ -71,6 +72,26 @@ namespace PlayListNew.DB
             }
         }
 
+        
+
+
+        public int checkIfPlNameExsistToUser(string name)
+        {
+            string query = string.Format(queries.queryTocheckIfPlNameExsistToUser, User.Instance.Id, name);
+            MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
+
+            var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Close();
+                return 1;
+            }
+            else
+            {
+                reader.Close();
+                return 0;
+            }
+        }
 
         public int checkIfUserExistAndPasswordRight(string email, string password)
         {

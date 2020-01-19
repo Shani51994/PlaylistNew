@@ -32,6 +32,14 @@ namespace PlayListNew.DB
         public static string crearteUserAndPlaylist = @"INSERT INTO playlistgame.user_to_playlists(user_to_playlists.playlist_id, user_to_playlists.user_id)
                     VALUES ('{0}', '{1}')";
 
+
+        // 
+        public static string queryTocheckIfPlNameExsistToUser = @"SELECT playlists.playlist_id
+                                                                FROM playlistgame.playlists
+                                                                inner join user_to_playlists 
+                                                                ON playlists.playlist_id = user_to_playlists.playlist_id
+                                                                where user_id ={0} and playlist_name='{1}'";
+
         //******************* END of create playlist section*******************************************************************************
 
 
@@ -136,7 +144,7 @@ namespace PlayListNew.DB
         public static string deletePlaylist = @"DELETE FROM playlists WHERE playlist_id='{0}';";
         public static string deleteSongsByPlaylist = @"DELETE FROM songs_to_playlist WHERE playlist_id='{0}';";
 
-        // fix!!!
+        // fix!!!#########################################################33
         public static string countSongNumIfNoSongThenDelete = @"";
 
         public static string deletePlaylistToUser = @"DELETE FROM user_to_playlists WHERE playlist_id='{0}';";
@@ -145,7 +153,17 @@ namespace PlayListNew.DB
         public static string deleteSongFromPlaylist = @"DELETE FROM songs_to_playlist WHERE song_id='{0}';";
 
 
-        public static string afterDeletingSongCheckPlaylist = @";";
+        public static string afterDeletingSongCheckPlaylistSongs = @"DELETE FROM playlistgame.playlists
+                                                                WHERE (SELECT COUNT(*) as Num
+		                                                                FROM songs_to_playlist
+		                                                                WHERE playlist_id = {0}) = 0
+                                                                AND playlist_id = {0};";
+
+        public static string afterDeletingSongCheckUTP = @"DELETE FROM playlistgame.user_to_playlists
+                                                                WHERE (SELECT COUNT(*) as Num
+		                                                                FROM playlists
+		                                                                WHERE playlist_id = {0}) = 0
+                                                                AND playlist_id = {0};";
 
         //******************* end of delete section**************************************************************************************
     }
