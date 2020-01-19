@@ -144,6 +144,9 @@ namespace PlayListNew.DB
 
         public static string deleteSongFromPlaylist = @"DELETE FROM songs_to_playlist WHERE song_id='{0}';";
 
+
+        public static string afterDeletingSongCheckPlaylist = @";";
+
         //******************* end of delete section**************************************************************************************
     }
 

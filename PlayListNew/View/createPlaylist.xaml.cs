@@ -160,16 +160,30 @@ namespace PlayListNew.View
                      " ORDER BY RAND()" +
                      " LIMIT " + this.numOfSongs.ToString();
 
+
             DataBaseHandler dbhandler = DataBaseHandler.Instance;
+            
+            // get all songs ids according to the user's request
+            List<string> songsIds = dbhandler.getSongsIds(query);
+
+            // if no songs found
+            if (songsIds.Count == 0)
+            {
+                message.Text = "No songs where found for choices!";
+                return;
+            }
+            
+
 
             // insert the playlist name into the playlists table
             dbhandler.saveNewPlaylistName(this.playlistName);
 
+
+            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! not good !!!!!!
+
             // get the id of the new playlist
             string playlistId = dbhandler.getPlaylistId(this.playlistName);
 
-            // get all songs ids according to the user's request
-            List<string> songsIds = dbhandler.getSongsIds(query);
 
             // insert every song to the platlists table
             for (int i = 0; i < songsIds.Count; i++)
@@ -178,12 +192,6 @@ namespace PlayListNew.View
                 dbhandler.createPlaylist(query);
             }
 
-            // if no songs found
-            if (songsIds.Count == 0)
-            {
-                dbhandler.deletePlaylist(int.Parse(playlistId));
-                return;
-            }
 
             // get the current user id
             string userId = User.Instance.Id.ToString();

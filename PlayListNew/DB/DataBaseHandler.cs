@@ -218,14 +218,6 @@ namespace PlayListNew.DB
             {
                 if (DBConnection.IsConnect())
                 {
-                    //        public void createPlaylist(string query)
-                    //string connstring = string.Format(queries.creartPlaylistAllOptions, Server, DatabaseName, User, Password);
-
-                    //string query = queries.creartPlaylistAllOptions;
-                    var command = new MySqlCommand(query, DBConnection.Connection);
-
-
-                    command.ExecuteNonQuery();
 
                 }
             }
