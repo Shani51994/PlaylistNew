@@ -21,10 +21,10 @@ namespace PlayListNew.DB
         public DataBaseHandler()
         {
             DBConnection = DBConnection.Instance();
-            DBConnection.DatabaseName = connectionInfo.DatabaseName;
-            DBConnection.Password = connectionInfo.Password;
-            DBConnection.Server = connectionInfo.Server;
-            DBConnection.User = connectionInfo.User;
+            DBConnection.DatabaseName = ConnectionInfo.DatabaseName;
+            DBConnection.Password = ConnectionInfo.Password;
+            DBConnection.Server = ConnectionInfo.Server;
+            DBConnection.User = ConnectionInfo.User;
 
             DBConnection.Start();
         }
@@ -40,7 +40,6 @@ namespace PlayListNew.DB
                 }
                 return instance;
             }
-
         }
 
         private string ConnectionString { get; set; }
@@ -308,6 +307,7 @@ namespace PlayListNew.DB
 
 
 
+
         public int getUserIdByEmail(string email)
         {
 
@@ -371,9 +371,6 @@ namespace PlayListNew.DB
         }
 
 
-
-
-
         public void deleteSong(int songId)
         {
 
@@ -392,18 +389,9 @@ namespace PlayListNew.DB
         }
 
 
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! need to change!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        public int countFriendPlaylist(List<string> emails)
+        private string convertListToString(List<string> emails)
         {
-            return 1; 
-        }
 
-
-
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! need to change!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        public ObservableCollection<Playlist> GetFriendsPlaylist(List<string> emails)
-        {
-            
             string strEmails = "";
             int firststr = 1;
             foreach (string email in emails)
@@ -415,11 +403,49 @@ namespace PlayListNew.DB
                 }
                 else
                 {
-                    strEmails += "," + "'"+ email + "'";
+                    strEmails += "," + "'" + email + "'";
                 }
             }
-           
-           
+
+            return strEmails;
+        }
+
+
+        public int countFriendPlaylist(List<string> emails)
+        {
+
+            string strEmails = convertListToString(emails);
+            int playlistNum = 0;
+            try
+            {
+                if (DBConnection.IsConnect())
+                {
+                    string query = string.Format(queries.countFriendPlaylistNum, strEmails);
+                    var cmd = new MySqlCommand(query, DBConnection.Connection);
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        playlistNum = reader.GetInt32(0);
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+            }
+
+
+            return (playlistNum);
+        }
+
+
+
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! need to change!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        public ObservableCollection<Playlist> GetFriendsPlaylist(List<string> emails)
+        {
+            string strEmails = convertListToString(emails);
 
             ObservableCollection<Playlist> playlists = new ObservableCollection<Playlist>();
 
@@ -436,9 +462,8 @@ namespace PlayListNew.DB
                     {
                         string playlistName = reader.GetString(0);
                         int playlistId = reader.GetInt32(1);
-                        int playlistNumOfSongs = reader.GetInt32(2);
-                        // string userName = reader.GetString(3);
-                        string userName = "ss";
+                        int playlistNumOfSongs = reader.GetInt32(3);
+                        string userName = reader.GetString(2);
                         Playlist plist = new Playlist() { PlaylistName = playlistName, PlaylistId = playlistId,
                             PlaylistNumOfSongs = playlistNumOfSongs, UserName=userName};
                         playlists.Add(plist);

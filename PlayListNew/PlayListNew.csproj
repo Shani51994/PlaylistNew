@@ -64,7 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DB\connectionInfo.cs" />
+    <Compile Include="DB\ConnectionInfo.cs" />
     <Compile Include="DB\DataBaseHandler.cs" />
     <Compile Include="DB\DBConnection.cs" />
     <Compile Include="DB\queries.cs" />

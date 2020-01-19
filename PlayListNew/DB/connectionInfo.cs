@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace PlayListNew.DB
 {
-    class connectionInfo
+    /*
+     * holds DB info connection
+     */
+    class ConnectionInfo
     {
-        
         public static string Server = "localhost";
         //public static string DatabaseName = "playlistGame";
         //public static string Password = "Mm1614113";
