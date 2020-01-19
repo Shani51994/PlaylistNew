@@ -21,10 +21,10 @@ namespace PlayListNew.DB
         public DataBaseHandler()
         {
             DBConnection = DBConnection.Instance();
-            DBConnection.DatabaseName = connectionInfo.DatabaseName;
-            DBConnection.Password = connectionInfo.Password;
-            DBConnection.Server = connectionInfo.Server;
-            DBConnection.User = connectionInfo.User;
+            DBConnection.DatabaseName = ConnectionInfo.DatabaseName;
+            DBConnection.Password = ConnectionInfo.Password;
+            DBConnection.Server = ConnectionInfo.Server;
+            DBConnection.User = ConnectionInfo.User;
 
             DBConnection.Start();
         }
@@ -40,7 +40,6 @@ namespace PlayListNew.DB
                 }
                 return instance;
             }
-
         }
 
         private string ConnectionString { get; set; }
@@ -371,9 +370,6 @@ namespace PlayListNew.DB
         }
 
 
-
-
-
         public void deleteSong(int songId)
         {
 
@@ -392,10 +388,31 @@ namespace PlayListNew.DB
         }
 
 
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! need to change!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         public int countFriendPlaylist(List<string> emails)
         {
-            return 1; 
+            int playlistNum = 0;
+            try
+            {
+                if (DBConnection.IsConnect())
+                {
+                    string query = string.Format(queries.countFriendPlaylistNum, emails);
+                    var cmd = new MySqlCommand(query, DBConnection.Connection);
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        playlistNum = reader.GetInt32(0);
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+            }
+
+
+            return (playlistNum);
         }
 
 

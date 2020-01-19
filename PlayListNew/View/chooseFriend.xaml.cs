@@ -32,41 +32,26 @@ namespace PlayListNew.View
             options.Show();
         }
 
+
+        /*
+         * Get friends emails, if there is no plailist to show - pop message, else show list of friends playlist
+         */
         public void pressCreate(object sender, RoutedEventArgs e)
         {
-            //List<string> NameArr = ["firstEmail", "secEmail", "thirdEmail", "fourEmail", "fifthEmail"];
-
+            List<string> NameArr = new List<string>(new string[] { "firstEmail", "secEmail", "thirdEmail", "fourEmail", "fifthEmail" });
             List<string> friendEmails = new List<string>();
 
+            TextBox textbox;
 
-            // try to fix!!! -put in array and then check this condition-
-            if(this.firstEmail.Text != "")
+            foreach (string fieldName in NameArr)
             {
-                friendEmails.Add(this.firstEmail.Text);
+                textbox = (TextBox)FindName(fieldName);
+                if (textbox.Text != "")
+                {
+                    friendEmails.Add(textbox.Text);
+                }
             }
-
-            if (this.secEmail.Text != "")
-            {
-                friendEmails.Add(this.secEmail.Text);
-            }
-
-            if (this.thirdEmail.Text != "")
-            {
-                friendEmails.Add(this.thirdEmail.Text);
-            }
-
-
-            if (this.fourEmail.Text != "")
-            {
-                friendEmails.Add(this.fourEmail.Text);
-            }
-
-
-            if (this.fifthEmail.Text != "")
-            {
-                friendEmails.Add(this.fifthEmail.Text);
-            }
-
+            
 
             DataBaseHandler dbHandler = DataBaseHandler.Instance;
             int numOfFriendsPlaylists = dbHandler.countFriendPlaylist(friendEmails);
@@ -84,10 +69,7 @@ namespace PlayListNew.View
                 ShowFriendsPlaylists showAllPls = new ShowFriendsPlaylists(friendEmails);
                 this.Close();
                 showAllPls.Show();
-
             }
-
-
 
         }
     }

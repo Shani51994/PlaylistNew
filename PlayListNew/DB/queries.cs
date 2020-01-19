@@ -88,12 +88,38 @@ namespace PlayListNew.DB
 
 
 
-        // fix!!!
-        public static string getAllFriendsPlaylists = @"SELECT * FROM playlistgame.users
-                                                        where email IN ({0});";
+        // 
+        public static string getAllFriendsPlaylists = @"SELECT p.playlist_name, p.playlist_id, u.full_name, COUNT(*) as Num 
+											FROM playlists p
+                                            JOIN songs_to_playlist sp 
+                                            ON p.playlist_id = sp.playlist_id
+                                            JOIN songs s
+                                            ON sp.song_id = s.id
+                                            JOIN user_to_playlists up 
+                                            ON p.playlist_id = up.playlist_id
+                                            JOIN users u
+                                            ON up.user_id = u.user_id
+                                            WHERE u.email IN {0}
+											group by p.playlist_name, p.playlist_id, u.full_name
+											ORDER BY creation_date DESC;";
 
-        // fix!!!
-        public static string countFriendPlaylistNum = @"";
+        // 
+        public static string countFriendPlaylistNum = @"select count(fpl.playlist_id) as pl_counter
+                                            from (
+                                            SELECT p.playlist_name, p.playlist_id, u.full_name, COUNT(*) as Num 
+											FROM playlists p
+                                            JOIN songs_to_playlist sp 
+                                            ON p.playlist_id = sp.playlist_id
+                                            JOIN songs s
+                                            ON sp.song_id = s.id
+                                            JOIN user_to_playlists up 
+                                            ON p.playlist_id = up.playlist_id
+                                            JOIN users u
+                                            ON up.user_id = u.user_id
+                                            WHERE u.email IN {0}
+											group by p.playlist_name, p.playlist_id, u.full_name
+											ORDER BY creation_date DESC
+                                            ) as fpl";
 
 
         // fix!!!
