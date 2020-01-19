@@ -160,24 +160,25 @@ namespace PlayListNew.View
                     " AND songs.loudness <= " + this.maxLoudnessRange.ToString();
 
             // checks if user wants specific decades
-            if (this.isDontCareDecChoosed)
-            {
-                this.isDontCareDecChoosed = true;
-            }
+            //if (this.isDontCareDecChoosed)
+            //{
+            //    this.isDontCareDecChoosed = true;
+            //}
 
             // checks if user wants popularity
-            if (this.isDontCarePopChoosed)
-            {
-                this.isDontCarePopChoosed = true;
-            }
-            else
+            //if (this.isDontCarePopChoosed)
+            //{
+            //    this.isDontCarePopChoosed = true;
+            //}
+            //else
+            if (!this.isDontCarePopChoosed)
             {
                 this.popularity = (double)popularitySlider.Value;
                 query += " AND songs.hotness >= 0 AND songs.hotness <= " + this.popularity.ToString();
             }
 
             // deals with all variations of options in order to know which query to run
-            if (this.isDontCareDecChoosed)
+            if (!this.isDontCareDecChoosed)
             {
                 if (this.numOfDecChoosed == 1)
                 {
@@ -214,7 +215,8 @@ namespace PlayListNew.View
                 }
             }
 
-            query += " AND(songs.duration >= 0 AND songs.duration < " + this.duration.ToString() + ")" +
+            query += " AND (songs.duration >= 0 AND songs.duration < " + this.duration.ToString() + ")" +
+                     " ORDER BY RAND()" +
                      " LIMIT " + this.numOfSongs.ToString();
 
             DataBaseHandler dbhandler = DataBaseHandler.Instance;
