@@ -38,7 +38,8 @@ namespace PlayListNew.View
          */
         public void pressCreate(object sender, RoutedEventArgs e)
         {
-            List<string> NameArr = new List<string>(new string[] { "firstEmail", "secEmail", "thirdEmail", "fourEmail", "fifthEmail" });
+            List<string> NameArr = new List<string>(
+                new string[] { "firstEmail", "secEmail", "thirdEmail", "fourEmail", "fifthEmail" });
             List<string> friendEmails = new List<string>();
 
             TextBox textbox;
@@ -55,7 +56,6 @@ namespace PlayListNew.View
 
             DataBaseHandler dbHandler = DataBaseHandler.Instance;
             int numOfFriendsPlaylists = dbHandler.countFriendPlaylist(friendEmails);
-
 
             if (numOfFriendsPlaylists == 0)
             {

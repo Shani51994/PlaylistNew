@@ -82,7 +82,7 @@
         
         
         <StackPanel Orientation="Horizontal" Grid.Row="7">
-                <TextBlock Text="Number of songs you want: (max 30 songs):" Padding="3" VerticalAlignment="Center" FontSize="15" Foreground="Teal" FontWeight="Bold"></TextBlock>
+                <TextBlock Text="Number of songs (max 30 songs):" Padding="3" VerticalAlignment="Center" FontSize="15" Foreground="Teal" FontWeight="Bold"></TextBlock>
                 <TextBox x:Name="songsNum" VerticalAlignment="Center" Margin="3" FontSize="13"  Width="50"></TextBox>
             </StackPanel>
 

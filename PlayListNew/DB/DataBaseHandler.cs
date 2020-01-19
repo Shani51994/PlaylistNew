@@ -307,6 +307,7 @@ namespace PlayListNew.DB
 
 
 
+
         public int getUserIdByEmail(string email)
         {
 
@@ -388,14 +389,38 @@ namespace PlayListNew.DB
         }
 
 
+        private string convertListToString(List<string> emails)
+        {
+
+            string strEmails = "";
+            int firststr = 1;
+            foreach (string email in emails)
+            {
+                if (firststr == 1)
+                {
+                    strEmails += "'" + email + "'";
+                    firststr = 0;
+                }
+                else
+                {
+                    strEmails += "," + "'" + email + "'";
+                }
+            }
+
+            return strEmails;
+        }
+
+
         public int countFriendPlaylist(List<string> emails)
         {
+
+            string strEmails = convertListToString(emails);
             int playlistNum = 0;
             try
             {
                 if (DBConnection.IsConnect())
                 {
-                    string query = string.Format(queries.countFriendPlaylistNum, emails);
+                    string query = string.Format(queries.countFriendPlaylistNum, strEmails);
                     var cmd = new MySqlCommand(query, DBConnection.Connection);
                     var reader = cmd.ExecuteReader();
 
@@ -420,23 +445,7 @@ namespace PlayListNew.DB
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! need to change!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         public ObservableCollection<Playlist> GetFriendsPlaylist(List<string> emails)
         {
-            
-            string strEmails = "";
-            int firststr = 1;
-            foreach (string email in emails)
-            {
-                if (firststr == 1)
-                {
-                    strEmails += "'" + email + "'";
-                    firststr = 0;
-                }
-                else
-                {
-                    strEmails += "," + "'"+ email + "'";
-                }
-            }
-           
-           
+            string strEmails = convertListToString(emails);
 
             ObservableCollection<Playlist> playlists = new ObservableCollection<Playlist>();
 
@@ -453,9 +462,8 @@ namespace PlayListNew.DB
                     {
                         string playlistName = reader.GetString(0);
                         int playlistId = reader.GetInt32(1);
-                        int playlistNumOfSongs = reader.GetInt32(2);
-                        // string userName = reader.GetString(3);
-                        string userName = "ss";
+                        int playlistNumOfSongs = reader.GetInt32(3);
+                        string userName = reader.GetString(2);
                         Playlist plist = new Playlist() { PlaylistName = playlistName, PlaylistId = playlistId,
                             PlaylistNumOfSongs = playlistNumOfSongs, UserName=userName};
                         playlists.Add(plist);
