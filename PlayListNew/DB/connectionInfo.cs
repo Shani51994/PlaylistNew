@@ -10,10 +10,10 @@ namespace PlayListNew.DB
     {
         
         public static string Server = "localhost";
-        public static string DatabaseName = "playlistGame";
-        public static string Password = "Mm1614113";
-        //public static string DatabaseName = "playlistgame";
-        //public static string Password = "Sql1234pass1234Sql";
+        //public static string DatabaseName = "playlistGame";
+        //public static string Password = "Mm1614113";
+        public static string DatabaseName = "playlistgame";
+        public static string Password = "Sql1234pass1234Sql";
         public static string User = "root";
 
     }
