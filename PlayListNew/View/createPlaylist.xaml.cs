@@ -72,50 +72,40 @@ namespace PlayListNew.View
         public void pressCreate(object sender, RoutedEventArgs e)
         {
             // get all values inserted by the user
-            this.minTempoRange = double.Parse(tempoMin.Text);
-            this.maxTempoRange = double.Parse(tempoMax.Text);
-            this.minLoudnessRange = double.Parse(loudnessMin.Text);
-            this.maxLoudnessRange = double.Parse(loudnessMax.Text);
             this.duration = (int)durationSlider.Value * 60;
-            this.numOfSongs = int.Parse(songsNum.Text);
             this.playlistName = playListName.Text;
+
+            if (songsNum.Text == "" || tempoMin.Text == "" || tempoMax.Text == "" ||
+                loudnessMin.Text == "" || loudnessMax.Text == "")
+            {
+                this.clearScreen();
+                message.Text = "One or more fields are incorrect. Please try again.";
+                return;
+            }
+            else
+            {
+                this.minTempoRange = double.Parse(tempoMin.Text);
+                this.maxTempoRange = double.Parse(tempoMax.Text);
+                this.minLoudnessRange = double.Parse(loudnessMin.Text);
+                this.maxLoudnessRange = double.Parse(loudnessMax.Text);
+                this.numOfSongs = int.Parse(songsNum.Text);
+            }
+
+            // prints appropriate message if user didnt choose all fields
+            // or choosed wrong values (out of range)
+            if (this.minLoudnessRange < -52 || this.maxLoudnessRange > 1 || this.minTempoRange < 0 ||
+                this.maxTempoRange > 262 || this.numOfSongs < 0 || this.numOfSongs > 30 ||
+                this.playlistName == "" || (this.numOfDecChoosed == 0 && !this.isDontCareDecChoosed))
+            {
+                this.clearScreen();
+                message.Text = "One or more fields are incorrect. Please try again.";
+                return;
+            }
 
             // if user choosed zero songs in playlist
             if (this.numOfSongs == 0)
             {
                 return;
-            }
-
-            // if user insert invalis values (out of the valid range), fix it
-            // to be the minimum or maximum range
-            if (this.minTempoRange < 0)
-            {
-                this.minTempoRange = 0;
-            }
-
-            if (this.maxTempoRange > 262)
-            {
-                this.maxTempoRange = 262;
-            }
-
-            if (this.minLoudnessRange < -52)
-            {
-                this.minLoudnessRange = -52;
-            }
-
-            if (this.maxLoudnessRange > 1)
-            {
-                this.maxLoudnessRange = 1;
-            }
-
-            if (this.numOfSongs < 0)
-            {
-                this.numOfSongs = 30;
-            }
-
-            if (this.numOfSongs > 30)
-            {
-                this.numOfSongs = 30;
             }
 
             query = "SELECT songs.id FROM playlistgame.songs " +
@@ -185,12 +175,7 @@ namespace PlayListNew.View
             string playlistId = dbhandler.getPlaylistId(this.playlistName);
 
 
-            // insert every song to the platlists table
-            for (int i = 0; i < songsIds.Count; i++)
-            {
-                query = string.Format(queries.creartPlaylist, playlistId, songsIds[i]);
-                dbhandler.createPlaylist(query);
-            }
+            dbhandler.createPlaylist(songsIds, playlistId);
 
 
             // get the current user id
