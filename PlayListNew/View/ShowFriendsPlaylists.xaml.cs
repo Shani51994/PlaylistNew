@@ -63,16 +63,16 @@ namespace PlayListNew.View
             dataGrid1.ItemsSource = playlistList;
         }
 
-        private void pressDeletePlaylist(object sender, RoutedEventArgs e)
+
+
+        //needToFix!!!!!!!!
+        private void pressCopyPlaylist(object sender, RoutedEventArgs e)
         {
 
             Button button = (Button)sender;
             int playlistId = (int)button.CommandParameter;
 
-            DataBaseHandler.Instance.deletePlaylist(playlistId);
-
-            showCurrentPlaylist(emails);
-
+            DataBaseHandler.Instance.copyPlaylist(playlistId);
         }
 
     }

@@ -39,7 +39,7 @@
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button CommandParameter="{Binding Path=PlaylistId}" Click="pressDeletePlaylist">copy playlist</Button>
+                                    <Button CommandParameter="{Binding Path=PlaylistId}" Click="pressCopyPlaylist">copy playlist</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

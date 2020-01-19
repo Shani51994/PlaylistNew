@@ -207,16 +207,42 @@ namespace PlayListNew.DB
 				                                    ORDER BY creation_date DESC;";
 
 
-        public static string getAllFriendsPlaylists = @"SELECT playlists.playlist_name, playlists.playlist_id, COUNT(*) as Num
-                                                    FROM playlistgame.playlists
-                                                    INNER JOIN playlistgame.user_to_playlists ON playlists.playlist_id = user_to_playlists.playlist_id
-                                                    INNER JOIN playlistgame.songs_to_playlist ON playlists.playlist_id = songs_to_playlist.playlist_id
-                                                    WHERE user_id IN ('{0}')
-                                                    group by playlist_id
-                                                    ORDER BY creation_date DESC;";
 
+        // fix!!!
+        public static string getAllFriendsPlaylists = @"SELECT * FROM playlistgame.users
+                                                        where email IN ({0});";
+
+        /*
+         SELECT playlists.playlist_name, playlists.playlist_id, COUNT(*) as Num, users.full_name 
+											FROM playlistgame.playlists, playlistgame.users
+											INNER JOIN playlistgame.user_to_playlists ON playlists.playlist_id = user_to_playlists.playlist_id
+											INNER JOIN playlistgame.songs_to_playlist ON playlists.playlist_id = songs_to_playlist.playlist_id
+											INNER JOIN playlistgame.users ON users.user_id = playlistgame.user_to_playlist.user_id
+											WHERE user_id IN ({0})
+											group by playlist_id
+											ORDER BY creation_date DESC;
+                                             
+          
+         
+        @"SELECT playlists.playlist_name, playlists.playlist_id, COUNT(*) as Num
+                                                FROM playlistgame.playlists
+                                                INNER JOIN playlistgame.user_to_playlists ON playlists.playlist_id = user_to_playlists.playlist_id
+                                                INNER JOIN playlistgame.songs_to_playlist ON playlists.playlist_id = songs_to_playlist.playlist_id
+                                                WHERE user_id IN ({0})
+                                                group by playlist_id
+                                                ORDER BY creation_date DESC;";
+
+*/
+
+        // fix!!!
 
         public static string countFriendPlaylistNum = @"";
+
+
+        // fix!!!
+
+        public static string copyPlaylistFromFriend = @"";
+
 
         //******************* show playlist section**************************************************************************************
 
@@ -228,6 +254,10 @@ namespace PlayListNew.DB
         // when delete playlist - delete the playlist from tables: playlists, songs_to_playlist, user_to_playlists
         public static string deletePlaylist = @"DELETE FROM playlists WHERE playlist_id='{0}';";
         public static string deleteSongsByPlaylist = @"DELETE FROM songs_to_playlist WHERE playlist_id='{0}';";
+
+        // fix!!!
+        public static string countSongNumIfNoSongThenDelete = @"";
+
         public static string deletePlaylistToUser = @"DELETE FROM user_to_playlists WHERE playlist_id='{0}';";
 
 

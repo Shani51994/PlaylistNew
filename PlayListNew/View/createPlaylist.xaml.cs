@@ -17,8 +17,6 @@ using PlayListNew.DB;
 
 namespace PlayListNew.View
 {
-
-
     /// <summary>
     /// Interaction logic for createPlaylist.xaml
     /// </summary>

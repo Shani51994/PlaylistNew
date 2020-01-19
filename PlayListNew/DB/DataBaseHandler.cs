@@ -401,24 +401,25 @@ namespace PlayListNew.DB
 
 
 
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! need to change!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         public ObservableCollection<Playlist> GetFriendsPlaylist(List<string> emails)
         {
-            /*
+            
             string strEmails = "";
             int firststr = 1;
             foreach (string email in emails)
             {
                 if (firststr == 1)
                 {
-                    strEmails += email;
+                    strEmails += "'" + email + "'";
                     firststr = 0;
                 }
                 else
                 {
-                    strEmails += "," + email;
+                    strEmails += "," + "'"+ email + "'";
                 }
             }
-            */
+           
            
 
             ObservableCollection<Playlist> playlists = new ObservableCollection<Playlist>();
@@ -427,7 +428,7 @@ namespace PlayListNew.DB
             {
                 if (DBConnection.IsConnect())
                 {
-                    string query = string.Format(queries.getAllFriendsPlaylists, 1);
+                    string query = string.Format(queries.getAllFriendsPlaylists, strEmails);
 
                     var cmd = new MySqlCommand(query, DBConnection.Connection);
                     var reader = cmd.ExecuteReader();
@@ -452,6 +453,14 @@ namespace PlayListNew.DB
             }
 
             return playlists;
+
+        }
+
+
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! need to change!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        public void copyPlaylist(int playlistIdToCopy)
+        {
 
         }
 
