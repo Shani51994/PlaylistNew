@@ -38,10 +38,6 @@ namespace PlayListNew.View
         private int numOfDecChoosed = 0;
         private List<int> decadesRanges = new List<int>();
         private string query;
-        private bool isChoosed70 = false;
-        private bool isChoosed80 = false;
-        private bool isChoosed90 = false;
-        private bool isChoosed00 = false;
 
         public createPlaylist()
         {
@@ -62,41 +58,12 @@ namespace PlayListNew.View
             durationSlider.Value = 2;
             popularitySlider.Value = 0;
 
-            if (this.isChoosed70)
-            {
-                checkBox70.IsChecked = false;
-            }
-
-            if (this.isChoosed80)
-            {
-                checkBox80.IsChecked = false;
-            }
-
-            if (this.isChoosed90)
-            {
-                checkBox90.IsChecked = false;
-            }
-
-            if (this.isChoosed00)
-            {
-                checkBox00.IsChecked = false;
-            }
-
-            if (this.isDontCareDecChoosed)
-            {
-                dontCareDec.IsChecked = false;
-            }
-
-            if (this.isDontCarePopChoosed)
-            {
-                dontCarePop.IsChecked = false;
-            }
-
-            // initial all variables
-            this.isChoosed70 = false;
-            this.isChoosed80 = false;
-            this.isChoosed90 = false;
-            this.isChoosed00 = false;
+            checkBox70.IsChecked = false;
+            checkBox80.IsChecked = false;
+            checkBox90.IsChecked = false;
+            checkBox00.IsChecked = false;
+            dontCareDec.IsChecked = false;
+            dontCarePop.IsChecked = false;
             this.isDontCareDecChoosed = false;
             this.isDontCarePopChoosed = false;
             this.decadesRanges.Clear();
@@ -159,18 +126,6 @@ namespace PlayListNew.View
                     " AND songs.loudness >= " + this.minLoudnessRange.ToString() +
                     " AND songs.loudness <= " + this.maxLoudnessRange.ToString();
 
-            // checks if user wants specific decades
-            //if (this.isDontCareDecChoosed)
-            //{
-            //    this.isDontCareDecChoosed = true;
-            //}
-
-            // checks if user wants popularity
-            //if (this.isDontCarePopChoosed)
-            //{
-            //    this.isDontCarePopChoosed = true;
-            //}
-            //else
             if (!this.isDontCarePopChoosed)
             {
                 this.popularity = (double)popularitySlider.Value;
@@ -180,38 +135,26 @@ namespace PlayListNew.View
             // deals with all variations of options in order to know which query to run
             if (!this.isDontCareDecChoosed)
             {
-                if (this.numOfDecChoosed == 1)
+                if (this.numOfDecChoosed >= 1)
                 {
-                    query += " AND(songs.year >= " + this.decadesRanges[0].ToString() +
+                    query += " AND (songs.year >= " + this.decadesRanges[0].ToString() +
                              " AND songs.year < " + this.decadesRanges[1].ToString() + ")";
 
                 }
-                else if (this.numOfDecChoosed == 2)
+                if (this.numOfDecChoosed >= 2)
                 {
-                    query += " AND((songs.year >= " + this.decadesRanges[0].ToString() +
-                             " AND songs.year < " + this.decadesRanges[1].ToString() + ")" +
-                             " OR(songs.year >= " + this.decadesRanges[2].ToString() +
-                             " AND songs.year < " + this.decadesRanges[3].ToString() + "))";
+                    query += " OR(songs.year >= " + this.decadesRanges[2].ToString() +
+                             " AND songs.year < " + this.decadesRanges[3].ToString() + ")";
                 }
-                else if (this.numOfDecChoosed == 3)
+                if (this.numOfDecChoosed >= 3)
                 {
-                    query += " AND((songs.year >= " + this.decadesRanges[0].ToString() +
-                             " AND songs.year < " + this.decadesRanges[1].ToString() + ")" +
-                             " OR(songs.year >= " + this.decadesRanges[2].ToString() +
-                             " AND songs.year < " + this.decadesRanges[3].ToString() + ")" +
-                             " OR(songs.year >= " + this.decadesRanges[4].ToString() +
-                             " AND songs.year < " + this.decadesRanges[5].ToString() + "))";
+                    query += " OR(songs.year >= " + this.decadesRanges[4].ToString() +
+                             " AND songs.year < " + this.decadesRanges[5].ToString() + ")";
                 }
-                else if (this.numOfDecChoosed == 4)
+                if (this.numOfDecChoosed == 4)
                 {
-                    query += " AND((songs.year >= " + this.decadesRanges[0].ToString() +
-                             " AND songs.year < " + this.decadesRanges[1].ToString() + ")" +
-                             " OR(songs.year >= " + this.decadesRanges[2].ToString() +
-                             " AND songs.year < " + this.decadesRanges[3].ToString() + ")" +
-                             " OR(songs.year >= " + this.decadesRanges[4].ToString() +
-                             " AND songs.year < " + this.decadesRanges[5].ToString() + ")" +
-                             " OR(songs.year >= " + this.decadesRanges[6].ToString() +
-                             " AND songs.year < " + this.decadesRanges[7].ToString() + "))";
+                    query += " OR(songs.year >= " + this.decadesRanges[6].ToString() +
+                             " AND songs.year < " + this.decadesRanges[7].ToString() + ")";
                 }
             }
 
@@ -255,7 +198,6 @@ namespace PlayListNew.View
             message.Text = "Your playlist succesfully created!";
 
             //System.Threading.Thread.Sleep(5000);
-
         }
 
         // function for check if user choosed songs from '70 decade
@@ -264,7 +206,6 @@ namespace PlayListNew.View
             this.decadesRanges.Add(1970);
             this.decadesRanges.Add(1979);
             this.numOfDecChoosed++;
-            this.isChoosed70 = true;
         }
 
         // function for check if user choosed songs from '80 decade
@@ -273,7 +214,6 @@ namespace PlayListNew.View
             this.decadesRanges.Add(1980);
             this.decadesRanges.Add(1989);
             this.numOfDecChoosed++;
-            this.isChoosed80 = true;
         }
 
         // function for check if user choosed songs from '90 decade
@@ -282,7 +222,6 @@ namespace PlayListNew.View
             this.decadesRanges.Add(1990);
             this.decadesRanges.Add(1999);
             this.numOfDecChoosed++;
-            this.isChoosed90 = true;
         }
 
         // function for check if user choosed songs from '00 decade
@@ -291,7 +230,6 @@ namespace PlayListNew.View
             this.decadesRanges.Add(2000);
             this.decadesRanges.Add(2009);
             this.numOfDecChoosed++;
-            this.isChoosed00 = true;
         }
 
         // function for check if user choosed songs from all decades
@@ -318,6 +256,5 @@ namespace PlayListNew.View
         {
             this.clearScreen();
         }
-
     }
 }
