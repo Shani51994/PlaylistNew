@@ -212,21 +212,20 @@ namespace PlayListNew.DB
         }
 
 
-        public void createPlaylist(string query)
+        public void createPlaylist(List<string> songsIds, string playlistId)
         {
             try
             {
                 if (DBConnection.IsConnect())
                 {
-                    //        public void createPlaylist(string query)
-                    //string connstring = string.Format(queries.creartPlaylistAllOptions, Server, DatabaseName, User, Password);
 
-                    //string query = queries.creartPlaylistAllOptions;
-                    var command = new MySqlCommand(query, DBConnection.Connection);
-
-
-                    command.ExecuteNonQuery();
-
+                    // insert every song to the platlists table
+                    for (int i = 0; i < songsIds.Count; i++)
+                    {
+                        string query = string.Format(queries.creartPlaylist, playlistId, songsIds[i]);
+                        var command = new MySqlCommand(query, DBConnection.Connection);
+                        command.ExecuteNonQuery();
+                    }
                 }
             }
             catch (Exception ex)

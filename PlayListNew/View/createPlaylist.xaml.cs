@@ -161,12 +161,7 @@ namespace PlayListNew.View
             // get all songs ids according to the user's request
             List<string> songsIds = dbhandler.getSongsIds(query);
 
-            // insert every song to the platlists table
-            for (int i = 0; i < songsIds.Count; i++)
-            {
-                query = string.Format(queries.creartPlaylist, playlistId, songsIds[i]);
-                dbhandler.createPlaylist(query);
-            }
+            dbhandler.createPlaylist(songsIds, playlistId);
 
             // if no songs found
             if (songsIds.Count == 0)
