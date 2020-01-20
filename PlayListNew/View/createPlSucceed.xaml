@@ -1,0 +1,22 @@
+﻿<Window x:Class="PlayListNew.View.createPlSucceed"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlayListNew.View"
+        mc:Ignorable="d"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="createPlSucceed" Height="150" Width="300">
+    <Grid  Background="Gainsboro">
+        
+        <Label HorizontalAlignment="Center" Grid.Row="0" Content="playlist create Successfully!" FontSize="20" FontWeight="Bold" Foreground="Blue"  Padding="10" Grid.ColumnSpan="2" Margin="9,0,9.6,-0.2"/>
+        <WrapPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" >
+            <Button Name="okBtn" Padding="3" HorizontalAlignment="Stretch"
+                 Height="50" Width="70" Margin="10" Click="pressBackToOptions" Content="Back to &#xa;options"></Button>
+            <Button Name="CancelNBtn" Padding="3" HorizontalAlignment="Right"
+                 Height="50" Width="70" Margin="10" Click="pressShowSongs" Content="Show playlist&#xa;  song"></Button>
+        </WrapPanel>
+
+    </Grid>
+</Window>

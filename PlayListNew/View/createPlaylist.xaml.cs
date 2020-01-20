@@ -165,18 +165,20 @@ namespace PlayListNew.View
 
         }
 
+
+
         // function for create a playlist according to the user's requests
         public void pressCreate(object sender, RoutedEventArgs e)
         {
             DataBaseHandler dbhandler = DataBaseHandler.Instance;
             string query = createQuery(dbhandler); 
+
             // if query equals "0" then user filter wasnt good 
             if (query == "0")
             {
                 return;
             }
             
-
             // get all songs ids according to the user's request
             List<string> songsIds = dbhandler.getSongsIds(query);
 
@@ -186,31 +188,16 @@ namespace PlayListNew.View
                 message.Text = "No songs where found for choices!";
                 return;
             }
-            
-            // insert the playlist name into the playlists table
-            dbhandler.saveNewPlaylistName(this.playlistName);
 
 
-            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! not good !!!!!!
-
-            // get the id of the new playlist
-            string playlistId = dbhandler.getPlaylistId(this.playlistName);
-
-
-            dbhandler.createPlaylist(songsIds, playlistId);
-
-
-            // get the current user id
-            string userId = User.Instance.Id.ToString();
-
-            // insert the playlist id and the current user id into the user_to_playlists table
-            dbhandler.saveNewPlaylisUser(playlistId, userId);
+            int playlistId = dbhandler.createPlaylist(playlistName, songsIds);
 
             this.clearScreen();
-            
-            // move to pop window!
-           /// message.Text = "Your playlist succesfully created!";
+            createPlSucceed succ = new createPlSucceed(playlistId);
+            succ.Show();
         }
+
+
 
         // function for check if user choosed songs from '70 decade
         private void choose70(object sender, RoutedEventArgs e)

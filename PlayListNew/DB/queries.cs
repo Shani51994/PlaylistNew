@@ -10,36 +10,54 @@ namespace PlayListNew.DB
     {
         //******************* create playlist section*******************************************************************************
 
-
-        // important!!
-        // the query for get all songs ids according to the user,
-        // is generate dynamiclly in the file: createPlaylist.xaml.cs
+        /* 
+        * query: selectSongs
+        * select songs to the playlist by the user Preferences is generate dynamiclly in the file: createPlaylist.xaml.cs
+        * in function 'createQuery'
+        */
 
 
         // insert playlist name from user to the playlists table
         public static string insertNewPlaylist = @"INSERT INTO playlistgame.playlists(playlists.playlist_name) VALUES ('{0}')";
 
-        // get playlist id by playlist name
-        public static string getPlaylistIdByName = @"SELECT playlists.playlist_id FROM playlistgame.playlists
-                    WHERE playlists.playlist_name = '{0}'";
 
+        // need to change and had user id !!!
+
+        // get playlist id by playlist name
+        public static string getPlaylistIdByPlaylistName= @"SELECT playlists.playlist_id 
+                                                        FROM playlistgame.playlists
+                                                        WHERE playlists.playlist_name = '{0}'";
+
+        public static string getPlaylistNameAndUserNByPlId = @"SELECT playlists.playlist_name, full_name
+                                                    FROM playlistgame.playlists
+                                                    inner join user_to_playlists 
+                                                    ON playlists.playlist_id = user_to_playlists.playlist_id
+                                                    inner join users
+                                                    ON user_to_playlists.user_id = users.user_id
+                                                    where playlists.playlist_id={0}";
 
         // create playlist and insert all songs choosed
         public static string creartPlaylist = @"INSERT INTO playlistgame.songs_to_playlist(songs_to_playlist.playlist_id, songs_to_playlist.song_id)
-                    VALUES ('{0}', '{1}')";
+                                               VALUES ('{0}', '{1}')";
 
         // create row for user id and playlist id and insert to user_tp_playlists table
         public static string crearteUserAndPlaylist = @"INSERT INTO playlistgame.user_to_playlists(user_to_playlists.playlist_id, user_to_playlists.user_id)
-                    VALUES ('{0}', '{1}')";
+                                                      VALUES ('{0}', '{1}')";
 
 
-        // 
-        public static string queryTocheckIfPlNameExsistToUser = @"SELECT playlists.playlist_id
+        // use to queryTocheckIfPlNameExsistToUser and to get name by user id and playlist name
+        public static string queryTocheckIfPlNameExsistToUser = @"SELECT playlists.playlist_name
                                                                 FROM playlistgame.playlists
                                                                 inner join user_to_playlists 
                                                                 ON playlists.playlist_id = user_to_playlists.playlist_id
                                                                 where user_id ={0} and playlist_name='{1}'";
 
+
+        public static string getSongsByPlaylistId = @"SELECT songs.id 
+                                                    FROM playlistgame.songs
+                                                    inner join songs_to_playlist
+                                                    ON songs.id = songs_to_playlist.song_id
+                                                    WHERE playlist_id = {0};";
         //******************* END of create playlist section*******************************************************************************
 
 
@@ -129,8 +147,8 @@ namespace PlayListNew.DB
                                             ) as fpl";
 
 
-        // fix!!!
-        public static string copyPlaylistFromFriend = @"";
+        // fix!!!########################################################3
+        public static string copyPlaylistFromFriend = @";";
 
 
         //******************* show playlist(friends and my) section**************************************************************************************
@@ -144,8 +162,6 @@ namespace PlayListNew.DB
         public static string deletePlaylist = @"DELETE FROM playlists WHERE playlist_id='{0}';";
         public static string deleteSongsByPlaylist = @"DELETE FROM songs_to_playlist WHERE playlist_id='{0}';";
 
-        // fix!!!#########################################################33
-        public static string countSongNumIfNoSongThenDelete = @"";
 
         public static string deletePlaylistToUser = @"DELETE FROM user_to_playlists WHERE playlist_id='{0}';";
 

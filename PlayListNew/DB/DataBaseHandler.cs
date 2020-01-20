@@ -56,9 +56,7 @@ namespace PlayListNew.DB
         {
             string query = string.Format(queries.queryToCheckIfUserExist, email);
             MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
-
-
-            //*******************
+            
             var reader = command.ExecuteReader();
             if (reader.HasRows)
             {
@@ -152,7 +150,7 @@ namespace PlayListNew.DB
             }
         }
 
-        public void saveNewPlaylisUser(string playlistId, string userId)
+        public void saveNewPlaylisUser(int playlistId, int userId)
         {
             string query = string.Format(queries.crearteUserAndPlaylist, playlistId, userId);
 
@@ -171,23 +169,20 @@ namespace PlayListNew.DB
         }
 
 
-        public string getPlaylistId(string playlistName)
+        public int getPlaylistId(string playlistName)
         {
-            string playlistId = "";
-            string query = string.Format(queries.getPlaylistIdByName, playlistName);
+            int playlistId=0;
+            string query = string.Format(queries.getPlaylistIdByPlaylistName, playlistName);
             try
             {
                 if (DBConnection.IsConnect())
                 {
-
                     var command = new MySqlCommand(query, DBConnection.Connection);
-
                     var reader = command.ExecuteReader();
-
-
+                    
                     while (reader.Read())
                     {
-                        playlistId = reader.GetString(0);
+                        playlistId = reader.GetInt32(0);
                     }
 
                     reader.Close();
@@ -198,10 +193,9 @@ namespace PlayListNew.DB
                 File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
             }
             return playlistId;
-
         }
 
-
+      
         public List<string> getSongsIds(string query)
         {
             List<string> songsIds = new List<string>();
@@ -232,14 +226,32 @@ namespace PlayListNew.DB
 
         }
 
+        
+        public int createPlaylist(string playlistName, List<string> songsIds)
+        {
+            // insert the playlist name into the playlists table
+            saveNewPlaylistName(playlistName);
+            
+            // get the current user id
+            int userId = User.Instance.Id;
 
-        public void createPlaylist(List<string> songsIds, string playlistId)
+            // get the id of the new playlist of the user
+            int playlistId = getPlaylistId(playlistName);
+
+            savePlaylistSongs(songsIds, playlistId);
+
+            // insert the playlist id and the current user id into the user_to_playlists table
+            saveNewPlaylisUser(playlistId, userId);
+
+            return playlistId;
+        }
+
+        public void savePlaylistSongs(List<string> songsIds, int playlistId)
         {
             try
             {
                 if (DBConnection.IsConnect())
                 {
-
                     // insert every song to the platlists table
                     for (int i = 0; i < songsIds.Count; i++)
                     {
@@ -461,8 +473,7 @@ namespace PlayListNew.DB
         }
 
 
-
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! need to change!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        
         public ObservableCollection<Playlist> GetFriendsPlaylist(List<string> emails)
         {
             string strEmails = convertListToString(emails);
@@ -501,12 +512,72 @@ namespace PlayListNew.DB
         }
 
 
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! need to change!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        public void copyPlaylist(int playlistIdToCopy)
+        public void checksAfterdeletingSongs(int playlistId)
         {
 
+            string query = string.Format(queries.afterDeletingSongCheckPlaylistSongs, playlistId);
+            string query2 = string.Format(queries.afterDeletingSongCheckUTP, playlistId);
+
+            try
+            {
+                if (DBConnection.IsConnect())
+                {
+                    var command = new MySqlCommand(query, DBConnection.Connection);
+                    command.ExecuteNonQuery();
+                    var command2 = new MySqlCommand(query2, DBConnection.Connection);
+                    command2.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+            }
         }
+
+       
+
+
+    public void copyPlaylist(int playlistIdToCopy)
+    {
+        // get name  of playlist by playlistId
+        string plNewName = "";
+        string plName = "";
+        // name of user that had this play list
+        string userName = "";
+        string query = string.Format(queries.getPlaylistNameAndUserNByPlId, playlistIdToCopy);
+        try
+        {
+            if (DBConnection.IsConnect())
+            {
+                var command = new MySqlCommand(query, DBConnection.Connection);
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    plName = reader.GetString(0);
+                    userName = reader.GetString(1);
+                }
+                reader.Close();
+            }
+        }
+        catch (Exception ex)
+        {
+            File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+        }
+
+        plNewName = plName + " copy from " +userName;
+       
+        List<string> songsIds = new List<string>();
+
+        query = string.Format(queries.getSongsByPlaylistId, playlistIdToCopy);
+        
+        // query to get the songs
+        songsIds = getSongsIds(query);
+
+
+        int res = createPlaylist(plNewName, songsIds);
+
+     }
 
 
     }

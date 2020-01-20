@@ -60,7 +60,6 @@ namespace PlayListNew.View
             this.Close();
             friends.Show();
         }
-
-
+        
     }
 }

@@ -74,6 +74,9 @@
     <Compile Include="View\chooseFriend.xaml.cs">
       <DependentUpon>chooseFriend.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\createPlSucceed.xaml.cs">
+      <DependentUpon>createPlSucceed.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -99,6 +102,10 @@
       <DependentUpon>showPlaylistSongs.xaml</DependentUpon>
     </Compile>
     <Page Include="View\chooseFriend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\createPlSucceed.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

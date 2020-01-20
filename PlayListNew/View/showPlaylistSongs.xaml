@@ -15,22 +15,21 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
     
-        Title="showPlaylistSongs" Height="450" Width="Auto"  >
+        Title="showPlaylistSongs" Height="450" Width="800"  >
     <Grid>
         <ScrollViewer Background="Transparent" ScrollViewer.CanContentScroll="False"  ScrollViewer.HorizontalScrollBarVisibility="Auto">
-            <!--PreviewMouseWheel="ScrollViewer_PreviewMouseWheel"-->
             <StackPanel Background="Gainsboro" ScrollViewer.CanContentScroll="False">
                 <TextBlock HorizontalAlignment="Left" Text="playlist songs:"  FontSize="40" FontWeight="Bold" Foreground="Teal" Padding="10"/>
-                <DataGrid ItemsSource="{Binding songList}" x:Name="dataGrid1" Background="OldLace" AutoGenerateColumns="False" CanUserAddRows="False" Margin="31,58,56.6,0" >
+                <DataGrid ItemsSource="{Binding songList}" x:Name="dataGrid1" Background="OldLace" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10,10,40,20" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Song" Width="Auto" Binding="{Binding SongName}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Song" Width="200" Binding="{Binding SongName}" IsReadOnly="True" />
                         <DataGridTextColumn Header="Duration" Width="Auto" Binding="{Binding Duration}" IsReadOnly="True"></DataGridTextColumn>
                         <DataGridTextColumn Header="Artist" Width="Auto" Binding="{Binding ArtistName}" IsReadOnly="True"></DataGridTextColumn>
                         <DataGridTextColumn Header="Album" Width="Auto" Binding="{Binding AlbumName}" IsReadOnly="True"></DataGridTextColumn>
                         <DataGridTemplateColumn >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button CommandParameter="{Binding Path=SongId}" Margin="20,0,0,0" Click="pressDeleteSong"
+                                    <Button CommandParameter="{Binding Path=SongId}" Click="pressDeleteSong"
                                             FontSize="10">delete song</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

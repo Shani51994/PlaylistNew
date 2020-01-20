@@ -14,7 +14,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
        
-        Title="login" Height="280" Width="400">
+        Title="login" Height="270" Width="400">
     <Grid Background="Gainsboro">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -27,7 +27,7 @@
         <Label HorizontalAlignment="Left" Content="Login" FontSize="30" FontWeight="Bold" Foreground="Teal" Padding="10" Margin="123,0,0,20.6" Grid.Row="0"/>
 
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin= "0,5,0,0">
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
             <TextBlock Padding="6" FontSize="20" Foreground="Teal" FontWeight="Bold" Margin="0,0,25,0" Height="36" Text="Email:"/>
             <TextBox x:Name="emailText" FontSize="18"  Width="258" Text="{Binding FlightServerIP, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
@@ -38,9 +38,9 @@
             <TextBox x:Name="passwordText" FontSize="18"  Width="219" Text="{Binding FlightServerIP, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,-0.2"/>
         </StackPanel>
 
-        <TextBlock Name="message" Grid.Row="3" FontSize="18" ></TextBlock>
+        <TextBlock Name="message" Grid.Row="3" Foreground="Red" FontSize="18" ></TextBlock>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15">
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Name="okBtn" Padding="3" HorizontalAlignment="Stretch" 
                   FontSize="18" Height="40" Width="70" Margin="8"  Click="clickSubmit">Login</Button>
             <Button Name="clearBtn" Padding="3" HorizontalAlignment="Stretch"

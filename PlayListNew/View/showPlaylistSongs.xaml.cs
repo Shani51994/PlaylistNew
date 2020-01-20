@@ -46,6 +46,7 @@ namespace PlayListNew.View
             int songId = (int)button.CommandParameter;
 
             DataBaseHandler.Instance.deleteSong(songId);
+            DataBaseHandler.Instance.checksAfterdeletingSongs(playlistIdG);
 
             showCurrentSongs();
         }
