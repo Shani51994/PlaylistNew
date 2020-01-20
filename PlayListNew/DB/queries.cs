@@ -20,9 +20,6 @@ namespace PlayListNew.DB
         // insert playlist name from user to the playlists table
         public static string insertNewPlaylist = @"INSERT INTO playlistgame.playlists(playlists.playlist_name) VALUES ('{0}')";
 
-
-        // need to change and had user id !!!
-
         // get playlist id by playlist name
         public static string getPlaylistIdByPlaylistName= @"SELECT playlists.playlist_id 
                                                         FROM playlistgame.playlists
@@ -146,9 +143,7 @@ namespace PlayListNew.DB
 											ORDER BY creation_date DESC
                                             ) as fpl";
 
-
-        // fix!!!########################################################3
-        public static string copyPlaylistFromFriend = @";";
+       
 
 
         //******************* show playlist(friends and my) section**************************************************************************************

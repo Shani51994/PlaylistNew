@@ -51,7 +51,9 @@ namespace PlayListNew.DB
         }
 
 
-
+        /*
+         * function that check if user email is already exist, if exsist return 1 (else return 0).
+         */
         public int checkIfUserExist(string email)
         {
             string query = string.Format(queries.queryToCheckIfUserExist, email);
