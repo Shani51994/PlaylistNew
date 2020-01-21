@@ -21,10 +21,19 @@ namespace PlayListNew.DB
         public static string insertNewPlaylist = @"INSERT INTO playlistgame.playlists(playlists.playlist_name) VALUES ('{0}')";
 
         // get playlist id by playlist name
-        public static string getPlaylistIdByPlaylistName= @"SELECT playlists.playlist_id 
+
+        public static string getPlaylistIdByPlaylistName = @"SELECT playlists.playlist_id 
                                                         FROM playlistgame.playlists
                                                         WHERE playlists.playlist_name = '{0}'";
 
+
+        /*SELECT playlists.playlist_id 
+                                                                    FROM playlistgame.playlists
+                                                                    inner join user_to_playlists
+                                                                    ON playlists.playlist_id = user_to_playlists.playlist_id
+                                                                    WHERE user_id = {0} AND playlist_name = '{1}'";
+                */
+                
         public static string getPlaylistNameAndUserNByPlId = @"SELECT playlists.playlist_name, full_name
                                                     FROM playlistgame.playlists
                                                     inner join user_to_playlists 

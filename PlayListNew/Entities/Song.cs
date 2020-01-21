@@ -35,46 +35,10 @@ namespace PlayListNew.Entities
         }
 
 
-
-        /*
-          private float duration;
-
-        public int SongId { set; get; }
-
-        public string SongName { set; get; }
-
-        public string AlbumName { set; get; }
-
-        public Artist SongArtist { set; get; }
-
-        public float SongHotness { set; get; }
-
-        public float Tempo { set; get; }
-
-		/// <summary>
-		/// Gets or sets the duration for common people.
-		/// </summary>
-		/// <value>
-		/// The duration of the for common people.
-		/// </value>
-		public float RealDuration
+        public Boolean BelongToPlayer
         {
-            set
-            {
-                this.duration = value;
-                this.Duration = TimeSpan.FromSeconds(Convert.ToInt32(this.duration)).ToString(@"mm\:ss"); ;
-            }
-            get
-            {
-                return this.duration;
-            }
+            get; set;
         }
 
-        public string Duration { get; set; }
-
-        public float Loudness { set; get; } 
-          
-         
-         */
     }
 }

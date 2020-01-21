@@ -23,25 +23,32 @@ namespace PlayListNew.View
     public partial class showPlaylistSongs : Window
     {
         public int playlistIdG;
+        public Boolean belongToPlayerG;
 
         public void showCurrentSongs()
         {
             DataBaseHandler dbHandler = DataBaseHandler.Instance;
-            ObservableCollection<Song> songList = dbHandler.GetPlaylistSongs(playlistIdG);
+            ObservableCollection<Song> songList = dbHandler.GetPlaylistSongs(playlistIdG, belongToPlayerG);
             dataGrid1.ItemsSource = songList;
         }
 
 
-        public showPlaylistSongs(int playlistId)
+        public bool delElement
+        { get; set; }
+
+        public showPlaylistSongs(int playlistId, Boolean belongToPlayer)
         {
+            //, int friendPage
             InitializeComponent();
             playlistIdG = playlistId;
+            belongToPlayerG = belongToPlayer;
             showCurrentSongs();
         }
 
 
         private void pressDeleteSong(object sender, RoutedEventArgs e)
         {
+            
             Button button = (Button)sender;
             int songId = (int)button.CommandParameter;
 
@@ -57,5 +64,7 @@ namespace PlayListNew.View
         {
 
         }
+
+        
     }
 }

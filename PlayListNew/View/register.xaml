@@ -43,7 +43,7 @@
         </StackPanel>
 
 
-        <TextBlock Name="message" Grid.Row="5" FontSize="18" ></TextBlock>
+        <TextBlock Name="message" Grid.Row="5" FontSize="18" Foreground="Red" ></TextBlock>
 
         <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15">
             <Button Name="okBtn" Padding="3" HorizontalAlignment="Stretch" Grid.Row="4" 

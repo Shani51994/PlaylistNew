@@ -26,10 +26,10 @@
                         <DataGridTextColumn Header="Duration" Width="Auto" Binding="{Binding Duration}" IsReadOnly="True"></DataGridTextColumn>
                         <DataGridTextColumn Header="Artist" Width="Auto" Binding="{Binding ArtistName}" IsReadOnly="True"></DataGridTextColumn>
                         <DataGridTextColumn Header="Album" Width="Auto" Binding="{Binding AlbumName}" IsReadOnly="True"></DataGridTextColumn>
-                        <DataGridTemplateColumn >
+                        <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button CommandParameter="{Binding Path=SongId}" Click="pressDeleteSong"
+                                    <Button IsEnabled="{Binding BelongToPlayer}" CommandParameter="{Binding Path=SongId}" Click="pressDeleteSong"
                                             FontSize="10">delete song</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

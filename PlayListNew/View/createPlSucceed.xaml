@@ -13,9 +13,9 @@
         <Label HorizontalAlignment="Center" Grid.Row="0" Content="playlist create Successfully!" FontSize="20" FontWeight="Bold" Foreground="Blue"  Padding="10" Grid.ColumnSpan="2" Margin="9,0,9.6,-0.2"/>
         <WrapPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" >
             <Button Name="okBtn" Padding="3" HorizontalAlignment="Stretch"
-                 Height="50" Width="70" Margin="10" Click="pressBackToOptions" Content="Back to &#xa;options"></Button>
+                 Height="50" Width="90" Margin="10" Click="pressBackToOptions" Content="Back to &#xa;options"></Button>
             <Button Name="CancelNBtn" Padding="3" HorizontalAlignment="Right"
-                 Height="50" Width="70" Margin="10" Click="pressShowSongs" Content="Show playlist&#xa;  song"></Button>
+                 Height="50" Width="90" Margin="10" Click="pressShowSongs" Content="Show playlist&#xa;  songs"></Button>
         </WrapPanel>
 
     </Grid>

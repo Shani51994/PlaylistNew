@@ -39,7 +39,7 @@ namespace PlayListNew.View
            
             Button button = (Button)sender;
             int playlistId = (int)button.CommandParameter;
-            showPlaylistSongs playlistSongs = new showPlaylistSongs(playlistId);
+            showPlaylistSongs playlistSongs = new showPlaylistSongs(playlistId, true);
             playlistSongs.Show();
            
         }

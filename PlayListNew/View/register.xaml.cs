@@ -42,7 +42,7 @@ namespace PlayListNew.View
             if (ans == 0)
             {
                 dbhandler.SaveUserData(emailText.Text, passwordText.Text, fullNameText.Text);
-                this.message.Text = "successfully register";
+                this.Close();
             }
             else
             {

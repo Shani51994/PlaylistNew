@@ -40,7 +40,7 @@ namespace PlayListNew.View
 
         public void pressShowSongs(object sender, RoutedEventArgs e)
         {
-            showPlaylistSongs playlistSongs = new showPlaylistSongs(playlistID);
+            showPlaylistSongs playlistSongs = new showPlaylistSongs(playlistID, true);
             this.Close();
             playlistSongs.Show();
         }

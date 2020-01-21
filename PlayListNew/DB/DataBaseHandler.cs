@@ -270,7 +270,7 @@ namespace PlayListNew.DB
         }
 
 
-        public ObservableCollection<Song> GetPlaylistSongs(int playlistID)
+        public ObservableCollection<Song> GetPlaylistSongs(int playlistID, Boolean doesBelongToPlayer)
         {
             ObservableCollection<Song> songs = new ObservableCollection<Song>();
             try
@@ -288,9 +288,10 @@ namespace PlayListNew.DB
                         string albumName = reader.GetString(2);
                         int id = reader.GetInt32(3);
                         int duration = reader.GetInt32(4);
+                        Boolean belongToPlayer = doesBelongToPlayer;
                         string durationS = TimeSpan.FromSeconds(Convert.ToInt32(duration)).ToString(@"mm\:ss"); ;
 
-                        Song song = new Song() { SongName = songName, ArtistName = artistName, AlbumName = albumName, SongId=id, Duration=durationS};
+                        Song song = new Song() { SongName = songName, ArtistName = artistName, AlbumName = albumName, SongId=id, Duration=durationS, BelongToPlayer= belongToPlayer };
                         songs.Add(song);
                     }
                     reader.Close();

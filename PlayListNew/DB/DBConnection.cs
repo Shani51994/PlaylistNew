@@ -60,14 +60,12 @@ namespace PlayListNew.DB
                 if (String.IsNullOrEmpty(databaseName))
                     return false;
                 string connstring = string.Format("Server={0}; database={1}; UID={2}; password={3}", Server, DatabaseName, User, Password);
-                //string ConnectionString = "SERVER = localhost; DATABASE = playlistGame; UID = root; PASSWORD = Mm1614113";
-
                 connection = new MySqlConnection(connstring);
                 connection.Open();
             }
             catch (Exception ex)
             {
-                File.AppendAllText(@"GuessTheSongServerLog.txt", "Server DB Error at Start Connection" + ex.Message + Environment.NewLine);
+                File.AppendAllText(@"PlayListNewLog.txt", "Server DB Error at Start Connection" + ex.Message + Environment.NewLine);
                 return false;
             }
             return true;
