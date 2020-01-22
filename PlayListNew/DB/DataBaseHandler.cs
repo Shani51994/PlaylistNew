@@ -406,10 +406,10 @@ namespace PlayListNew.DB
         }
 
 
-        public void deleteSong(int songId)
+        public void deleteSong(int songId, int playlistId)
         {
 
-            string query = string.Format(queries.deleteSongFromPlaylist, songId);
+            string query = string.Format(queries.deleteSongFromPlaylist, songId, playlistId);
             MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
 
             try

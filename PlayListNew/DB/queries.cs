@@ -164,13 +164,14 @@ namespace PlayListNew.DB
 
         // when delete playlist - delete the playlist from tables: playlists, songs_to_playlist, user_to_playlists
         public static string deletePlaylist = @"DELETE FROM playlists WHERE playlist_id='{0}';";
+
         public static string deleteSongsByPlaylist = @"DELETE FROM songs_to_playlist WHERE playlist_id='{0}';";
 
 
         public static string deletePlaylistToUser = @"DELETE FROM user_to_playlists WHERE playlist_id='{0}';";
 
 
-        public static string deleteSongFromPlaylist = @"DELETE FROM songs_to_playlist WHERE song_id='{0}';";
+        public static string deleteSongFromPlaylist = @"DELETE FROM songs_to_playlist WHERE song_id='{0}' AND playlist_id='{1}';";
 
 
         public static string afterDeletingSongCheckPlaylistSongs = @"DELETE FROM playlistgame.playlists

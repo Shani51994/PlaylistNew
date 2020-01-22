@@ -52,7 +52,7 @@ namespace PlayListNew.View
             Button button = (Button)sender;
             int songId = (int)button.CommandParameter;
 
-            DataBaseHandler.Instance.deleteSong(songId);
+            DataBaseHandler.Instance.deleteSong(songId, playlistIdG);
             DataBaseHandler.Instance.checksAfterdeletingSongs(playlistIdG);
 
             showCurrentSongs();
