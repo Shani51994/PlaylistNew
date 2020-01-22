@@ -39,6 +39,8 @@ namespace PlayListNew.View
            
             Button button = (Button)sender;
             int playlistId = (int)button.CommandParameter;
+
+            // show songs of the playlist
             showPlaylistSongs playlistSongs = new showPlaylistSongs(playlistId, true);
             playlistSongs.Show();
            
@@ -52,6 +54,7 @@ namespace PlayListNew.View
         }
 
 
+        // make query of all playlists in playlist and update the dataGrid in the window
         public void showCurrentPlaylist()
         {
            
@@ -62,12 +65,14 @@ namespace PlayListNew.View
 
         private void pressDeletePlaylist(object sender, RoutedEventArgs e)
         {
-
+            // take playlistId from CommandParameterin button 
             Button button = (Button)sender;
             int playlistId = (int)button.CommandParameter;
 
+            // delete the playlist 
             DataBaseHandler.Instance.deletePlaylist(playlistId);
 
+            // refresh playlist list
             showCurrentPlaylist();
 
         }

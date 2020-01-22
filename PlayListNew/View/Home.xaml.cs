@@ -1,4 +1,5 @@
-﻿using PlayListNew.View;
+﻿using PlayListNew.DB;
+using PlayListNew.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace PlayListNew.View
             InitializeComponent();
         }
 
+        // open login window
         private void loginClicked(object sender, RoutedEventArgs e)
         {
             //login loginS = new login();
@@ -34,11 +36,22 @@ namespace PlayListNew.View
             loginS.Show();
         }
 
+        // open register window
         private void registerClicked(object sender, RoutedEventArgs e)
         {
             register registerS = new register();
             registerS.Show();
         }
+
+
+        // shutdown the program and close connection with DB
+        private void exitPressed(object sender, RoutedEventArgs e)
+        {
+            DataBaseHandler.Instance.EndDBConnection();
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        
 
     }
 }

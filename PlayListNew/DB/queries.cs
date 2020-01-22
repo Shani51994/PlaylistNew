@@ -70,7 +70,7 @@ namespace PlayListNew.DB
 
         //******************* Users section**************************************************************************************
 
-        // get user id when user logged in
+        // get user id when user logged in and to check if email exsits
         public static string getUserId = @"SELECT users.user_id
                                             FROM playlistgame.users
                                             WHERE email = '{0}';";
@@ -79,9 +79,7 @@ namespace PlayListNew.DB
         public static string insertNewUser = @"INSERT INTO playlistGame.users (Email, Password, Full_name)
                                               Values('{0}','{1}', '{2}');";
 
-        // to check if email exsits
-        public static string queryToCheckIfUserExist = @"SELECT * from playlistGame.users WHERE email= '{0}';";
-
+      
         // to check if password entered is correct
         public static string toCheckPassword = "SELECT users.password from playlistGame.users WHERE email='{0}';";
 

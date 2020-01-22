@@ -9,9 +9,13 @@
         Background="black">
 
     <Grid Background="Gainsboro">
+        
         <StackPanel>
 
-        <Image Margin="54,10,86.6,0" Height="254" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <Button Name="exit" HorizontalAlignment="Left"
+              FontSize="18"  Height="40" Width="80" Margin="30" Background="Red" Click="exitPressed" >EXIT</Button>
+
+            <Image HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -25,7 +29,7 @@
             </Image.Source>
         </Image>
 
-        <StackPanel Orientation="Horizontal" Width="250" Margin="0,40">
+        <StackPanel Orientation="Horizontal" Width="250" Margin="0,20">
             <Button Name="loginBtn" Padding="3" HorizontalAlignment="Stretch"
               FontSize="18"  Height="40" Width="80" Margin="30"  Click="loginClicked" >Login</Button>
             <Button x:Name="registerBtn" Padding="3" HorizontalAlignment="Stretch"

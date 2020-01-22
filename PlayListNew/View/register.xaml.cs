@@ -31,14 +31,17 @@ namespace PlayListNew.View
         /// </summary>
         public void registerClick(object sender, RoutedEventArgs e)
         {
+            // checks fields are not empty
             if (emailText.Text == "" || passwordText.Text=="" || fullNameText.Text == "")
             {
                 this.message.Text = "fill all fileds please";
                 return;
             }
-
+            
             DataBaseHandler dbhandler = DataBaseHandler.Instance;
             int ans = dbhandler.checkIfUserExist(emailText.Text);
+
+            // if ans ==0 then user email not used in past 
             if (ans == 0)
             {
                 dbhandler.SaveUserData(emailText.Text, passwordText.Text, fullNameText.Text);

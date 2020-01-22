@@ -47,6 +47,8 @@ namespace PlayListNew.View
            
         }
 
+
+        // back options window
         public void pressGoBack(object sender, RoutedEventArgs e)
         {
             playlistOptions options = new playlistOptions();
@@ -55,6 +57,7 @@ namespace PlayListNew.View
         }
 
 
+        // make query of all playlists in playlist and update the dataGrid in the window
         public void showCurrentPlaylist(List<string> friendEmails)
         {
            
@@ -63,9 +66,8 @@ namespace PlayListNew.View
             dataGrid1.ItemsSource = playlistList;
         }
 
-
-
-        //needToFix!!!!!!!!
+        
+        // copy friend playlist to mine playlist list
         private void pressCopyPlaylist(object sender, RoutedEventArgs e)
         {
 

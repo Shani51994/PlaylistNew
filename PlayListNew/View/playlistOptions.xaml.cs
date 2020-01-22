@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PlayListNew.DB;
 using PlayListNew.Entities;
 
 
@@ -22,6 +23,7 @@ namespace PlayListNew.View
     public partial class playlistOptions : Window
     {
 
+        // connect info message in the top of the window
         public playlistOptions()
         {
            InitializeComponent();
@@ -29,6 +31,9 @@ namespace PlayListNew.View
         }
        
 
+        /// <summary>
+        /// show create playlist window and close current window
+        /// </summary>
         private void createPlaylistWin(object sender, RoutedEventArgs e)
         {
             createPlaylist createPl = new createPlaylist();
@@ -37,6 +42,9 @@ namespace PlayListNew.View
            
         }
 
+        /// <summary>
+        /// show all user playlist window and close current window
+        /// </summary>
         private void ShowAllPlaylistWin(object sender, RoutedEventArgs e)
         {
             ShowPlaylists showAllPls = new ShowPlaylists();
@@ -45,6 +53,10 @@ namespace PlayListNew.View
         }
 
 
+
+        /// <summary>
+        /// show all home window and close current window
+        /// </summary>
         private void backToHomePage(object sender, RoutedEventArgs e)
         {
             Home homePage = new Home();
@@ -53,7 +65,10 @@ namespace PlayListNew.View
         }
 
 
-       
+
+        /// <summary>
+        /// show choose friend window and close current window
+        /// </summary>
         private void ShowChooseFriends(object sender, RoutedEventArgs e)
         {
             chooseFriend friends = new chooseFriend();

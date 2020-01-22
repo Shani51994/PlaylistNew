@@ -30,6 +30,7 @@ namespace PlayListNew.DB
         }
 
 
+        // DataBaseHandler singeltone
         public static DataBaseHandler Instance
         {
             get
@@ -42,9 +43,11 @@ namespace PlayListNew.DB
             }
         }
 
+
         private string ConnectionString { get; set; }
         private MySqlConnection ConnectionHandler { get; set; }
 
+        // close the connection to the DB
         public void EndDBConnection()
         {
             DBConnection.Close();
@@ -56,43 +59,70 @@ namespace PlayListNew.DB
          */
         public int checkIfUserExist(string email)
         {
-            string query = string.Format(queries.queryToCheckIfUserExist, email);
+            string query = string.Format(queries.getUserId , email);
             MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
-            
-            var reader = command.ExecuteReader();
-            if (reader.HasRows)
+            try
             {
-                reader.Close();
-                return 1;
+                if (DBConnection.IsConnect())
+                {
+                    var reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        reader.Close();
+                        return 1;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return 0;
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                reader.Close();
-                return 0;
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
+            return 0; 
         }
 
         
 
-
+        /*
+         * check if user already has playlist with this name
+         */
         public int checkIfPlNameExsistToUser(string name)
         {
             string query = string.Format(queries.queryTocheckIfPlNameExsistToUser, User.Instance.Id, name);
             MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
+            
+            try
+            {
+                if (DBConnection.IsConnect())
+                {
 
-            var reader = command.ExecuteReader();
-            if (reader.HasRows)
-            {
-                reader.Close();
-                return 1;
+                    var reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        reader.Close();
+                        return 1;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return 0;
+                    }
+
+                }
             }
-            else
+            catch (Exception ex)
             {
-                reader.Close();
-                return 0;
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
+            return 0;
         }
 
+
+        // when user try to login - check if the password he entered is correct
         public int checkIfUserExistAndPasswordRight(string email, string password)
         {
            
@@ -100,22 +130,36 @@ namespace PlayListNew.DB
             MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
 
             string DBpassword = "";
-            var reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                DBpassword = reader.GetString(0);
-            }
 
-            if (DBpassword == password)
+            try
             {
-                reader.Close();
-                return 1;
+                if (DBConnection.IsConnect())
+                {
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        DBpassword = reader.GetString(0);
+                    }
+
+                    if (DBpassword == password)
+                    {
+                        reader.Close();
+                        return 1;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return 0;
+                    }
+
+
+                }
             }
-            else
+            catch (Exception ex)
             {
-                reader.Close();
-                return 0;
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
+            return 0;
         }
 
         public void SaveUserData(string email, string password, string fullName)
@@ -125,11 +169,14 @@ namespace PlayListNew.DB
 
             try
             {
-                command.ExecuteNonQuery();
+                if (DBConnection.IsConnect())
+                {
+                    command.ExecuteNonQuery();
+                }
             }
             catch (Exception ex)
             {
-                File.AppendAllText(path, "Server DB Error at RunQuery function" + ex.Message + Environment.NewLine);
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
         }
 
@@ -148,7 +195,7 @@ namespace PlayListNew.DB
             }
             catch (Exception ex)
             {
-                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
         }
 
@@ -166,7 +213,7 @@ namespace PlayListNew.DB
             }
             catch (Exception ex)
             {
-                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
         }
 
@@ -192,7 +239,7 @@ namespace PlayListNew.DB
             }
             catch (Exception ex)
             {
-                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
             return playlistId;
         }
@@ -222,7 +269,7 @@ namespace PlayListNew.DB
             }
             catch (Exception ex)
             {
-                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
             return songsIds;
 
@@ -265,7 +312,7 @@ namespace PlayListNew.DB
             }
             catch (Exception ex)
             {
-                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
         }
 
@@ -299,7 +346,7 @@ namespace PlayListNew.DB
             }
             catch (Exception ex)
             {
-                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
 
             return songs;
@@ -333,7 +380,7 @@ namespace PlayListNew.DB
             }
             catch (Exception ex)
             {
-                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
 
             return playlists;
@@ -350,13 +397,26 @@ namespace PlayListNew.DB
             MySqlCommand command = new MySqlCommand(query, DBConnection.Connection);
 
             int id=0;
-            var reader = command.ExecuteReader();
 
-            while (reader.Read())
+            try
             {
-                id = reader.GetInt32(0);
+                if (DBConnection.IsConnect())
+                {
+
+
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        id = reader.GetInt32(0);
+                    }
+                    reader.Close();
+                }
             }
-            reader.Close();
+            catch (Exception ex)
+            {
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
+            }
 
             return id;
         }
@@ -371,11 +431,14 @@ namespace PlayListNew.DB
 
             try
             {
-                command.ExecuteNonQuery();
+                if (DBConnection.IsConnect())
+                {
+                    command.ExecuteNonQuery();
+                }
             }
             catch (Exception ex)
             {
-                File.AppendAllText(path, "Server DB Error at RunQuery function" + ex.Message + Environment.NewLine);
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
 
 
@@ -384,11 +447,14 @@ namespace PlayListNew.DB
 
             try
             {
-                command2.ExecuteNonQuery();
+                if (DBConnection.IsConnect())
+                {
+                    command2.ExecuteNonQuery();
+                }
             }
             catch (Exception ex)
             {
-                File.AppendAllText(path, "Server DB Error at RunQuery function" + ex.Message + Environment.NewLine);
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
 
             
@@ -397,11 +463,14 @@ namespace PlayListNew.DB
 
             try
             {
-                command3.ExecuteNonQuery();
+                if (DBConnection.IsConnect())
+                {
+                    command3.ExecuteNonQuery();
+                }
             }
             catch (Exception ex)
             {
-                File.AppendAllText(path, "Server DB Error at RunQuery function" + ex.Message + Environment.NewLine);
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
         }
 
@@ -414,11 +483,14 @@ namespace PlayListNew.DB
 
             try
             {
-                command.ExecuteNonQuery();
+                if (DBConnection.IsConnect())
+                {
+                    command.ExecuteNonQuery();
+                }
             }
             catch (Exception ex)
             {
-                File.AppendAllText(path, "Server DB Error at RunQuery function" + ex.Message + Environment.NewLine);
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
             
         }
@@ -468,7 +540,7 @@ namespace PlayListNew.DB
             }
             catch (Exception ex)
             {
-                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
 
 
@@ -507,7 +579,7 @@ namespace PlayListNew.DB
             }
             catch (Exception ex)
             {
-                File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+                File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
             }
 
             return playlists;
@@ -565,7 +637,7 @@ namespace PlayListNew.DB
         }
         catch (Exception ex)
         {
-            File.AppendAllText(path, "Server DB Error at GetTopScores function" + ex.Message + Environment.NewLine);
+            File.AppendAllText(path, "Server DB Error" + ex.Message + Environment.NewLine);
         }
 
         plNewName = plName + " copy from " +userName;

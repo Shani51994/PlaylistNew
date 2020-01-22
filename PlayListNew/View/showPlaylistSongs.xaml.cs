@@ -25,6 +25,7 @@ namespace PlayListNew.View
         public int playlistIdG;
         public Boolean belongToPlayerG;
 
+        // make query of all songs in playlist and update the dataGrid in the window
         public void showCurrentSongs()
         {
             DataBaseHandler dbHandler = DataBaseHandler.Instance;
@@ -33,12 +34,8 @@ namespace PlayListNew.View
         }
 
 
-        public bool delElement
-        { get; set; }
-
         public showPlaylistSongs(int playlistId, Boolean belongToPlayer)
         {
-            //, int friendPage
             InitializeComponent();
             playlistIdG = playlistId;
             belongToPlayerG = belongToPlayer;
@@ -51,10 +48,13 @@ namespace PlayListNew.View
             
             Button button = (Button)sender;
             int songId = (int)button.CommandParameter;
-
+            // delete the song 
             DataBaseHandler.Instance.deleteSong(songId, playlistIdG);
+
+            // check if num of songs in playlist equalls to zero, if yes - delete the playlist
             DataBaseHandler.Instance.checksAfterdeletingSongs(playlistIdG);
 
+            // refresh - the song list
             showCurrentSongs();
         }
 

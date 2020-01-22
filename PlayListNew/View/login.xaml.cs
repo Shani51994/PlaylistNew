@@ -34,6 +34,8 @@ namespace PlayListNew.View
         /// </summary>
         public void clickSubmit(object sender, RoutedEventArgs e)
         {
+
+            // checks fields are not empty
             if (emailText.Text == "" || passwordText.Text == "" )
             {
                 this.message.Text = "fill all fileds please";
@@ -41,8 +43,11 @@ namespace PlayListNew.View
             }
 
             DataBaseHandler dbhandler = DataBaseHandler.Instance;
+
+            // check If User Exist And Password Right
             int ans = dbhandler.checkIfUserExistAndPasswordRight(emailText.Text, passwordText.Text);
 
+            // if ans == 1 means that user exist and we can login
             if (ans == 1)
             {
                 User currentUser = User.Instance;
